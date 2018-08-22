@@ -29,12 +29,25 @@ html, body{
 }
 
 .fondo{
-    background-image: url("../images/f.jpg");
+    
     height: 100%;
     width: 100%;
     min-width: 100%;
     min-height: 100%;
     opacity: 0.6;
-    background-repeat: no-repeat;
-    background-size: 100%;
+    
+    
+    background: #EB3349;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F45C43, #EB3349); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+.fondo_2{
+    background-color: whitesmoke;
+}
+.titulo{
+    
+    color: black;
+    
 }

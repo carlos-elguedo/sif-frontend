@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Access from './components/access/Access'
+import Home from './components/home/Home'
 import NotFound from './components/notFound'
 import init from './utils/init'
 
@@ -19,7 +20,7 @@ isLogged() {
 
   
     const isLogged = init.isLogged();
-    //console.log("Llego: " + isLogged);
+    console.log("Llego: " + isLogged);
     if(isLogged){
       return <Access/>;
     }else{
@@ -33,8 +34,12 @@ isLogged() {
 
 
     return (
-      <this.isLogged/>
-          
+      <Router>
+        <Switch>
+          <Route path='/' exact component={this.isLogged}/>
+          <Route path='/home' exact component={Home}/>
+        </Switch>
+      </Router>
     );
   }
 }

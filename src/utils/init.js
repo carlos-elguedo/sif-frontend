@@ -26,10 +26,10 @@ function isLogged(){
                     if(key_2 === "pass"){pass_user = val_2;}
                 }
 
-                console.log("Va a pedir");
+                //console.log("Va a pedir");
                 fetch('http://localhost:3001/api/rest/login',{
                     method: 'POST',
-                    body: JSON.stringify({"user":"MMMM", "password": "MMMM"}),
+                    body: JSON.stringify({"user":email_user, "password": pass_user}),
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -37,9 +37,11 @@ function isLogged(){
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    console.log(data.status);
+                    console.log("Va a retornar: tru");
+                    return true;
                     //M.toast({html: data.message});
-                    ret = true;
+                    
                 })
                 .catch(err => console.error("-------------------" + err));
                 
@@ -51,9 +53,12 @@ function isLogged(){
         //alert("No hay nada");
         console.log("No hay nada guardado");
         localStorage.setItem("sav", "0");
+        console.log("Va a retornar: false");
+        return false;
     }
 
-    return ret;
+    
+    return true;
 }
 
 module.exports = {isLogged};

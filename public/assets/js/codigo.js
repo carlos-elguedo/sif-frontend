@@ -7,6 +7,18 @@
 $(document).ready(function(){
     //$('.sidenav').sidenav();
     
+
+    $("#bot_go_register").click(function(){
+        $("#pageLogin").fadeOut(2000, function(){
+            $("#pageRegister").removeClass('hide');
+            $("#pageRegister").fadeIn(2000);
+        });
+    });
+
+
+
+
+
     $("#buscarTrabajador").click(function (){
         //alert("BubuscarTrab");
         $("#results_div").toggleClass("hide");
