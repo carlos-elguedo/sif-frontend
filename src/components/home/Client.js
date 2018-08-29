@@ -4,106 +4,32 @@ import React, { Component } from 'react';
 class Client extends Component {
     render() {
       return (
-        <div>
-          <nav className="navbar">
-            <div className="nav-wrapper orange">
-                
-                <i className="left material-icons">menu</i>
-                
-                <a href="#" className="brand-logo">Esteban Torres</a>
+        <div className="App">
+            
+            <nav className="navbar navbar-light bg-primary">
+                <div className="navbar-brand text-white" href="">
+                    <img src="assets/images/SIF.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
+                    Nombre de usuario
+                </div>
+            </nav>
 
-                <i className="right material-icons">user</i>
+            <div className="container">
+                
+                <div className="row">
+                
+                    <div className="col-lg-8 search-bar p-t-20">
+                        <div className="input-group">
+                            <input type="text" className="form-control" placeholder="Escribe aquí el servicio que estas buscando"/>
+                            <span className="input-group-btn">
+                                <button className="btn btn-primary" type="button">Buscar</button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/*<ResultPanel result_title ={this.state.result_title} videos_to_view={this.state.searched} video_player={this.viewVideo}/>*/}
             </div>
-          </nav>
-
-          <div className="container">
-            
-            <div className="row">
-                <div className="col s12 m12">
-                    <div className="card hoverable">
-                        <div className="card-content">
-                            <div className="input-field">
-                                <input type="text" placeholder="Empieza a buscar trabajadores"/>
-                            </div>
-                            <div className="input-field">
-                                <select>
-                                    <option>Buscar por palabra</option>
-                                    <option>Buscar por categoria</option>
-                                </select>
-                            </div>
-                            
-                        </div>
-                        <div className="card-action">
-                            <a id="buscarTrabajador" className="waves-effect waves-light">Buscar</a>
-                        </div>
-                    </div>
-                </div> {/*<!-- Fin de la columna principal del panel de busqueda -->*/}
-            </div> {/*<!--Fin de la fila del panel de busqueda*/}
-                   
-            
-            
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-            {/*<!-- RESULTADOS DE BUSQUEDA -->*/}
-            <div id="results_div" className="row  hide">
-                <p><b>Resultados de busqueda</b></p>
-                <div id="results" className="col s12 m12">
-                    
-                </div> {/* <!-- Fin de la columna principal del panel de resultados busqueda -->*/}
-            </div> {/*<!--Fin de la fila del panel de resultados busqueda*/}
-                    
- 
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-            
-            {/*<!-- ULTIMOS PERFILES VISTOS -->*/}
-            <div className="row">
-                <div className="col s12 m6">
-                    <p><b>Trabajadores vistos recientemene</b></p>
-                    <ul className="collection">
-                        <li className="collection-item avatar">
-                            <img src="../assets/images/perfil/0.jpeg" alt="" className="circle"/>
-                            <span className="title"><b>Guiileermo Toro</b></span>
-                            <p>Mecánico</p>
-                            <a href="#" className="secondary-content">
-                              <span>Hoy</span>
-                            </a>
-                        </li>
-                        <li className="collection-item avatar">
-                            <img src="../assets/images/perfil/1.jpeg" alt="" className="circle"/>
-                            <span className="title"><b>Hector Herrera</b></span>
-                            <p>Abogado</p>
-                            <a href="#" className="secondary-content">
-                              <span>Hace una semana</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div> {/* <!-- Fin de la columna principal del panel de trabajadores recientes vistos -->*/}
-                
-                {/*<!-- TRABAJADORES RECOMENDADOS -->*/}
-                <div className="col s12s m6">
-                    <p><b>Trabajadores recomendados</b></p>
-                    <div className="card">
-                        <div className="card-content">
-                            Recomendado 2
-                        </div>
-                    </div>
-                </div> {/*<!-- Fin de la columna principal del panel de trabajadores recomendados -->*/}
-                
-            </div> {/*<!--Fin de la fila del panel de trabajadores recientes vistos -->*/}
-          </div>
         </div>
       );
     }

@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Access from './components/access/Access'
 import Home from './components/home/Home'
 import NotFound from './components/notFound'
-import init from './utils/init'
+
+const init = require('./utils/init')
 
 
 class App extends Component {

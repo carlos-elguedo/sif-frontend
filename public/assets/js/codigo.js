@@ -9,9 +9,16 @@ $(document).ready(function(){
     
 
     $("#bot_go_register").click(function(){
-        $("#pageLogin").fadeOut(2000, function(){
+        $("#pageLogin").fadeOut(1500, function(){
             $("#pageRegister").removeClass('hide');
-            $("#pageRegister").fadeIn(2000);
+            $("#pageRegister").fadeIn(1500);
+        });
+    });
+
+    $("#bot_go_login").click(function(){
+        $("#pageRegister").fadeOut(2000, function(){
+            $("#pageLogin").removeClass('invisible');
+            $("#pageLogin").fadeIn(2000);
         });
     });
 

@@ -2,6 +2,7 @@
 
 
 function isLogged(){
+    
     //alert("Va a buscar");
     //console.log("Llegooooooooooooooooooooooooooo");
     var totalStorage = localStorage.length;
@@ -60,5 +61,7 @@ function isLogged(){
     
     return true;
 }
+
+
 
 module.exports = {isLogged};
