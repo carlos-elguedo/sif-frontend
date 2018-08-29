@@ -8,6 +8,21 @@ and open the template in the editor.
     Author     : law
 */
 
+.re-card-header{
+    background: transparent;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.re-section{
+    border: 0px;
+    margin-top: -30px;
+}
+.result-video{
+    margin-bottom: 5%;
+}
+
 .img_result{
     min-width: 150px;
     min-height: 150px;
@@ -42,4 +57,9 @@ html, body{
 
 .hide{
     display: none;
+}
+
+.img-responsive{
+    width: 250px;
+    height: 250px;
 }

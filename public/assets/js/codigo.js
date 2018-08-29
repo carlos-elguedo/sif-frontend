@@ -28,7 +28,7 @@ $(document).ready(function(){
 
     $("#buscarTrabajador").click(function (){
         //alert("BubuscarTrab");
-        $("#results_div").toggleClass("hide");
+        //$("#results_div").toggleClass("hide");
         
         $("#results").html('<img class="center-align responsive-img" src="../assets/images/progress.gif">');
         
@@ -36,22 +36,28 @@ $(document).ready(function(){
             $("#results").html('');
             
             for (var i = 0, max = 4; i < max; i++) {
-                $("#results").append('<div class="col s12 m6 l3">'+
-                        '<div class="card">'+
-                        '<div class="card-image">'+
-                            '<img  class="img_result" src="../assets/images/perfil/'+ i +'.jpeg">'+
-                            '<span class="card-title">'+ i +'</span>'+
+                
+                $("#results").append('<section class="result-video">'+
+                    '<div class="container py-3">'+
+                        '<div class="card re-section">'+
+                            '<div class="row">'+
+                                '<div class="col-md-4">'+
+                                    '<img class="img-responsive" src="../assets/images/perfil/'+ i +'.jpeg" alt="img"/>`'+
+                                '</div>'+
+
+                                '<div class="col-md-8 px-3">'+
+                                    '<div class="card-block px-3">'+
+                                        '<h5 class="card-title">Nombre del trabajador</h5>'+
+                                        '<h6 class="card-subtitle mb-2 text-muted">Servicio ofrecido</h6>'+
+                                        '<p class="card-text text-truncate"> Descripción del trabajador</p>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
                         '</div>'+
-                        '<div class="card-content">'+
-                            '<p>Nombre del trabajador '+ i +'</p>'+
-                        '</div>'+
-                        '<div class="card-action">'+
-                            '<a href="#">Ver perfil</a>'+
-                        '</div>'+
-                        '</div>'+
-                    '</div>');
+                    '</div>'+
+                '</section>');
             }
-        }, 1000);
+        }, 1600);
     });
     
     
