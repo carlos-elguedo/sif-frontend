@@ -19,14 +19,16 @@ class App extends Component {
   
 isLogged() {
 
-  
+  /*
     const isLogged = init.isLogged();
-    console.log("Llego: " + isLogged);
+    //console.log("Llego: " + isLogged);
     if(isLogged){
       return <Access/>;
     }else{
       return <NotFound/>;
     }
+    */
+   return <Access/>;
   }
   
 

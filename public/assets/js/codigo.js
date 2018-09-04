@@ -6,7 +6,7 @@
 
 $(document).ready(function(){
     //$('.sidenav').sidenav();
-    
+    var tipo_registro = 2;
 
     $("#bot_go_register").click(function(){
         $("#pageLogin").fadeOut(1500, function(){
@@ -23,6 +23,19 @@ $(document).ready(function(){
     });
 
 
+
+    $("#tipo_registro").change(function(eve){
+        eve.preventDefault();
+        console.log("Cambio----------------------S");
+        if(tipo_registro%2 == 0){
+            $("#dato_registro").prop("placeholder","ej: 3007007000");
+            $("#dato_registro_texto").html("Numero telefonico");
+        }else{
+            $("#dato_registro").prop("placeholder","ej: nombre@mail.com");
+            $("#dato_registro_texto").html("Correo electronico");
+        }
+        tipo_registro++;
+    });
 
 
 

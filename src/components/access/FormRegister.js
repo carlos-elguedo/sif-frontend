@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 
 class FormRegister extends Component {
@@ -12,17 +12,16 @@ class FormRegister extends Component {
                 </span>
         
                 <div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
-                    <span className="label-input100">Eres un</span>
                     <select id="tipo_usuario" className="form-control">
-                        <option>Cliente</option>
-                        <option>Trabajador independiente</option>
+                        <option>Soy un cliente</option>
+                        <option>Soy un Trabajador independiente</option>
                     </select>
                 </div>
     
         
                 <div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
                     <span className="label-input100">Nombre</span>
-                    <input className="input100" type="text" name="username" placeholder="Tu nombre por favor"/>
+                    <input className="input100" type="text" name="register_name" placeholder="Tu nombre por favor" onChange={this.props.typing}/>
                     <span className="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
     
@@ -35,26 +34,26 @@ class FormRegister extends Component {
                 </div>
     
                 <div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
-                    <span className="label-input100">Correo electronico</span>
-                    <input className="input100" type="mail" name="username" placeholder="ej: nombre@mail.com"/>
+                    <span id="dato_registro_texto" className="label-input100">Correo electronico</span>
+                    <input id="dato_registro" className="input100" type="mail" name="register_date_register" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
                     <span className="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
     
                 <div className="wrap-input100 validate-input" data-validate="completa este campo">
                     <span className="label-input100">Contraseña</span>
-                    <input className="input100" type="password" name="pass" placeholder="Escribe aquí"/>
+                    <input className="input100" type="password" name="register_password" placeholder="Escribe aquí" onChange={this.props.typing}/>
                     <span className="focus-input100" data-symbol="&#xf190;"></span>
                 </div>
     
                 <div className="wrap-input100 validate-input p-b-30" data-validate="completa este campo">
                     <span className="label-input100">Fecha de nacimiento</span>
-                    <input className="input100" type="date" name="pass"/>
+                    <input className="input100" type="date" name="register_age" onChange={this.props.typing}/>
                     <span className="focus-input100" data-symbol="&#xf190;"></span>
                 </div>
         
                 <div className="wrap-input100 validate-input p-b-30 for-check" data-validate="Acepta los terminos">
                     <input id="aceptar_terminos" className="form-check-input" type="checkbox" value=""/>
-                    <span className="label-input100">Acepto las condiciones de uso</span>
+                    <label htmlFor="aceptar_terminos" className="label-input100">Acepto las condiciones de uso</label>
                 </div>
           
           

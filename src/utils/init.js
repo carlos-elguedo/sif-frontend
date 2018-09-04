@@ -28,7 +28,7 @@ function isLogged(){
                 }
 
                 //console.log("Va a pedir");
-                fetch('http://localhost:3001/api/rest/login',{
+                fetch('http://localhost:3001/api/rest/access',{
                     method: 'POST',
                     body: JSON.stringify({"user":email_user, "password": pass_user}),
                     headers: {
