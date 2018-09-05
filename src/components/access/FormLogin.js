@@ -13,13 +13,13 @@ class FormLogin extends Component {
 
 		  		<div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
 					<span className="label-input100">Correo o telefono</span>
-					<input className="input100" type="text" name="register_name" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
+					<input className="input100" type="text" name="login_data" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
 					<span className="focus-input100" data-symbol="&#xf206;"></span>
 		  		</div>
 
 		  		<div className="wrap-input100 validate-input" data-validate="completa este campo">
 					<span className="label-input100">Contraseña</span>
-					<input className="input100" type="password" name="register_password" placeholder="Escribe aquí" onChange={this.props.typing}/>
+					<input className="input100" type="password" name="login_password" placeholder="Escribe aquí" onChange={this.props.typing}/>
 					<span className="focus-input100" data-symbol="&#xf190;"></span>
 		  		</div>
 	

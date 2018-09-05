@@ -6,7 +6,8 @@
 
 $(document).ready(function(){
     //$('.sidenav').sidenav();
-    var tipo_registro = 2;
+    var tipo_registro = 2, tipo_usuario = 2;
+
 
     $("#bot_go_register").click(function(){
         $("#pageLogin").fadeOut(1500, function(){
@@ -23,10 +24,13 @@ $(document).ready(function(){
     });
 
 
+    
+    
+
 
     $("#tipo_registro").change(function(eve){
         eve.preventDefault();
-        console.log("Cambio----------------------S");
+        
         if(tipo_registro%2 == 0){
             $("#dato_registro").prop("placeholder","ej: 3007007000");
             $("#dato_registro_texto").html("Numero telefonico");

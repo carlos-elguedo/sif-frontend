@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 //import { Link } from "react-router-dom";
 
+var cont = 0;
 
 class FormRegister extends Component {
+
+
     render() {
       return (
         <div id="pageRegister" className="wrap-login100 p-l-55 p-r-55 p-t-25 p-b-54 hide">
@@ -12,7 +15,7 @@ class FormRegister extends Component {
                 </span>
         
                 <div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
-                    <select id="tipo_usuario" className="form-control">
+                    <select id="tipo_usuario" className="form-control" onChange={this.props.userType}>
                         <option>Soy un cliente</option>
                         <option>Soy un Trabajador independiente</option>
                     </select>
@@ -35,7 +38,7 @@ class FormRegister extends Component {
     
                 <div className="wrap-input100 validate-input m-b-23" data-validate = "completa este campo">
                     <span id="dato_registro_texto" className="label-input100">Correo electronico</span>
-                    <input id="dato_registro" className="input100" type="mail" name="register_date_register" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
+                    <input id="dato_registro" className="input100" type="mail" name="register_data_register" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
                     <span className="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
     
@@ -55,7 +58,6 @@ class FormRegister extends Component {
                     <input id="aceptar_terminos" className="form-check-input" type="checkbox" value=""/>
                     <label htmlFor="aceptar_terminos" className="label-input100">Acepto las condiciones de uso</label>
                 </div>
-          
           
                 <div className="container-login100-form-btn">
                     <div className="wrap-login100-form-btn">
