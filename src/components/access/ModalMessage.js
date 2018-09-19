@@ -23,13 +23,14 @@ class ModalMessage extends Component {
                 <div className='center1'>
                     <center>
                         <img src={text_img}/>
+                    
+                        <br/>
+                        <label>{this.props.message}</label>
+                        <br/>
+                        <button id = 'cancelar-envio' className='boton-aceptar-cancelar' onClick={this.props.cancel}>
+                            {this.props.boton_text}
+                        </button>
                     </center>
-                    <br/>
-                    <label>{this.props.message}</label>
-                    <br/>
-                    <button id = 'cancelar-envio' className='boton-aceptar-cancelar' onClick={this.props.cancel}>
-                        {this.props.boton_text}
-                    </button>
                 </div>
             </div>
         );
