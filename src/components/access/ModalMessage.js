@@ -16,8 +16,8 @@ class ModalMessage extends Component {
             text_img = "assets/images/progress.gif";
             
         }
-        console.log(textVisible);
-        console.log(text_img);
+        //console.log(textVisible);
+        //console.log(text_img);
         return (
             <div className={textVisible}>
                 <div className='center1'>

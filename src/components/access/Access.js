@@ -26,7 +26,8 @@ class Access extends Component {
       counter_user_type: 2,
       message_request: 'Enviando información',
       message_request_option: 'Cancelar',
-      sending_request: false
+      sending_request: false,
+      user_request: []
 
 
   };
@@ -70,8 +71,10 @@ class Access extends Component {
         message_request: data.message
       });
       if(data.type_error == -1){
+        console.log(data.user)
         this.setState({
-          message_request_option: 'Aceptar'
+          message_request_option: 'Aceptar',
+          user_request: data.user
         });
       }
 
@@ -164,10 +167,14 @@ class Access extends Component {
  * Funcion para cancelar el envio de un formulario al servidor
  */
   cancelSend(){
-    console.log("Cancelo envio")
+    console.log("Cancelo envio " + this.state.user_request.register_name)
+    
+    
     this.setState({
       sending_request: false
     });
+
+
   }
 
 
