@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title id="titulo-pagina">Sif</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    
+    
+    <link rel='stylesheet prefetch' href='MaterialDesign/css/materialdesignicons.min.css'>
+    <link rel="stylesheet" href="MaterialDesign/css/animate.css"/>
+    <link rel="stylesheet" href="MaterialDesign/css/style.css">
+    <link rel="stylesheet" href="MaterialDesign/css/emojione.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="MaterialDesign/css/precargando.css" type="text/css" media="screen, print"/>
+
+  </head>
+  <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+
+
+<style id="dynamic-styles"></style>
+<div id="hangout">
+  <div id="head" class="style-bg">
+    
+    <i class="mdi mdi-arrow-left"></i>
+    <i class="mdi mdi-fullscreen-exit"></i>
+    <i class="mdi mdi-menu"></i>
+    <div id="barraSuperiorTexto">
+      <h1>John Doe</h3>
+      <p id="estado_superior"></p>
+    </div>
+    <img id="img-otro" class="img-superior chat-superior" src="assets/img/index.png" />
+    <ul class="dropdown-menu" role="menu">
+        <li><label>Ver perfil</label></li>
+        <li><label>Ver perfil</label></li>
+        <li><label>Ver perfil</label></li>
+        <li><label>Ver perfil</label></li>
+        <li><label>Ver perfil</label></li>
+        <li id="cerrarMenuOtro"><label> Salir</label></li>
+    </ul>
+
+    <i id="mas-opciones" class="mdi mdi-plus chat-superior"></i>
+    <i class="mdi mdi-chevron-down"></i>
+    
+  </div>
+  
+  <div id="content">
+    
+
+    <div class="overlay"></div>
+
+    <div id="floater-position">
+      <div id="add-contact-floater" class="floater control style-bg hidden">
+        <i class="mdi mdi-plus"></i>
+      </div>          
+      <div id="chat-floater" class="floater control style-bg hidden">
+        <i class="mdi mdi-comment-text-outline"></i>
+      </div>
+    </div><!-- Fin del div floater position-->
+
+
+    <div id="menuLateral" class="card menu">
+      <div class="header">
+        <img src="assets/images/index.png" />
+        <h3></h3>
+      </div>
+    <div class="content">
+      <!--
+      <div class="i-group">
+        <input type="text" id="username"><span class="bar"></span>
+        <label>Name</label>
+      </div>        
+      -->
+      
+      <div class="center">
+        <!--<canvas id="colorpick" width="250" height="220" ></canvas>-->
+        
+        <ul class="mat-ripple" id="opcionesLaterales">      
+          
+          <li id="opcion_1">
+            <i id="barra-opc-1" class="mdi"></i>
+          </li>
+          
+          <li id="opcion_2">
+            <i id="barra-opc-2" class="mdi"></i>
+          </li>
+          
+          <li id="opcion_3">
+            <i id="barra-opc-3" class="mdi"></i>
+          </li>
+          
+          <li id="opcion_4">
+            <i id="barra-opc-4" class="mdi"></i>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </div><!-- Fin del div menu card-->
+
+
+
+
+  <div class="list-account">
+    <div class="meta-bar">
+      <input class="nostyle search-filter" type="text" placeholder="Search" />
+    </div>
+    <ul class="list mat-ripple">      
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Angie</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li>
+
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Larissa</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li>
+
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Hank</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li>
+
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Peter</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li>
+
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Oliver</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li> 
+
+      <li>
+        <img src="assets/img/index.png">
+        <span class="name">Chris</span>
+        <i class="mdi mdi-menu-down"></i>
+      </li> 
+    </ul>
+
+  </div><!-- Fin del div list count-->
+
+
+  <div class="list-text">
+  <div id="noticias">
+    <!--<section id="reproductor">
+      <video id="medio" controls>
+        <source src="assets/video/video1.mp4">
+      </video>
+    </section>-->          
+  </div>
+
+
+
+    <ul class="list mat-ripple">
+      <li>
+        <img src="assets/img/index.png">
+        <div class="content-container">
+          <span class="name">Angie</span>
+          <span class="txt">i get the other involved a bit </span>
+        </div>
+        <span class="time">
+          <i id="5" class="mdi mdi-heart"></i>
+          14:00
+        </span>
+      </li>    
+
+      <li>
+        <img src="assets/img/index.png">
+        <div class="content-container">
+          <span class="name">Larissa</span>
+          <span class="txt">Hi! how are you :] </span>
+        </div>
+        <span class="time">
+          <i id="5" class="mdi mdi-heart"></i>
+          16:02
+        </span>
+      </li>  
+
+      <li>
+        <img src="assets/img/index.png">
+        <div class="content-container">
+          <span class="name">Peter</span>
+          <span class="txt">Want to go drink a beer afte...</span>
+        </div>
+        <span class="time">
+          <i id="5" class="mdi mdi-heart"></i>
+          16:03
+        </span>
+      </li>  
+    </ul> 
+  </div><!-- Fin del div list text-->
+
+
+
+
+  <div class="list-phone">
+    <div class="meta-bar">
+      <input class="nostyle search-filter" type="text" placeholder="Name, phone number" />
+    </div>
+    <ul class="list mat-ripple">      
+      <li>
+        <img src="assets/img/index.png">
+        <div class="content-container">
+          <span class="name">Angie</span>
+          <span class="phone">000-555-28175</span>
+          <span class="meta">Mobile</span>
+        </div>
+        <span class="time">
+          2015-01-01 03:35
+        </span>
+      </li>
+
+      <li>
+        <img src="assets/img/index.png">
+        <div class="content-container">
+          <span class="name">Bert</span>
+          <span class="phone">666-222-11433</span>
+          <span class="meta">Main</span>
+        </div>
+        <span class="time">
+          2015-01-01 03:35
+        </span>
+      </li>
+
+    </ul> 
+  </div><!-- Fin del div lista phones-->
+
+
+
+  <div id="pantalla_chat" class="list-chat" style="display: none;">
+
+        <!--  CUERPO DE LOS MENSAJES -->
+        <!-- ***************************************************************************************** -->
+        <div class="inicio style-bg">
+          <div class="imagenes-union">
+              <img src="assets/img/index.png" />
+              <img src="assets/img/index.png" />
+          </div>
+          <div class="texto-union">Jhon Doe y tu se han unido en Mylove</div>
+        </div>
+
+        <div class="fecha">
+            <label>22 de diciembre de 2016</label>
+        </div>
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola! Hola! Hola! Hola! Hola! Hola! Hola! Hola! Hola!</div>
+                <div class="datos-der">
+                    <div><i id="i1" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+                <div class="mas-datos" style="display:none;"></div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal? Bien Bien Bien Bien Bien Bien Bien</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola! Mucho gusto ;)</div>
+                <div class="datos-der">
+                    <div><i id="3" class="mdi mdi-heart"></i></div>
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="5" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="7" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="9" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="11" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="13" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal?</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola!</div>
+                <div class="datos-der">
+                    <div><i id="15" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <div class='datos_usuario_secundario'>
+            <div class='chat-box-left'>
+                <div class="mensaje">Hola, que tal? ane ultimo</div>
+                <div class="datos-izq">
+                    <div>22:19</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='datos_usuario_principal'>                  
+            <div class='chat-box-right style-bg'>
+                <div class="mensaje">Hola! Ultimo :)</div>
+                <div class="datos-der">
+                    <div><i id="17" class="mdi mdi-heart"></i></div>
+                    <div> 22:19</div>
+                </div>
+            </div>
+        </div>
+        <!-- ***************************************************************************************** -->
+        <!--  CUERPO DE LOS MENSAJES -->
+
+  </div><!-- Fin del div chat -->
+
+
+
+
+
+
+
+
+
+  <ul id="opciones-principales" class="nav control mat-ripple tiny">
+
+<li data-route=".list-account"><i id="pantalla_1" class="mdi mdi-account-multiple"></i><label id="num_notificaciones"></label></li><li data-route=".list-text"><i id="pantalla_2" class="mdi mdi-comment-text"></i><label id="num_mensajes"></label></li><li data-route=".list-phone"><i id="pantalla_3" class="mdi mdi-phone"></i><label id="num_juegos"></label></li></ul>
+
+
+<!-- Opciones de la barra lateral -->
+<div class="mylove" id="opc_mylove" style="display:none;">
+    <div>
+      <h2 class="center">Titulo 1</h2>
+      <h3>Titulo 3</h3>
+      <p>Hola Hola Hola Hola Hola Hola Hola Hola </p>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="cuenta" id="opc_cuenta" style="display:none;">
+    <div>
+
+      <br/>
+      <div class="center">
+        <img id="IMAGEN-PERFIL-OPC" class="img-perfil-opc" src="assets/img/index.png">
+      </div>
+      <br/>
+
+      <div>
+        
+        <div class="i-group center">
+          <div class="center">
+            <input type="text" id="username" class="center"><span class="bar"></span>
+          </div>
+        </div>        
+      </div>
+
+      <div>
+        <ul class="mat-ripple opc">      
+          
+          <li>
+            <i id="cambiarEstilo" class="opc-opc">Cambiar tema de mensajes</i>
+          </li>
+          <li>
+            <i class="opc-opc">Una opcion aqui</i>
+          </li>
+          <li>
+            <i class="opc-opc">Una opcion aqui</i>
+          </li>
+          <li>
+            <i class="opc-opc">Una opcion aqui</i>
+          </li>
+
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="configuraciones" id="opc_configuraciones" style="display:none;">
+    <div>
+      <h2 class="center">Titulo 3</h2>
+      <h3>Titulo 3</h3>
+      <p>Hola Hola Hola Hola Hola Hola Hola Hola </p>
+    </div>
+</div>
+
+<div class="acerca" id="opc_acerca" style="display:none;">
+    <div>
+      <h2 class="center">Titulo 4</h2>
+      <h3>Titulo 4</h3>
+      <p>Hola Hola Hola Hola Hola Hola Hola Hola </p>
+    </div>
+</div>
+
+
+
+
+</div><!-- Fin del div CONTENT PRICIPAL-->
+
+<div id="footer" style="display:none;">
+    <div id="mensajeT0" class="opciones-de-mensajes" style="display:none;">
+        <ul class="lista-de-mensajes">
+            <li data-route="#texto">
+                <i class="mdi mdi-plus"></i>
+            </li>
+            <li>
+                <i class="mdi mdi-plus"></i>
+            </li>
+            <li>
+                <i class="mdi mdi-plus"></i>
+            </li>
+            <li>
+                <i class="mdi mdi-plus"></i>
+            </li>
+            <li>
+                <i class="mdi mdi-plus"></i>
+            </li>
+
+        </ul>
+
+    </div>
+    <div style="clear:both;"></div>
+    <div id="texto">
+      <div id="mensajeT1" class="boton-chat-texto-izq enlinea">
+          <div class="boton-chat-texto-emo-tex control style-bg">
+              <i class="mdi mdi-emoticon-excited  boton" id="boton-cambiar-emo-txt"></i>
+          </div>
+      </div>
+            
+      <div id="mensajeT2"  class="enlinea">
+          <div id ="area_de_texto" contentEditable="true"></div>
+      </div>
+            
+      <div id="mensajeT3" class="boton-chat-texto-der enlinea">
+          <div class="boton-chat-texto-enviar control style-bg">
+              <i id="ENVIAR" class="mdi mdi-heart boton"></i>
+          </div>
+      </div>
+      <div id="mensajeT4" class="emoticones style-bg center emoticones" style="display:none;">
+        
+        <input id="emo1" type="radio" name="tabs" checked>
+        <label for="emo1"><i class="mdi mdi-emoticon-happy"></i></label>
+        
+        <input id="emo2" type="radio" name="tabs"/>
+        <label for="emo2"><i class="mdi mdi-cat"></i></label>
+          
+        <input id="emo3" type="radio" name="tabs"/>
+        <label for="emo3"><i class="mdi mdi-heart-outline"></i></label>
+
+        <input id="emo4" type="radio" name="tabs"/>
+        <label for="emo4"><i class="mdi mdi-food"></i></label>
+        
+        <input id="emo5" type="radio" name="tabs"/>
+        <label for="emo5"><i class="mdi mdi-soccer"></i></label>
+        
+        <input id="emo6" type="radio" name="tabs"/>
+        <label for="emo6"><i class="mdi mdi-home-outline"></i></label>
+        
+        <input id="emo7" type="radio" name="tabs"/>
+        <label for="emo7"><i class="mdi mdi-cellphone-link"></i></label>
+        
+        <input id="emo8" type="radio" name="tabs"/>
+        <label for="emo8"><i class="mdi mdi-face"></i></label>
+
+        <input id="emo9" type="radio">
+        <label ><i id="eliminar-emoticon" class="mdi mdi-step-backward-2"></i></label>
+
+        <section id="emos1">emo 1</section>
+        <section id="emos2">emo 2</section>
+        <section id="emos3">emo 3</section>
+        <section id="emos4">emo 4</section>
+        <section id="emos5">emo 5</section>
+        <section id="emos6">emo 6</section>
+        <section id="emos7">emo 7</section>
+        <section id="emos8">
+            <input id="color1" type="radio" name="tabs-tono" checked>
+            <label for="color1"><i class="mdi mdi-emoticon-happy"></i></label>
+        
+            <input id="color2" type="radio" name="tabs-tono"/>
+            <label for="color2"><i class="mdi mdi-cat"></i></label>
+          
+            <input id="color3" type="radio" name="tabs-tono"/>
+            <label for="color3"><i class="mdi mdi-heart-outline"></i></label>
+
+            <input id="color4" type="radio" name="tabs-tono"/>
+            <label for="color4"><i class="mdi mdi-food"></i></label>
+        
+            <input id="color5" type="radio" name="tabs-tono"/>
+            <label for="color5"><i class="mdi mdi-soccer"></i></label>
+
+            <input id="color6" type="radio" name="tabs-tono"/>
+            <label for="color6"><i class="mdi mdi-soccer"></i></label>
+
+            <section id="colors1">color 1</section>
+            <section id="colors2">color 2</section>
+            <section id="colors3">color 3</section>
+            <section id="colors4">color 4</section>
+            <section id="colors5">color 5</section>
+            <section id="colors6">color 6</section>
+
+        </section>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+<div id="contact-modal" data-mode="add" class="card dialog">
+    <h3 id="lab-solicitud-titulo"></h3>
+  <div class="i-group">
+      <p id="lab-solicitud-descripcion"></p>
+      <select id="solicitud-tipo-dato">
+          <option id="envsolval1" value="1"></option>
+          <option id="envsolval2" value="2"></option>
+          <option id="envsolval3" value="3"></option>
+      </select>
+      <input id="correo-solicitud" type="text" placeholder="ejemplo@ejemplo.com">
+      <input id="telefono-solicitud" type="number" placeholder="3002222333 o +573002222333" style="display: none;">
+      <input id="codigo-solicitud" type="text" placeholder="a11aa" style="display: none;">
+  </div>
+    <br/>
+  <div class="btn-container">
+    <span id="envsolbotcancel" class="btn cancel"></span>
+    <span id="envsolbotenviar" class="btn save"></span>      
+  </div>
+
+</div>
+
+<div id="detalles-su-mensaje" class="card dialog">
+    <h3>Detalles del mensaje</h3>
+    <h3>Reenviar mensaje</h3>
+    <h3>Eliminar</h3>
+    <div class="btn-container">
+          <span class="btn cancel">Cancel</span>
+    </div>
+    <br/>
+</div>
+
+<div id="foto" class="card teatro">
+    <div>
+      <div class="foto-superior">
+        <i class="mdi mdi-close-circle-outline" style="color:white; font-size:20px;"></i>
+        <label style="color:white;">Cerrar</label>
+      </div>
+      <picture>
+        <img id = "img-teatro" src="assets/img/index.png" alt="cargando...">
+      </picture>  
+      <div class="foto-inferior">
+        <label>Siguiente</label>
+        <label>Anterior</label>
+      </div>
+    </div>
+</div>
+
+
+</div><!-- Fin del div PRIMERO HANGUT-->
+
+
+
+
+<script src='assets/vendor/jquery/jquery-3.2.1.min.js'></script>
+
+<script src="assets/js/home_user.js"></script>
+<script src="assets/js/opciones_barra_lateral.js"></script>
+
+<script type="text/javascript">
+function quitarCarga(){
+  $('#status').fadeOut(); // will first fade out the loading animation
+  $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+}
+
+window.onload=quitarCarga;
+</script>
+
+
+
+</body>
+</html>

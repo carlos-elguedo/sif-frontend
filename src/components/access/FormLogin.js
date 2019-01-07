@@ -24,7 +24,7 @@ class FormLogin extends Component {
 		  		</div>
 	
 		  		<div className="text-right p-t-8 p-b-31">
-					<a href="#">
+					<a>
 				  		¿Olvidó su contraseña?
 					</a>
 		  		</div>
@@ -49,15 +49,15 @@ class FormLogin extends Component {
 		  		</div>
 
 		  		<div className="flex-c-m">
-					<a href="#" className="login100-social-item bg1">
+					<a className="login100-social-item bg1">
 			  			<i className="fa fa-facebook"></i>
 					</a>
 
-					<a href="#" className="login100-social-item bg2">
+					<a className="login100-social-item bg2">
 			  			<i className="fa fa-twitter"></i>
 					</a>
 
-					<a href="#" className="login100-social-item bg3">
+					<a className="login100-social-item bg3">
 			  			<i className="fa fa-google"></i>
 					</a>
 		  		</div>
@@ -67,7 +67,7 @@ class FormLogin extends Component {
 			  			O registrate en SIF
 					</span>
 
-					<a id="bot_go_register" href="#" className="txt2">
+					<a id="bot_go_register" className="txt2">
 			  			Registrarme
 					</a>
 		  		</div>

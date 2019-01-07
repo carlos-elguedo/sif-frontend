@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 
 import FormLogin from './FormLogin'
@@ -70,12 +70,11 @@ class Access extends Component {
       this.setState({
         message_request: data.message
       });
-      if(data.type_error == -1){
-        console.log(data.user)
+      if(data.type_error === -1){
         this.setState({
-          message_request_option: 'Aceptar',
-          user_request: data.user
+          message_request_option: 'Aceptar'
         });
+        this.props.userType = data.register_type;
       }
 
   })
@@ -110,7 +109,7 @@ class Access extends Component {
       this.setState({
         message_request: data.message
       });
-      if(data.type_error == -1){
+      if(data.type_error === -1){
         this.setState({
           message_request_option: 'Aceptar'
         });
@@ -128,7 +127,7 @@ class Access extends Component {
    * @param {*} eve 
    */
   changeRegister(eve){
-    console.log(eve.target.name + ": " +eve.target.value);
+    //console.log(eve.target.name + ": " +eve.target.value);
     const {name, value} = eve.target;
 
     this.setState({
@@ -144,8 +143,8 @@ class Access extends Component {
    * Funcion para gestionar el tipo de usuario a registrar
    */
   userType(){
-    console.log("Cambio")
-    if(this.state.counter_user_type % 2 == 0){
+    
+    if(this.state.counter_user_type % 2 === 0){
       this.setState({
         register_type: 2
       });
@@ -167,8 +166,6 @@ class Access extends Component {
  * Funcion para cancelar el envio de un formulario al servidor
  */
   cancelSend(){
-    console.log("Cancelo envio " + this.state.user_request.register_name)
-    
     
     this.setState({
       sending_request: false

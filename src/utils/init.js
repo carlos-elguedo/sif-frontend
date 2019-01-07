@@ -6,7 +6,7 @@ function isLogged(){
     //alert("Va a buscar");
     //console.log("Llegooooooooooooooooooooooooooo");
     var totalStorage = localStorage.length;
-    var ret = false;
+    
 
     if(totalStorage >= 1){
         //localStorage.setItem("user", "carlos elguedo");

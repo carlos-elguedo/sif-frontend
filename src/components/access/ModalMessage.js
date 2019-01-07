@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 //import { Link } from "react-router-dom";
 
-var cont = 0;
 var textVisible = "", text_img = "";
 
 class ModalMessage extends Component {
