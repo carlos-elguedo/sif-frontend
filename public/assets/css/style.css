@@ -8,6 +8,14 @@ and open the template in the editor.
     Author     : law
 */
 
+body{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('/assets/images/bg-01.jpg');
+}
 .re-card-header{
     background: transparent;
     padding-left: 15px;
@@ -50,9 +58,6 @@ html, body{
     
     color: black;
     
-}
-.container-login100{
-    background-image: url('/assets/images/bg-01.jpg');
 }
 
 .hide{

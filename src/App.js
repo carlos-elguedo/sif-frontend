@@ -16,7 +16,6 @@ class App extends Component {
       userType : 0
     };
     this.isLogged = this.isLogged.bind(this);
-    this.redirectUser = this.redirectUser.bind(this);
     
   }
   
@@ -34,10 +33,6 @@ isLogged() {
    return <Access userType = {this.state.userType}/>;
   }
   
-
-  redirectUser(){
-
-  }
 
 
   render() {

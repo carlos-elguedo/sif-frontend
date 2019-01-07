@@ -24,8 +24,8 @@ class Access extends Component {
       register_age: '',
       register_type: '',
       counter_user_type: 2,
-      message_request: 'Enviando información',
-      message_request_option: 'Cancelar',
+      message_request: '',
+      message_request_option: '',
       sending_request: false,
       user_request: []
 
@@ -52,9 +52,12 @@ class Access extends Component {
     eve.preventDefault();
 
     //Para mostrar el mensaje de enviando datos
-    this.setState({
-      sending_request: true
-    });
+
+    console.log('Llego')
+
+    // this.setState({
+    //   sending_request: true
+    // });
 
     fetch('http://localhost:3001/api/rest/access/',{
       method: 'POST',
@@ -90,9 +93,9 @@ class Access extends Component {
     eve.preventDefault();
 
     //Para mostrar el mensaje de enviando datos
-    this.setState({
-      sending_request: true
-    });
+    // this.setState({
+    //   sending_request: true
+    // });
 
     
     fetch('http://localhost:3001/api/rest/access/signup/',{
@@ -160,8 +163,6 @@ class Access extends Component {
   }
 
 
-
-
 /**
  * Funcion para cancelar el envio de un formulario al servidor
  */
@@ -177,14 +178,13 @@ class Access extends Component {
 
   render() {
     return (
-          
-      <div className="limiter">
-        <div className="container-login100">
-          <ModalMessage visibility={this.state.sending_request} message={this.state.message_request} cancel = {this.cancelSend} boton_text={this.state.message_request_option}/>
+      
+      <main class="container p-5">
+          {/* {<ModalMessage visibility={this.state.sending_request} message={this.state.message_request} cancel = {this.cancelSend} boton_text={this.state.message_request_option}/>} */}
           <FormLogin login={this.login} typing= {this.changeRegister}/>
           <FormRegister register={this.register} typing= {this.changeRegister} userType={this.userType}/>
-        </div>
-      </div>
+
+      </main>
     );
   }
 }
