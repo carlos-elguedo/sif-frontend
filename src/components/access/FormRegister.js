@@ -18,12 +18,12 @@ class FormRegister extends Component {
 				<img className="mx-auto d-block logo s-4" src="assets/images/sif72.png" alt="Logo SIF"/>
 
 				<div className="card-body">
-					<form onSubmit={this.props.login}>
+					<form onSubmit={this.props.register}>
                         {/* USER TYPE SELECT */}
                         <div className="form-group">
-                            <select id="tipo_usuario" className="form-control" onChange={this.props.userType}>
-                                <option>Soy un cliente</option>
-                                <option>Soy un Trabajador independiente</option>
+                            <select id="tipo_usuario" name="register_type" className="form-control" onChange={this.props.typing}>
+                                <option value="1">Soy un cliente</option>
+                                <option value="2">Soy un Trabajador independiente</option>
                             </select>
                         </div>
 
@@ -34,7 +34,7 @@ class FormRegister extends Component {
 
                         {/* METHOD REGISTER SELECT */}
                         <div className="form-group">
-                            <select id="tipo_registro" className="form-control" onChange={this.props.userType}>
+                            <select id="tipo_registro" className="form-control">
                                 <option>Registrarme con correo electronico</option>
                                 <option>Registrarme con numero telefonico</option>
                             </select>

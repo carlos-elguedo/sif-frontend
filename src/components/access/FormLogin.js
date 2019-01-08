@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 
 class FormLogin extends Component {
+
+
     render() {
       return (
 		<div className="row" id="pageLogin">
@@ -17,7 +19,7 @@ class FormLogin extends Component {
 				<div className="card-body">
 					<form onSubmit={this.props.login} >
 					<div className="form-group">
-						<input type="text" className="form-control" name="login_data" placeholder="Correo electronico o numero tel."  onChange={this.props.typing} autofocus/>
+						<input type="text" className="form-control" name="login_data" placeholder="Correo electronico o numero tel." onChange={this.props.typing} autoFocus/>
 					</div>
 					<div className="form-group">
 						<input className="form-control" type="password" name="login_password" placeholder="Contraseña" onChange={this.props.typing}/>
@@ -30,7 +32,7 @@ class FormLogin extends Component {
 					</button>
 					<br/>
 					<div className="form-group">
-						<button className="btn btn-secundary btn-block">
+						<button id="bot_go_register" className="btn btn-secundary btn-block">
 							Registrarme
 						</button>
 					</div>

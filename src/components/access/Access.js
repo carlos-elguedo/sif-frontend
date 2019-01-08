@@ -23,9 +23,8 @@ class Access extends Component {
       register_password: '',
       register_age: '',
       register_type: '',
-      counter_user_type: 2,
       message_request: '',
-      message_request_option: '',
+      message_request_option: 'Cancelar',
       sending_request: false,
       user_request: []
 
@@ -35,7 +34,6 @@ class Access extends Component {
 
     this.login = this.login.bind(this);
     this.register = this.register.bind(this);
-    this.userType = this.userType.bind(this);
     this.cancelSend = this.cancelSend.bind(this);
     this.changeRegister = this.changeRegister.bind(this);
   }
@@ -52,13 +50,12 @@ class Access extends Component {
     eve.preventDefault();
 
     //Para mostrar el mensaje de enviando datos
+    this.setState({
+      message_request: 'Enviando...',
+      sending_request: true
+    });
 
-    console.log('Llego')
-
-    // this.setState({
-    //   sending_request: true
-    // });
-
+    //Enviamos la solicitud de inicio de sesion al servidor 
     fetch('http://localhost:3001/api/rest/access/',{
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -70,9 +67,13 @@ class Access extends Component {
   .then(res => res.json())
   .then(data => {
       
+      //Ajustamos las variables locales a las recibidas por el servidor
       this.setState({
-        message_request: data.message
+        message_request: data.message,
+        message_request_option: data.option
       });
+
+
       if(data.type_error === -1){
         this.setState({
           message_request_option: 'Aceptar'
@@ -81,8 +82,19 @@ class Access extends Component {
       }
 
   })
-  .catch(err => console.error(err));
+  .catch(err => {
+    this.setState({
+      message_request: 'Error al realizar la petición',
+      sending_request: true,
+      message_request_option: 'Cerrar'
+    });    
+    console.error(err) 
+});
   }
+
+
+
+
 
 
 
@@ -92,10 +104,11 @@ class Access extends Component {
   register(eve){
     eve.preventDefault();
 
-    //Para mostrar el mensaje de enviando datos
-    // this.setState({
-    //   sending_request: true
-    // });
+    // Para mostrar el mensaje de enviando datos
+    this.setState({
+      message_request: 'Enviando...',
+      sending_request: true
+    });
 
     
     fetch('http://localhost:3001/api/rest/access/signup/',{
@@ -110,8 +123,10 @@ class Access extends Component {
   .then(data => {
       
       this.setState({
-        message_request: data.message
+        message_request: data.message,
+        message_request_option: data.option
       });
+
       if(data.type_error === -1){
         this.setState({
           message_request_option: 'Aceptar'
@@ -119,7 +134,14 @@ class Access extends Component {
       }
 
   })
-  .catch(err => console.error(err));
+  .catch(err => {
+      this.setState({
+        message_request: 'Error al realizar la petición',
+        sending_request: true,
+        message_request_option: 'Cerrar'
+      });    
+      console.error(err) 
+  });
   }
 
 
@@ -130,7 +152,7 @@ class Access extends Component {
    * @param {*} eve 
    */
   changeRegister(eve){
-    //console.log(eve.target.name + ": " +eve.target.value);
+    // console.log(eve.target.name + ": " +eve.target.value);
     const {name, value} = eve.target;
 
     this.setState({
@@ -139,37 +161,15 @@ class Access extends Component {
   }
 
 
-
-
-
-  /**
-   * Funcion para gestionar el tipo de usuario a registrar
-   */
-  userType(){
-    
-    if(this.state.counter_user_type % 2 === 0){
-      this.setState({
-        register_type: 2
-      });
-
-  }else{
-      this.setState({
-        register_type: 1
-      });
-  }
-  this.setState({
-    counter_user_type: this.counter_user_type+1
-  });
-  }
-
-
 /**
  * Funcion para cancelar el envio de un formulario al servidor
  */
   cancelSend(){
-    
+    console.log("Cancelo")
     this.setState({
-      sending_request: false
+      sending_request: false,
+      message_request: '',
+      message_request_option: 'Cancelar'
     });
 
 
@@ -178,11 +178,10 @@ class Access extends Component {
 
   render() {
     return (
-      
-      <main class="container p-5">
-          {/* {<ModalMessage visibility={this.state.sending_request} message={this.state.message_request} cancel = {this.cancelSend} boton_text={this.state.message_request_option}/>} */}
-          <FormLogin login={this.login} typing= {this.changeRegister}/>
-          <FormRegister register={this.register} typing= {this.changeRegister} userType={this.userType}/>
+      <main className="container p-5">
+          {<ModalMessage visibility={this.state.sending_request} message={this.state.message_request} cancel = {this.cancelSend} boton_text={this.state.message_request_option}/>}}
+          <FormLogin login={this.login} typing = {this.changeRegister}/>
+          <FormRegister register={this.register} typing= {this.changeRegister}/>
 
       </main>
     );

@@ -13,7 +13,7 @@ body{
     background-position: center;
     background-size: cover;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     background-image: url('/assets/images/bg-01.jpg');
 }
 .re-card-header{
