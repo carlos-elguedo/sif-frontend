@@ -63,7 +63,7 @@ class FormRegister extends Component {
 
                         {/* SEND FORM REGISTER */}
                         <div className="form-group">
-                            <button className="btn btn-primary btn-block">
+                            <button type="submit" className="btn btn-primary btn-block">
                                 Registrarme
                             </button>
                         </div>

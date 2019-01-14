@@ -32,7 +32,7 @@ class FormLogin extends Component {
 					</button>
 					<br/>
 					<div className="form-group">
-						<button id="bot_go_register" className="btn btn-secundary btn-block">
+						<button type="submit" id="bot_go_register" className="btn btn-secundary btn-block">
 							Registrarme
 						</button>
 					</div>

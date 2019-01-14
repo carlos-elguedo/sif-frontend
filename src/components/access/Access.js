@@ -61,10 +61,12 @@ class Access extends Component {
       body: JSON.stringify(this.state),
       headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true'
       }
   })
-  .then(res => res.json())
+  .then(res => { console.log(res); res.json()})
   .then(data => {
       
       //Ajustamos las variables locales a las recibidas por el servidor
@@ -84,7 +86,7 @@ class Access extends Component {
   })
   .catch(err => {
     this.setState({
-      message_request: 'Error al realizar la petición',
+      message_request: 'Error al realizar la petición : Login',
       sending_request: true,
       message_request_option: 'Cerrar'
     });    
@@ -136,7 +138,7 @@ class Access extends Component {
   })
   .catch(err => {
       this.setState({
-        message_request: 'Error al realizar la petición',
+        message_request: 'Error al realizar la petición: Register',
         sending_request: true,
         message_request_option: 'Cerrar'
       });    

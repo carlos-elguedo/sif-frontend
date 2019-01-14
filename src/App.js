@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+
 import Access from './components/access/Access'
 import Home from './components/home/Home'
+
+
 //import NotFound from './components/notFound'
 
 //const init = require('./utils/init')
