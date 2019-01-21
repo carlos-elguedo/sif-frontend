@@ -58,7 +58,7 @@ class FormRegister extends Component {
 
                         {/* TERMINS ACCEPT */}
                         <div className="form-group text-left">
-                            <input id="aceptar_terminos" type="checkbox"/> Acepto las condiciones de uso
+                            <input id="aceptar_terminos" type="checkbox" name="register_terms" onChange={this.props.typing}/> Acepto las condiciones de uso
                         </div>
 
                         {/* SEND FORM REGISTER */}

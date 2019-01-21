@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Access from './components/access/Access'
 import Home from './components/home/Home'
+import Client from './components/home/Client'
+import Worker from './components/home/Worker'
+
+// import Routes from './router'
 
 
 //import NotFound from './components/notFound'
@@ -45,9 +49,11 @@ isLogged() {
       <Router>
         <Switch>
           <Route path='/' exact component={this.isLogged}/>
-          <Route path='/home' exact component={Home}/>
+          <Route path='/client' exact component={Client}/>
+          <Route path='/worker' exact component={Worker}/>
         </Switch>
       </Router>
+      // <Routes/>
     );
   }
 }
