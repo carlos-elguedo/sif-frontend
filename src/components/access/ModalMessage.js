@@ -21,7 +21,7 @@ class ModalMessage extends Component {
             <div className={textVisible}>
                 <div className='center1'>
                     <center>
-                        <img src={text_img}/>
+                        <img src={text_img} alt='cargando...'/>
                     
                         <br/>
                         <label>{this.props.message}</label>

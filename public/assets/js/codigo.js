@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,26 +9,28 @@ $(document).ready(function(){
     var tipo_registro = 2, tipo_usuario = 2;
 
 
-    $("#bot_go_register").click(function(){
+    $("#bot_go_register").click(function(eve){
+      eve.preventDefault();
         $("#pageLogin").fadeOut(1500, function(){
             $("#pageRegister").fadeIn(1500);
         });
     });
 
-    $("#bot_go_login").click(function(){
+    $("#bot_go_login").click(function(eve){
+      eve.preventDefault();
         $("#pageRegister").fadeOut(1500, function(){
             $("#pageLogin").fadeIn(1500);
         });
     });
 
 
-    
-    
+
+
 
 
     $("#tipo_registro").change(function(eve){
         eve.preventDefault();
-        
+
         if(tipo_registro%2 == 0){
             $("#dato_registro").prop("placeholder","ej: 3007007000");
             $("#dato_registro_texto").html("Numero telefonico");
@@ -44,14 +46,14 @@ $(document).ready(function(){
     $("#buscarTrabajador").click(function (){
         //alert("BubuscarTrab");
         //$("#results_div").toggleClass("hide");
-        
+
         $("#results").html('<img class="center-align responsive-img" src="../assets/images/progress.gif">');
-        
+
         setTimeout(function () {
             $("#results").html('');
-            
+
             for (var i = 0, max = 4; i < max; i++) {
-                
+
                 $("#results").append('<section class="result-video">'+
                     '<div class="container py-3">'+
                         '<div class="card re-section">'+
@@ -74,6 +76,6 @@ $(document).ready(function(){
             }
         }, 1600);
     });
-    
-    
+
+
   });

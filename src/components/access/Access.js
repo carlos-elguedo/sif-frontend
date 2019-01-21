@@ -44,7 +44,7 @@ class Access extends Component {
 
   /**
    * Funcion para enviar el formulario de login al servidor
-   * @param {*} eve 
+   * @param {*} eve
    */
   login(eve){
     eve.preventDefault();
@@ -55,7 +55,7 @@ class Access extends Component {
       sending_request: true
     });
 
-    //Enviamos la solicitud de inicio de sesion al servidor 
+    //Enviamos la solicitud de inicio de sesion al servidor
     fetch('http://localhost:3001/api/rest/access/',{
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -66,21 +66,20 @@ class Access extends Component {
           'Access-Control-Allow-Credentials': 'true'
       }
   })
-  .then(res => { console.log(res); res.json()})
+  .then(res => res.json())
   .then(data => {
-      
+
       //Ajustamos las variables locales a las recibidas por el servidor
       this.setState({
-        message_request: data.message,
+        message_request: `${data.message}`,
         message_request_option: data.option
       });
 
 
       if(data.type_error === -1){
-        this.setState({
-          message_request_option: 'Aceptar'
-        });
-        this.props.userType = data.register_type;
+        //Login exitoso
+        document.location = data.redirect
+
       }
 
   })
@@ -89,8 +88,8 @@ class Access extends Component {
       message_request: 'Error al realizar la petición : Login',
       sending_request: true,
       message_request_option: 'Cerrar'
-    });    
-    console.error(err) 
+    });
+    console.error(err)
 });
   }
 
@@ -112,7 +111,7 @@ class Access extends Component {
       sending_request: true
     });
 
-    
+
     fetch('http://localhost:3001/api/rest/access/signup/',{
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -123,16 +122,15 @@ class Access extends Component {
   })
   .then(res => res.json())
   .then(data => {
-      
+
       this.setState({
         message_request: data.message,
         message_request_option: data.option
       });
 
       if(data.type_error === -1){
-        this.setState({
-          message_request_option: 'Aceptar'
-        });
+          //Registro exitoso
+          document.location = data.redirect
       }
 
   })
@@ -141,8 +139,8 @@ class Access extends Component {
         message_request: 'Error al realizar la petición: Register',
         sending_request: true,
         message_request_option: 'Cerrar'
-      });    
-      console.error(err) 
+      });
+      console.error(err)
   });
   }
 
@@ -151,7 +149,7 @@ class Access extends Component {
 
   /**
    * Funcion para controlar las pulsasiones sobre el teclado
-   * @param {*} eve 
+   * @param {*} eve
    */
   changeRegister(eve){
     // console.log(eve.target.name + ": " +eve.target.value);
