@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 import Access from './components/access/Access'
-import Home from './components/home/Home'
+// import Home from './components/home/Home'
 import Client from './components/home/Client'
 import Worker from './components/home/Worker'
 
@@ -23,9 +23,9 @@ class App extends Component {
       userType : 0
     };
     this.isLogged = this.isLogged.bind(this);
-    
+
   }
-  
+
 isLogged() {
 
   /*
@@ -39,7 +39,7 @@ isLogged() {
     */
    return <Access userType = {this.state.userType}/>;
   }
-  
+
 
 
   render() {

@@ -86,6 +86,8 @@ class Access extends Component {
         if(data.type_error === -1){
           //Login exitoso
           document.location = data.redirect
+          // console.log(data.redirect)
+
         }
 
       })

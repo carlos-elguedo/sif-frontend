@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 /**
- * Class Header
- * Header of the application
+ * Class Sidebar
+ * LATERAL BAR of the application
  * receives as parameter the text to be displayed in the upper bar
  * It contains a link to the Home page ('/')
  * @author Carlos Elguedo
@@ -13,18 +13,12 @@ class Header extends Component{
 
     render(){
         return(
-                <nav className="navbar navbar-light bg-danger">
-                <Link to={`/`}>
-                    <div className="navbar-brand text-white" href="">
-                        <img src="assets/images/sif72.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
-                        {this.props.nav_title}
-                    </div>
-                </Link>
-                </nav>
-        
+          <div className="row">
+            <h2 className='p-t-10 text-center w-full'>{this.props.text}</h2>
+          </div>
         );
     }
-    
+
 }
 
 export default Header;
