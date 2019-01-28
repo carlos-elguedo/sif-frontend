@@ -4,10 +4,26 @@ import NavBar from '../sections/NavBar'
 import Search from '../sections/Search'
 import SideBar from '../sections/SideBar'
 import Header from '../sections/Header'
+import OptionSearch from '../sections/OptionSearch'
+import ResultPanel from '../sections/ResultPanel'
 
 
 
 class Client extends Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+        workers: []
+    };
+
+    this.search = this.search.bind(this)
+  }
+
+  search(){
+
+  }
+
     render() {
       return (
         <div className="App">
@@ -15,10 +31,12 @@ class Client extends Component {
           <SideBar/>
           <div className="container">
             <Header text = 'Empieza a buscar trabajadores en tu ciudad...'/>
-            <Search/>
-          {/* <SearchBar search={this.getVideos} typing={this.typing}/>
+            <Search search = {this.search}/>
+            <OptionSearch/>
+            <ResultPanel result_title = 'En SIF esta encuentras lo que estas buscando...' workers={this.state.workers} />
+            {/* <SearchBar search={this.getVideos} typing={this.typing}/>
 
-          <ResultPanel result_title ={this.state.result_title} videos_to_view={this.state.searched} video_player={this.viewVideo}/> */}
+            <ResultPanel result_title ={this.state.result_title} videos_to_view={this.state.searched} video_player={this.viewVideo}/> */}
         </div>
       </div>
       );

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import { Link } from "react-router-dom";
-
+const config = require('../../config.js')
 
 /**
  * Class Sidebar
@@ -10,33 +10,53 @@ import React, {Component} from 'react';
  * @author Carlos Elguedo
  * @version 0.0.1
  */
+
 class OptionSearch extends Component{
 
-  getProfessions(){
-    fetch(``)
-      .then(res =>res.json())
-      .then(data =>{
-        // this.setState({
-        //   videoDetails: data.items
-        // });
-        console.log("Se obtuvieron detalles video: " + data.total + " Profesiones");
-        // this.setState(this.state);
-        // this.render();
-        // this.getRecommendedVideos();
-      });
+
+
+
+  constructor(props){
+    super(props)
+
+    this.state={
+        categories: []
+    };
+
+    this.getCategories = this.getCategories.bind(this)
+
+    this.getCategories()
   }
 
+
+
+
+  getCategories(){
+
+    fetch(`${config.SERVER_URL}${config.SERVER_API_PROF_URL}allcategory/`)
+      .then(res =>res.json())
+      .then(data =>{
+        // console.log("Se obtuvieron: " + data.length + " categorias");
+        this.setState({categories: data})
+        console.log('tuldlasd ' + this.state.categories.length)
+      })
+      // .catch(error =>{
+      //   console.log('Error request the Categories: ' error);
+      // })
+  }//End get Categories
+
     render(){
-      const Professions =  this.props.professions.map((profession, i) => {
+      const Categories =  this.state.categories.map((category, i) => {
             return(
-              <option>profession.name</option>
+              <option key={i}>{category.name_es}</option>
             )
           });
+      // getCategories()
         return(
-          <div class="form-group">
-            <label for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-              {Professions}
+          <div className="form-group">
+            <select className="form-control" id="exampleSelect1">
+              <option> O selecciona una categoria</option>
+              {Categories}
             </select>
           </div>
         );

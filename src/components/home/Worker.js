@@ -11,6 +11,7 @@ class Client extends Component {
         <NavBar nav_title = " User Name worker"/>
         <SideBar/>
         <div className="container">
+
           {/* <SearchBar search={this.getVideos} typing={this.typing}/>
           <ResultPanel result_title ={this.state.result_title} videos_to_view={this.state.searched} video_player={this.viewVideo}/> */}
         </div>

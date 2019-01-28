@@ -7,9 +7,11 @@ import FormRegister from './FormRegister'
 import ModalMessage from '../sections/ModalMessage'
 import Alert from '../info/Alert'
 
-
 //import NotFound from '../notFound'
 import {validate_login, validate_register} from '../../utils/validator'
+
+/**Global configurations file*/
+const config = require('../../config.js')
 
 
 
@@ -64,7 +66,7 @@ class Access extends Component {
       });
 
       //Enviamos la solicitud de inicio de sesion al servidor
-      fetch('http://localhost:3001/api/rest/access/',{
+      fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`,{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers: {
@@ -107,7 +109,7 @@ class Access extends Component {
         show_alert: true
       })
     }
-    
+
   }//End of login function
 
 
@@ -130,7 +132,7 @@ class Access extends Component {
       });
 
 
-      fetch('http://localhost:3001/api/rest/access/signup/',{
+      fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}signup/`,{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers: {
@@ -180,18 +182,18 @@ class Access extends Component {
   changeRegister(eve){
     // console.log(eve.target.name + ": " +eve.target.value + ": " + eve.target.type);
     const {name, value, type} = eve.target;
-    
+
     //To checkbox input
     if(type === 'checkbox'){
       if(this.state.register_terms === 0){
         this.setState({
           register_terms: 1
-        }); 
+        });
         // console.log('Cambio a 1 ------------:', this.state.register_terms)
       }else{
         this.setState({
           register_terms: 0
-        }); 
+        });
         // console.log('Cambio a 0---------------:', this.state.register_terms)
       }
 
@@ -201,7 +203,7 @@ class Access extends Component {
         [name]: value
       });
     }
-    
+
   }
 
 
@@ -227,7 +229,7 @@ class Access extends Component {
       show_alert: false
     })
   }
-  
+
 
 
   render() {
