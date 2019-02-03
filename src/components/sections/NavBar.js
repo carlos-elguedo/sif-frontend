@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 // import { Link } from "react-router-dom";
+import DropdownUserMenu from './DropdownUserMenu'
 
 /**
  * Class NavBar
@@ -75,6 +76,9 @@ class NavBar extends Component{
                           <a className="nav-link" href="">Link</a>
                         </li>
                       </ul>
+
+                      <DropdownUserMenu/>
+
                     </div>
 
                   </nav>
