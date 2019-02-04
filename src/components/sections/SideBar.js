@@ -12,20 +12,20 @@ import React, {Component} from 'react';
 class SideBar extends Component{
 
     render(){
+
         return(
           <div id="wrapper" className="">
             <div id="sidebar-wrapper">
               <ul className="sidebar-nav">
                   <li className="sidebar-brand">
-                    <a href=""> Start Bootstrap </a>
+                    <a href="">SIF Cartagena</a>
                   </li>
-                  <li> <a href="">Dashboard</a> </li>
-                  <li> <a href="">Shortcuts</a> </li>
-                  <li> <a href="">Overview</a> </li>
-                  <li> <a href="">Events</a> </li>
-                  <li> <a href="">About</a> </li>
-                  <li> <a href="">Services</a> </li>
-                  <li> <a href="">Contact</a> </li>
+                  <li> <a href=""> {this.props.options[0]} </a> </li>
+                  <li> <a href=""> {this.props.options[1]} </a> </li>
+                  <li> <a href=""> {this.props.options[2]} </a> </li>
+                  <li> <a href=""> {this.props.options[3]} </a> </li>
+                  {/*<li> <a href="">Contact</a> </li>*/}
+
               </ul>
             </div>
           </div>

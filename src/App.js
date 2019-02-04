@@ -51,6 +51,7 @@ isLogged() {
           <Route path='/' exact component={this.isLogged}/>
           <Route path='/client' exact component={Client}/>
           <Route path='/worker' exact component={Worker}/>
+          <Route path='/worker/edit' exact component={Worker}/>
         </Switch>
       </Router>
       // <Routes/>

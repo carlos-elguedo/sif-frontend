@@ -72,9 +72,6 @@ class NavBar extends Component{
                             </span>
                           </a>
                         </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="">Link</a>
-                        </li>
                       </ul>
 
                       <DropdownUserMenu/>
