@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 /**
  * Class ResultPanel
@@ -45,7 +45,7 @@ class ResultPanel extends Component{
                             {this.props.result_title}
                         </div>
                         <div className="card-body">
-                            
+
                         </div>
                     </div>
                 </div>

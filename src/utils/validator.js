@@ -24,7 +24,7 @@ function validate_register(state){
 
         //2. Correct Length
         if(correctLength(register_name, 4) && correctLength(register_password, 6) && correctDate(register_age) && correctUserType(register_type) ){
-            
+
             //3. Now, we check the data for the register
             if(correctEmail(register_data_register) || correctNumberPhone(register_data_register)){
                 //3. Finish, accept terms
@@ -37,7 +37,7 @@ function validate_register(state){
             else{
                 console.log('Data register')
             }
-            
+
 
         }//End Correct length validation
         else{
@@ -110,7 +110,7 @@ function correctDate(date){
     // let day = fechaf[2];
     // let month = fechaf[1];
     let year = fechaf[0];
-    let year2 = parseInt(year);
+    let year2 = parseInt(year, 10);
 
     if(year2 < 2000 && year2 > 1900){
         ret = true;
