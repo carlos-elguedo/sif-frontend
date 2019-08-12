@@ -1,12 +1,12 @@
 function validate_login(state){
     let ret = false
-    const {login_data, login_password} = state
+    const {data_register, password} = state
 
     //1.  Validate empty values
-    if(login_password !== '' && login_data !== ''){
+    if(password !== '' && data_register !== ''){
 
         //2. Validate the lenth of data
-        if(correctLength(login_password, 6) && correctLength(login_data, 4)){
+        if(correctLength(password, 6) && correctLength(data_register, 4)){
             ret = true
         }
 

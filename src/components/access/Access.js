@@ -21,8 +21,8 @@ class Access extends Component {
 
     this.state={
 
-      login_data: '',
-      login_password: '',
+      data_register: '',
+      password: '',
       register_name: '',
       register_data_register: '',
       register_password: '',
