@@ -19,13 +19,13 @@ class FormLogin extends Component {
 				<div className="card-body">
 					<form onSubmit={this.props.login} >
 					<div className="form-group">
-						<input type="text" className="form-control" name="data_register" placeholder="Correo electronico o numero tel." onChange={this.props.typing} autoFocus/>
+						<input type="text" className="form-control" name="data_register" placeholder="Correo electronico o numero tel." onChange={this.props.typing} autoFocus autoComplete="username"/>
 					</div>
 					<div className="form-group">
-						<input className="form-control" type="password" name="password" placeholder="Contraseña" onChange={this.props.typing}/>
+						<input className="form-control" type="password" name="password" placeholder="Contraseña" onChange={this.props.typing} autoComplete="current-password"/>
 					</div>
 					<div className="form-group text-right">
-						<a>¿Olvidó su contraseña?</a>
+						<a href = "lol">¿Olvidó su contraseña?</a>
 					</div>
 					<button type="submit" className="btn btn-primary btn-block">
 						Entrar a SIF

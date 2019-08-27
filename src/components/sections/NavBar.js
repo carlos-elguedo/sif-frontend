@@ -36,7 +36,7 @@ class NavBar extends Component{
               <div className="collapse navbar-collapse" id="navbarsExample02">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
-                    <a className="nav-link" href="">
+                    <a className="nav-link" href="lol">
                       {this.props.nav_title}
                       <span className="sr-only">
                         (current)

@@ -42,12 +42,12 @@ class FormRegister extends Component {
 
                         {/* USER DATA TO REGISTER */}
                         <div className="form-group">
-                            <input id="dato_registro" className="form-control" type="text" name="register_data_register" placeholder="ej: nombre@mail.com" onChange={this.props.typing}/>
+                            <input id="dato_registro" className="form-control" type="text" name="register_data_register" placeholder="ej: nombre@mail.com" onChange={this.props.typing} autoComplete="username"/>
                         </div>
 
                         {/* PASSWORD OF USER */}
                         <div className="form-group">
-                            <input className="form-control" type="password" name="register_password" placeholder="Contraseña" onChange={this.props.typing}/>
+                            <input className="form-control" type="password" name="register_password" placeholder="Contraseña" onChange={this.props.typing} autoComplete="current-password"/>
                         </div>
 
                         {/* DATE OF BIRTHDAY */}
@@ -70,7 +70,7 @@ class FormRegister extends Component {
 
                         {/* BACK TO LOGIN */}
                         <div className="form-group">
-                            <a id="bot_go_login" className="btn btn-secundary btn-block">
+                            <a id="bot_go_login" className="btn btn-secundary btn-block" href = "lol">
                                 Volver atras
                             </a>
                         </div>

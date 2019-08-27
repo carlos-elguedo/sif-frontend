@@ -12,6 +12,7 @@ import {validate_login, validate_register} from '../../utils/validator'
 
 /**Global configurations file*/
 const config = require('../../config.js')
+const axios = require('axios');
 
 
 
@@ -55,7 +56,7 @@ class Access extends Component {
    * Funcion para enviar el formulario de login al servidor
    * @param {*} eve
    */
-  login(eve){
+  async login(eve){
     eve.preventDefault();
 
     if(validate_login(this.state)){
@@ -64,43 +65,71 @@ class Access extends Component {
         message_request: 'Enviando...',
         sending_request: true
       });
-
-      //Enviamos la solicitud de inicio de sesion al servidor
-      fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`,{
-        method: 'POST',
-        body: JSON.stringify(this.state),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': 'true'
-        }
+      let message_request, message_request_option, type_error, redirect;
+      await axios.post(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`, this.state)
+      .then(function (response) {
+        console.log('llego, ', response.headers.cookie);
+        message_request = response.data.message
+        message_request_option = response.data.option
+        type_error = response.data.type_error
+        redirect = response.data.redirect
       })
-      .then(res => res.json())
-      .then(data => {
-
-        //Ajustamos las variables locales a las recibidas por el servidor
-        this.setState({
-          message_request: `${data.message}`,
-          message_request_option: data.option
-        });
-
-        if(data.type_error === -1){
-          //Login exitoso
-          document.location = data.redirect
-          // console.log(data.redirect)
-
-        }
-
+      .catch(function (error) {
+        // handle error
+        console.log('error hghg: ', error)
       })
-      .catch(err => {
-        this.setState({
-          message_request: 'Error al realizar la petición : Login',
-          sending_request: true,
-          message_request_option: 'Cerrar'
-        });
-        console.error(err)
+      .finally(function () {
+        // always executed
       });
+      this.setState({
+        message_request: message_request,
+        message_request_option: message_request_option
+      });
+      if(type_error === -1){
+        //Login exitoso
+        document.location = redirect
+      }
+
+      // //Enviamos la solicitud de inicio de sesion al servidor
+      // fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`,{
+      //   method: 'POST',
+      //   body: JSON.stringify(this.state),
+      //   headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json',
+      //       'Access-Control-Allow-Origin': '*',
+      //       'Access-Control-Allow-Credentials': 'true'
+      //   }
+      // })
+      // .then(res => res.json())
+      // .then(data => {
+
+      //   //Ajustamos las variables locales a las recibidas por el servidor
+      //   this.setState({
+      //     message_request: `${data.message}`,
+      //     message_request_option: data.option
+      //   });
+
+      //   if(data.type_error === -1){
+      //     //Login exitoso
+      //     document.location = data.redirect
+      //     // console.log(data.redirect)
+
+      //   }
+
+      // })
+      // .catch(err => {
+      //   this.setState({
+      //     message_request: 'Error al realizar la petición : Login',
+      //     sending_request: true,
+      //     message_request_option: 'Cerrar'
+      //   });
+      //   console.error(err)
+      // });
+
+      //New peticion axios
+
+
     }//End of validator function
     else{
       console.log('Datros malos..........................')

@@ -18,12 +18,12 @@ class SideBar extends Component{
             <div id="sidebar-wrapper">
               <ul className="sidebar-nav">
                   <li className="sidebar-brand">
-                    <a href="">SIF Cartagena</a>
+                    <a href="lol">SIF Cartagena</a>
                   </li>
-                  <li> <a href=""> {this.props.options[0]} </a> </li>
-                  <li> <a href=""> {this.props.options[1]} </a> </li>
-                  <li> <a href=""> {this.props.options[2]} </a> </li>
-                  <li> <a href=""> {this.props.options[3]} </a> </li>
+                  <li> <a href="lol"> {this.props.options[0]} </a> </li>
+                  <li> <a href="lol"> {this.props.options[1]} </a> </li>
+                  <li> <a href="lol"> {this.props.options[2]} </a> </li>
+                  <li> <a href="lol"> {this.props.options[3]} </a> </li>
                   {/*<li> <a href="">Contact</a> </li>*/}
 
               </ul>
