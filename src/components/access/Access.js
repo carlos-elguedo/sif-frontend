@@ -9,10 +9,10 @@ import Alert from '../info/Alert'
 
 //import NotFound from '../notFound'
 import {validate_login, validate_register} from '../../utils/validator'
+import { access } from '../../api';
 
 /**Global configurations file*/
 const config = require('../../config.js')
-const axios = require('axios');
 
 
 
@@ -66,72 +66,25 @@ class Access extends Component {
         sending_request: true
       });
       let message_request, message_request_option, type_error, redirect;
-      await axios.post(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`, this.state)
+      await access
+      .login(this.state)
       .then(function (response) {
-        console.log('llego, ', response.headers.cookie);
+        console.log('llego, ', response);
         message_request = response.data.message
         message_request_option = response.data.option
         type_error = response.data.type_error
         redirect = response.data.redirect
       })
       .catch(function (error) {
-        // handle error
         console.log('error hghg: ', error)
       })
-      .finally(function () {
-        // always executed
-      });
-      this.setState({
-        message_request: message_request,
-        message_request_option: message_request_option
-      });
+
       if(type_error === -1){
         //Login exitoso
         document.location = redirect
       }
 
-      // //Enviamos la solicitud de inicio de sesion al servidor
-      // fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}`,{
-      //   method: 'POST',
-      //   body: JSON.stringify(this.state),
-      //   headers: {
-      //       'Accept': 'application/json',
-      //       'Content-Type': 'application/json',
-      //       'Access-Control-Allow-Origin': '*',
-      //       'Access-Control-Allow-Credentials': 'true'
-      //   }
-      // })
-      // .then(res => res.json())
-      // .then(data => {
-
-      //   //Ajustamos las variables locales a las recibidas por el servidor
-      //   this.setState({
-      //     message_request: `${data.message}`,
-      //     message_request_option: data.option
-      //   });
-
-      //   if(data.type_error === -1){
-      //     //Login exitoso
-      //     document.location = data.redirect
-      //     // console.log(data.redirect)
-
-      //   }
-
-      // })
-      // .catch(err => {
-      //   this.setState({
-      //     message_request: 'Error al realizar la petición : Login',
-      //     sending_request: true,
-      //     message_request_option: 'Cerrar'
-      //   });
-      //   console.error(err)
-      // });
-
-      //New peticion axios
-
-
-    }//End of validator function
-    else{
+    }else{
       console.log('Datros malos..........................')
       this.setState({
         text_alert: 'Por favor revisa tus datos',
@@ -160,37 +113,37 @@ class Access extends Component {
         sending_request: true
       });
 
+      let gotError = false
+      let message_request = '', message_request_option = '', redirect
 
-      fetch(`${config.SERVER_URL}${config.SERVER_API_ACCES_URL}signup/`,{
-        method: 'POST',
-        body: JSON.stringify(this.state),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+      access
+      .logout(this.state)
+      .then(function (data) {
+        console.log(data)
+        message_request = data.message
+        message_request_option = data.option
+        redirect = data.redirect
       })
-      .then(res => res.json())
-      .then(data => {
-
-          this.setState({
-            message_request: data.message,
-            message_request_option: data.option
-          });
-
-          if(data.type_error === -1){
-              //Registro exitoso
-              document.location = data.redirect
-          }
-
+      .catch(function (error) {
+        console.log('error hghg: ', error)
+        gotError = true
       })
-      .catch(err => {
-          this.setState({
-            message_request: 'Error al realizar la petición: Register',
-            sending_request: true,
-            message_request_option: 'Cerrar'
-          });
-          console.error(err)
-      });
+
+      if(gotError){
+        this.setState({
+          message_request: 'Error al realizar la petición: Register',
+          sending_request: true,
+          message_request_option: 'Cerrar'
+        });
+      }else{
+        this.setState({
+          message_request,
+          message_request_option
+        });
+        document.location = redirect
+      }
+      
+      
     }else{
       console.log('Datros malos register..........................')
       this.setState({

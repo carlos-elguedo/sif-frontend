@@ -1,14 +1,14 @@
-import axios from 'axios';
+import { sifRequestInstance } from './';
 
 const config = require('../config')
 
-export const logout = () =>
-  axios.post(`url`, {
-  });
+export const login = (data) => {
+  // console.log('Hay: ', sifRequestInstance.arguments)
+  return sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}`, data)
+}
 
-export const login = () => {
-  const cookie = {
-    
-  };
-  return axios.post(`url`, cookie);
-};
+export const logout = (data) => {
+  // console.log('Hay: ', sifRequestInstance.arguments)
+  return sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}signup/`, data)
+}
+
