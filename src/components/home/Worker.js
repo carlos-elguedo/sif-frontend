@@ -23,7 +23,7 @@ class Worker extends Component {
 
   componentDidMount() {
     worker.userIsLogged().then(function (response) {
-      console.log('llego del loggin 2 ', response);
+      console.log('El usuario es: ', response.data);
       
     })
     .catch(function (error) {

@@ -13,8 +13,13 @@ export {
 
 export const sifRequestInstance = axios.create({
   baseURL: config.SERVER_URL,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true'
-  }
+  withCredentials: true
 });
+
+// ,
+//   headers: {
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Credentials': 'true',
+//     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+//     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
+//   }
