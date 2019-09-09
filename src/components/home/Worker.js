@@ -11,10 +11,7 @@ import { worker } from '../../api';
 
 import { WORKER_ROUTES } from '../../constants';
 
-// const axios = require('axios');
-const config = require('../../config')
-
-const axios = require('axios');
+// const config = require('../../config')
 
 
 var userOption = ['Inicio', 'Mi perfil', 'Buscar un trabajador','Mensajes']
@@ -22,13 +19,13 @@ var userOption = ['Inicio', 'Mi perfil', 'Buscar un trabajador','Mensajes']
 class Worker extends Component {
 
   componentDidMount() {
-    worker.userIsLogged().then(function (response) {
-      console.log('El usuario es: ', response.data);
+    // worker.userIsLogged().then(function (response) {
+    //   // console.log('El usuario es: ', response.data);
       
-    })
-    .catch(function (error) {
-      console.log('error: ', error)
-    })
+    // })
+    // .catch(function (error) {
+    //   console.log('error: ', error)
+    // })
   }
 
     render() {

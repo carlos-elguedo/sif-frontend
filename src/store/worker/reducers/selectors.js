@@ -8,12 +8,12 @@ export default function(globalstate) {
     }
   } = globalstate;
 
-  const getExclusions = () => map(entities);
+  const getWorker = () => map(entities);
 
   const getFetchStatus = () => fetchStatus;
 
   return {
-    getExclusions,
+    getWorker,
     getFetchStatus
   };
 }

@@ -12,7 +12,7 @@ import {validate_login, validate_register} from '../../utils/validator'
 import { access } from '../../api';
 
 /**Global configurations file*/
-const config = require('../../config.js')
+// const config = require('../../config.js')
 
 
 
@@ -78,11 +78,16 @@ class Access extends Component {
       .catch(function (error) {
         console.log('error hghg: ', error)
       })
-
-      if(type_error === -1){
-        //Login exitoso
-        document.location = redirect
-      }
+      .finally(()=>{
+        this.setState({
+          message_request,
+          message_request_option
+        });
+        if(type_error === -1){
+          //Login exitoso
+          document.location = redirect
+        }
+      })
 
     }else{
       console.log('Datros malos..........................')

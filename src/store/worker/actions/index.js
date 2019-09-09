@@ -6,10 +6,10 @@ import types from './types';
 export const workerRequest = () => ({
   type: types.FETCH_REQUEST
 });
-export const workerSuccess = (exclusions = []) => ({
+export const workerSuccess = (data = []) => ({
   type: types.FETCH_SUCCESS,
   payload: {
-    exclusions
+    data
   }
 });
 export const workerFailure = error => ({

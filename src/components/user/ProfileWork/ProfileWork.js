@@ -4,7 +4,7 @@ import ImageUser from './../ImageUser'
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import Inbox from '../../user/Inbox'
 
-import { WORKER_ROUTES } from '../../../constants';
+import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants';
 
 /**Global configurations file*/
 // const config = require('../../config.js')
@@ -12,12 +12,15 @@ import { WORKER_ROUTES } from '../../../constants';
 class ProfileWork extends Component {
 
   componentDidMount() {
-     const { user_name } = this.props;
-     console.log('Hey ', user_name)
-    // fetchExclusionEmployees();
+    const { fetchWorker } = this.props;
+    fetchWorker()
   }
 
     render() {
+      const { data, status } = this.props;
+      const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
+      const showSpinner = status === LOADING || status === NOT_LOADED;
+
       return (
         <div className="container">
           <div className="card mb-3">
@@ -45,6 +48,8 @@ class ProfileWork extends Component {
 
             </div>
           </div>
+          <p>Hola: {data.length}</p>
+          <p>Hola: {status}</p>
           <Inbox/>
         </div>
       );

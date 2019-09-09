@@ -1,26 +1,26 @@
 import { connect } from 'react-redux';
 
 import ProfileWork from './ProfileWork';
-// import {
-//   selectors,
-//   actions
-// } from '../../../../../../../../store/exclusions';
+import {
+  selectors,
+  actions
+} from '../../../store/worker';
 
 export const mapStateToProps = (state) => {
 
-  // let exclusionsSelectors = selectors(state);
+  let workerSelector = selectors(state);
 
   return {
     user_name: 'Carlos Elguedo',
     user_work: 'Electricista',
     user_work_category: 'Tecnicos',
-    //name: exclusionsSelectors.getExclusions(),
-    status: true//exclusionsSelectors.getFetchStatus()
+    data: workerSelector.getWorker(),
+    status: workerSelector.getFetchStatus()
   };
 };
 export default connect(
   mapStateToProps,
   {
-    // fetchExclusionEmployees: actions.exclusionsFetch
+    fetchWorker: actions.workerFetch
   }
 )(ProfileWork);

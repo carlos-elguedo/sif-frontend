@@ -5,8 +5,8 @@ import { forAllRegisters } from '../../../utils';
 export const entities = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_SUCCESS: {
-      const { exclusions } = action.payload;
-      return {...state, ...exclusions}
+      const { worker } = action.payload;
+      return {...state, ...worker}
     }
 
      default:
