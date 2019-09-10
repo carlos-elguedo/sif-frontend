@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import Button from 'emerald-ui/lib/Button';
+import React, { Component } from 'react'
+import Button from 'emerald-ui/lib/Button'
 import ImageUser from './../ImageUser'
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import LinkContainer from 'react-router-bootstrap/lib/LinkContainer'
 import Inbox from '../../user/Inbox'
+import Spinner from 'react-bootstrap/Spinner'
 
-import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants';
+import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants'
 
 /**Global configurations file*/
 // const config = require('../../config.js')
@@ -12,20 +13,29 @@ import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants';
 class ProfileWork extends Component {
 
   componentDidMount() {
-    const { fetchWorker } = this.props;
+    const { fetchWorker } = this.props
     fetchWorker()
   }
 
     render() {
-      const { data, status } = this.props;
-      const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
-      const showSpinner = status === LOADING || status === NOT_LOADED;
+      const { data: current_worker, status } = this.props
+      const { LOADING, NOT_LOADED } = REQUEST_STATUSES
+      const showSpinner = status === LOADING || status === NOT_LOADED
+      // console.log(current_worker)
 
       return (
         <div className="container">
           <div className="card mb-3">
             <div className="card-body text-center">
-              <h3 className="card-header">{this.props.user_name}</h3>
+            {showSpinner ? (
+              <div className="card-header">
+                <div className="card-body">
+                <Spinner animation="grow" variant="warning" />
+                </div>
+              </div>
+            ) 
+            :<div>
+              <h3 className="card-header">{current_worker.name}</h3>
               <div className="row">
                 <div className="card-body">
                   <h5 className="card-title">{this.props.user_work}</h5>
@@ -45,10 +55,11 @@ class ProfileWork extends Component {
                   </LinkContainer>
                 </li>
               </ul>
-
-            </div>
+              </div>
+            }
+            </div>{/** End of header */}
           </div>
-          <p>Hola: {data.length}</p>
+          <p>Hola: {current_worker.age}</p>
           <p>Hola: {status}</p>
           <Inbox/>
         </div>

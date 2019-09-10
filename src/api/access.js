@@ -2,13 +2,13 @@ import { sifRequestInstance } from './';
 
 const config = require('../config')
 
-export const login = (data) => {
+export const login = async (data) => {
   // console.log('Hay: ', sifRequestInstance.arguments)
-  return sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}`, data)
+  return await sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}`, data)
 }
 
-export const logout = (data) => {
+export const register = async (data) => {
   // console.log('Hay: ', sifRequestInstance.arguments)
-  return sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}signup/`, data)
+  return await sifRequestInstance.post(`/${config.SERVER_API_ACCES_URL}signup/`, data)
 }
 

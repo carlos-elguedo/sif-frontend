@@ -8,7 +8,7 @@ export default function(globalstate) {
     }
   } = globalstate;
 
-  const getWorker = () => map(entities);
+  const getWorker = () => entities;
 
   const getFetchStatus = () => fetchStatus;
 

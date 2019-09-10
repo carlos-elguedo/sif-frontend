@@ -20,6 +20,12 @@ class SideBar extends Component{
                   <li className="sidebar-brand">
                     <a href="lol">SIF Cartagena</a>
                   </li>
+                  {/* {
+                    Object.keys(this.props.options).map((option) => {
+                      // console.log(this.props.options[option])
+                      <li> <a href="lol"> {this.props.options[option]} </a> </li>  
+                    })
+                  } */}
                   <li> <a href="lol"> {this.props.options[0]} </a> </li>
                   <li> <a href="lol"> {this.props.options[1]} </a> </li>
                   <li> <a href="lol"> {this.props.options[2]} </a> </li>

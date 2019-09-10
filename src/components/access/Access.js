@@ -69,7 +69,7 @@ class Access extends Component {
       await access
       .login(this.state)
       .then(function (response) {
-        console.log('llego, ', response);
+        // console.log('llego, ', response);
         message_request = response.data.message
         message_request_option = response.data.option
         type_error = response.data.type_error
@@ -108,7 +108,7 @@ class Access extends Component {
   /**
    * Funcion para enviar el formulario de registro al servidor
    */
-  register(eve){
+  async register(eve){
     eve.preventDefault();
 
     if(validate_register(this.state)){
@@ -119,35 +119,39 @@ class Access extends Component {
       });
 
       let gotError = false
-      let message_request = '', message_request_option = '', redirect
+      let message_request = '', message_request_option = '', redirect = '', type_error = -1
 
-      access
-      .logout(this.state)
-      .then(function (data) {
-        console.log(data)
+      await access
+      .register(this.state)
+      .then(function (response) {
+        const {data} = response
+        type_error = data.type_error
+        if(type_error !== -1){
+          gotError = true
+        }
         message_request = data.message
         message_request_option = data.option
         redirect = data.redirect
       })
       .catch(function (error) {
-        console.log('error hghg: ', error)
+        console.log(error)
         gotError = true
       })
-
-      if(gotError){
-        this.setState({
-          message_request: 'Error al realizar la petición: Register',
-          sending_request: true,
-          message_request_option: 'Cerrar'
-        });
-      }else{
-        this.setState({
-          message_request,
-          message_request_option
-        });
-        document.location = redirect
-      }
-      
+      .finally(()=>{
+        if(gotError){
+          this.setState({
+            message_request,
+            sending_request: true,
+            message_request_option
+          });
+        }else{
+          this.setState({
+            message_request,
+            message_request_option
+          });
+          document.location = redirect
+        }
+      })      
       
     }else{
       console.log('Datros malos register..........................')

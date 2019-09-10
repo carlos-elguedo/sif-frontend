@@ -6,7 +6,7 @@ import EditProfileWork from '../user/EditProfileWork'
 // import Inbox from '../user/Inbox'
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
-import { worker } from '../../api';
+// import { worker } from '../../api';
 
 
 import { WORKER_ROUTES } from '../../constants';

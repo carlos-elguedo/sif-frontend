@@ -8,8 +8,8 @@ class FormLogin extends Component {
     render() {
       return (
 		<div className="row" id="pageLogin">
-			<div className="col-md-4 mx-auto">
-				<div className="card mt-4 text-center">
+			<div className="col-md-6 mx-auto">
+				<div className="card mt-6 text-center">
 				<div className="card-header">
 					<h1 className="h4">
 					Ingresar a tu cuenta

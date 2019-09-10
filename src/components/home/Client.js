@@ -7,9 +7,10 @@ import Header from '../sections/Header'
 import OptionSearch from '../sections/OptionSearch'
 import ResultPanel from '../sections/ResultPanel'
 
-const axios = require('axios');
-const config = require('../../config')
+// const axios = require('axios');
+// const config = require('../../config')
 
+var userOption = ['Inicio', 'Mi perfil', 'Buscar un trabajador','Mensajes']
 class Client extends Component {
 
   constructor(props){
@@ -22,17 +23,7 @@ class Client extends Component {
   }
 
   componentDidMount() {
-    // const transport = axios.create({
-    //   withCredentials: true
-    // })
-
-    axios.get(`${config.SERVER_URL}${config.SERVER_API_UTILS_URL}userIsLogged`, { withCredentials: true })
-    .then(function (response) {
-      console.log('Vino response: ', response);
-    })
-    .catch(function (error) {
-      console.log('Viono error: ', error);
-    });
+    
   }
 
   search(){
@@ -43,7 +34,7 @@ class Client extends Component {
       return (
         <div className="App">
           <NavBar nav_title = " User Name worker"/>
-          <SideBar/>
+          <SideBar options = {userOption}/>
           <div className="container">
             <Header text = 'Empieza a buscar trabajadores en tu ciudad...'/>
             <Search search = {this.search}/>
