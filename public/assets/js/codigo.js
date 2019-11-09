@@ -94,7 +94,7 @@ $(document).ready(function(){
 
     /*==================================================================
         [ Daterangepicker ]*/
-        try {
+        /* try {
             $('.js-datepicker').daterangepicker({
                 "singleDatePicker": true,
                 "showDropdowns": true,
@@ -138,11 +138,11 @@ $(document).ready(function(){
             });
         
         
-        } catch(er) {console.log(er);}
+        } catch(er) {console.log(er);} */
         /*[ Select 2 Config ]
             ===========================================================*/
         
-        try {
+        /* try {
             var selectSimple = $('.js-select-simple');
         
             selectSimple.each(function () {
@@ -156,5 +156,5 @@ $(document).ready(function(){
         
         } catch (err) {
             console.log(err);
-        }
+        } */
   });

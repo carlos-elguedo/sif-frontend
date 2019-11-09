@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ImageUser from './../ImageUser';
+import Input from './InputFormEditProfile';
+import InputDouble from './InputDoubleFormEditProfile';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
 import styled from 'styled-components';
@@ -12,8 +14,36 @@ const StyleBottom = styled(Button)`
 
 
 class EditProfileWork extends Component {
+
+    componentDidMount() {
+        //const { fetchWorker } = this.props
+        //fetchWorker()
+      }
+
+
+
     render() {
-      return (
+
+    
+    const { data_user } = this.props;
+
+    /* console.log('data_user', data_user);
+    console.log('status_user', status_user); */
+    let propsName = {
+        "text":"Nombres",
+        "textDescription1":"Nombre",
+        "textDescription2":"Apellido",
+        "type":"text",
+        "nameId1":"first_name",
+        "nameId2":"last_name",
+        "defaultValue1":data_user.firstName,
+        "defaultValue2":data_user.lastName,
+        "width1":"col-sm",
+        "width2":"col-sm"
+    };
+    console.log(propsName);
+    
+    return (
         <div className="container mt-5 mb-5">
           <Panel>
             <Panel.Body>
@@ -31,19 +61,20 @@ class EditProfileWork extends Component {
                                           <div className="row row-space">
                                               <div className="col-sm">
                                                   <div className="input-group-desc">
-                                                    <ImageUser img_h = "150" img_w = "150" img_url = "car@hotm.com2.jpeg"/>
+                                                    <ImageUser img_h = "150" img_w = "150" img_url = ""/>
                                                   </div>
                                               </div>
                                               <div className="col-sm">
                                                   <div className="input-group-desc-file">
                                                       <input className="input--style-6" type="file" name="profile_pic" id = "profile_pic"/>
-                                                      <label className="label--desc-file" for = "profile_pic">Seleccionar una imagen</label>
+                                                      <label className="label--desc-file" htmlFor = "profile_pic">Seleccionar una imagen</label>
                                                   </div>
                                               </div>
                                           </div>
                                       </div>
                                   </div>
-                                  <div className="form-row">
+                                  <InputDouble data={propsName}/>
+                                  {/* <div className="form-row">
                                       <div className="name">Nombres</div>
                                       <div className="value">
                                           <div className="row row-space">
@@ -61,15 +92,8 @@ class EditProfileWork extends Component {
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
-                                  <div className="form-row">
-                                      <div className="name">Correo</div>
-                                      <div className="value">
-                                          <div className="input-group">
-                                              <input className="input--style-5" type="email" name="email"/>
-                                          </div>
-                                      </div>
-                                  </div>
+                                  </div> */}
+                                <Input text={'Correo'} type={'email'} name = {'email'} valueCustom = {data_user.email}/>
                                   <div className="form-row">
                                       <div className="name">Phone</div>
                                       <div className="value">
@@ -89,21 +113,14 @@ class EditProfileWork extends Component {
                                           </div>
                                       </div>
                                   </div>
-                                  <div className="form-row">
-                                      <div className="name">Dirección (Opcional)</div>
-                                      <div className="value">
-                                          <div className="input-group">
-                                              <input className="input--style-5" type="text" name="company"/>
-                                          </div>
-                                      </div>
-                                  </div>
+                                  <Input text={'Dirección (Opcional)'} type={'text'} name={'address'} valueCustom={data_user.address}/>
                                   <div className="form-row">
                                       <div className="name">Subject</div>
                                       <div className="value">
                                           <div className="input-group">
                                               <div className="rs-select2 js-select-simple select--no-search">
                                                   <select name="subject">
-                                                      <option disabled="disabled" selected="selected">Choose option</option>
+                                                      <option disabled="disabled" defaultValue="selected">Choose option</option>
                                                       <option>Subject 1</option>
                                                       <option>Subject 2</option>
                                                       <option>Subject 3</option>
@@ -113,7 +130,7 @@ class EditProfileWork extends Component {
                                           </div>
                                       </div>
                                   </div>
-                                  <div className="form-row p-t-20">
+                                  {/* <div className="form-row p-t-20">
                                       <label className="label label--block">Are you an existing customer?</label>
                                       <div className="p-t-15">
                                           <label className="radio-container m-r-55">Yes
@@ -125,7 +142,7 @@ class EditProfileWork extends Component {
                                               <span className="checkmark"></span>
                                           </label>
                                       </div>
-                                  </div>
+                                  </div> */}
                                   <div>
                                     <div className="row">
                                       <div className="col-6">
