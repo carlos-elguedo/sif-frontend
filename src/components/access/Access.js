@@ -65,7 +65,7 @@ class Access extends Component {
         message_request: 'Enviando...',
         sending_request: true
       });
-      let message_request, message_request_option, type_error, redirect;
+      let message_request, message_request_option = 'Cancelar', type_error, redirect;
       await access
       .login(this.state)
       .then(function (response) {
@@ -76,7 +76,7 @@ class Access extends Component {
         redirect = response.data.redirect
       })
       .catch(function (error) {
-        console.log('error hghg: ', error)
+        console.log('error in login: ', error)
       })
       .finally(()=>{
         this.setState({

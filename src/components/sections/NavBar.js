@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { access } from '../../api';
 // import { Link } from "react-router-dom";
 // import DropdownUserMenu from './DropdownUserMenu'
 import Dropdown from 'emerald-ui/lib/Dropdown';
@@ -22,6 +23,22 @@ const StyleDropdown = styled(Dropdown)`
 
  // <DropdownUserMenu/>
 class NavBar extends Component{
+
+  async closeSession(){
+    //let redirect = '', message_request = '';
+    //if(access.userIsLogged())
+    await access.logout().then(function (response) {
+        //message_request = response.data.message
+        //redirect = response.data.redirect
+        console.log(response.data)
+      })
+      .catch(function (error) {
+        console.log('error in logout: ', error)
+      })
+      .finally(()=>{
+        document.location.href = '/';
+      })
+  }
 
     render(){
         return(
@@ -55,7 +72,7 @@ class NavBar extends Component{
                     <Dropdown.Item>Action</Dropdown.Item>
                     <Dropdown.Item>Another action</Dropdown.Item>
                     <Dropdown.Item separator />
-                    <Dropdown.Item color="danger">Dangerous action</Dropdown.Item>
+                    <Dropdown.Item onClick={this.closeSession} >Cerrar sesión</Dropdown.Item>
                   </Dropdown.Menu>
                 </StyleDropdown>
               </div>

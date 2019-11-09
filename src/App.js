@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //Components created
 import Access from './components/access/Access'
 import Client from './components/home/Client'
-import Worker from './components/home/Worker'
+import Worker from './components/home/Worker.container'
 // import NotFound from './components/notFound'
+
+import { WORKER_ROUTES } from './constants';
 
 
 class App extends Component {
@@ -24,9 +26,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact component={Access}/>
-          <Route path='/client' exact component={Client}/>
-          <Route path='/worker' exact component={Worker}/>
-          <Route path='/worker/edit' exact component={Worker}/>
+          <Route path='/client'  component={Client}/>
+          <Route path={WORKER_ROUTES.root}  component={Worker}/>
+          <Route path={WORKER_ROUTES.edit} exact component={Worker}/>
         </Switch>
       </Router>
       // <Routes/>

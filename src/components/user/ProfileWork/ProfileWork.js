@@ -13,8 +13,8 @@ import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants'
 class ProfileWork extends Component {
 
   componentDidMount() {
-    const { fetchWorker } = this.props
-    fetchWorker()
+    //const { fetchWorker } = this.props
+    //fetchWorker()
   }
 
     render() {

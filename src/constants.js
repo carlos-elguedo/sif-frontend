@@ -1,6 +1,6 @@
 export const WORKER_ROUTES = {
   root: '/worker',
-  edit: '/worker/edit'
+  edit: '/workeredit'
 };
 
 export const REQUEST_STATUSES = {
