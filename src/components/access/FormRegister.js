@@ -34,9 +34,9 @@ class FormRegister extends Component {
 
                         {/* METHOD REGISTER SELECT */}
                         <div className="form-group">
-                            <select id="tipo_registro" className="form-control">
-                                <option>Registrarme con correo electronico</option>
-                                <option>Registrarme con numero telefonico</option>
+                            <select id="tipo_registro" name="register_using" className="form-control" onChange={this.props.typing}>
+                                <option value="0">Registrarme con correo electronico</option>
+                                <option value="1">Registrarme con numero telefonico</option>
                             </select>
                         </div>
 

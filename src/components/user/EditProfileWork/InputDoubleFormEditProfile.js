@@ -10,13 +10,13 @@ class InputFormEditProfile extends Component {
     let type =  this.props.data.type;
     let nameId1 =  this.props.data.name;
     let nameId2 =  this.props.data.name;
-    let defaultValue1 =  this.props.data.valueCustom1;
-    let defaultValue2 =  this.props.data.alueCustom2;
+    let defaultValue1 =  this.props.data.defaultValue1;
+    let defaultValue2 =  this.props.data.defaultValue2;
     let width1 = this.props.data.width1;
     let width2 = this.props.data.width2;
 
 
-    console.log('Llego a el componente', this.props.data)
+    //console.log('Llego a el componente', defaultValue1)
 
 
     return (

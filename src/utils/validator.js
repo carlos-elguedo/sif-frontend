@@ -41,7 +41,7 @@ function validate_register(state){
 
         }//End Correct length validation
         else{
-            console.log('Data correct lengtg')
+            console.log('Data correct')
         }
     }//End of empty values validation
     else{

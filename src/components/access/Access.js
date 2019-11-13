@@ -30,6 +30,7 @@ class Access extends Component {
       register_age: '',
       register_type: 1,
       register_terms: 0,
+      register_using: 0,//0 Using email, 1 phone
       message_request: '',
       message_request_option: 'Cancelar',
       sending_request: false,
@@ -77,6 +78,11 @@ class Access extends Component {
       })
       .catch(function (error) {
         console.log('error in login: ', error)
+        this.setState({
+          message_request: 'Ha ocurrido un error, por favor intenta de nuevo :(',
+          message_request_option: 'OK',
+          show_alert: true
+        })
       })
       .finally(()=>{
         this.setState({
@@ -140,9 +146,9 @@ class Access extends Component {
       .finally(()=>{
         if(gotError){
           this.setState({
-            message_request,
-            sending_request: true,
-            message_request_option
+            message_request: 'Ha ocurrido un error, por favor intenta de nuevo :(',
+            message_request_option: 'OK',
+            sending_request: true
           });
         }else{
           this.setState({
@@ -154,7 +160,7 @@ class Access extends Component {
       })      
       
     }else{
-      console.log('Datros malos register..........................')
+      console.log('Error on register local')
       this.setState({
         text_alert: 'Por favor revisa tus datos',
         show_alert: true
@@ -189,10 +195,15 @@ class Access extends Component {
       }
 
     }else{
+
+      console.log("value",value)
+      console.log("name", name)
+
       //Other fields of input
       this.setState({
         [name]: value
       });
+      console.log(this.state)
     }
 
   }
