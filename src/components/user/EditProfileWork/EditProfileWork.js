@@ -16,8 +16,10 @@ const StyleBottom = styled(Button)`
 class EditProfileWork extends Component {
 
     componentDidMount() {
-        const { fetchUser } = this.props
-        fetchUser()
+        const { fetchUser, fetchProfessions, fetchCategories } = this.props;
+        fetchUser();
+        fetchProfessions();
+        fetchCategories();
       }
 
 
@@ -25,8 +27,11 @@ class EditProfileWork extends Component {
     render() {
 
     
-    const { data_user } = this.props;
-    console.log(data_user.lastName);
+    const { data_user, data_professions, data_categories } = this.props;
+    console.log(' - - - -- - -- - - -- - -- -- --   -- - -- -- - -- - -- -')
+    console.log(data_categories);
+    console.log('*********************************')
+    console.log(data_professions);
 
     /* console.log('data_user', data_user);
     console.log('status_user', status_user); */
