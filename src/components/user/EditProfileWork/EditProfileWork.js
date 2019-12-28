@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import ImageUser from './../ImageUser';
 import Input from './InputFormEditProfile';
 import InputDouble from './InputDoubleFormEditProfile';
+import SelectFormEditProfile from './SelectFormEditProfile';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
 import styled from 'styled-components';
+//import SearchableSelect from 'emerald-ui/lib/SearchableSelect';
 
 
 const StyleBottom = styled(Button)`
   border: 2px solid;
   width: 100%;
-`;
-
+`;  
 
 class EditProfileWork extends Component {
+
+    state = {
+      codeCategorieSelect: ""
+    };
 
     componentDidMount() {
         const { fetchUser, fetchProfessions, fetchCategories } = this.props;
@@ -22,16 +27,29 @@ class EditProfileWork extends Component {
         fetchCategories();
       }
 
+      handleCategorieSelect = (action) => {
+        if(typeof(action)==="string"){
+          this.setState({
+            codeCategorieSelect: action
+          });
+          /* console.log("**************************")
+          //console.log("Value", value);
+          console.log("action", action);
+          console.log("State", typeof(this.state.codeCategorieSelect)) */
+        }
+      
+    };
 
 
     render() {
 
     
-    const { data_user, data_professions, data_categories } = this.props;
-    console.log(' - - - -- - -- - - -- - -- -- --   -- - -- -- - -- - -- -')
-    console.log(data_categories);
+    const { data_user, data_categories, status_categories, status_professions, data_professions } = this.props;
+    //console.log(data_professions);
+    /* console.log(' - - - -- - -- - - -- - -- -- --   -- - -- -- - -- - -- -')
+    console.log(status_categories);
     console.log('*********************************')
-    console.log(data_professions);
+    console.log(status_professions); */
 
     /* console.log('data_user', data_user);
     console.log('status_user', status_user); */
@@ -61,6 +79,7 @@ class EditProfileWork extends Component {
         "width2":"col-9"
     };
     //console.log(propsName);
+
     
     return (
         <div className="container mt-5 mb-5">
@@ -100,42 +119,18 @@ class EditProfileWork extends Component {
                                 <InputDouble data={propsPhone}/>
 
                                 <Input text={'Dirección (Opcional)'} type={'text'} name={'address'} valueCustom={data_user.address}/>
-                                  {/* <div className="form-row">
-                                      <div className="name">Subject</div>
-                                      <div className="value">
-                                          <div className="input-group">
-                                              <div className="rs-select2 js-select-simple select--no-search">
-                                                  <select name="subject">
-                                                      <option disabled="disabled" defaultValue="selected">Choose option</option>
-                                                      <option>Subject 1</option>
-                                                      <option>Subject 2</option>
-                                                      <option>Subject 3</option>
-                                                  </select>
-                                                  <div className="select-dropdown"></div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div> */}
+                                
+                                {/* <SelectFormEditProfile text = {"Mi trabajo"} options = {data_categories} status = {status_categories} /> */}
 
-                                  {/* <div className="form-row p-t-20">
-                                      <label className="label label--block">Are you an existing customer?</label>
-                                      <div className="p-t-15">
-                                          <label className="radio-container m-r-55">Yes
-                                              <input type="radio" checked="checked" name="exist"/>
-                                              <span className="checkmark"></span>
-                                          </label>
-                                          <label className="radio-container">No
-                                              <input type="radio" name="exist"/>
-                                              <span className="checkmark"></span>
-                                          </label>
-                                      </div>
-                                  </div> */}
 
                                 <div className="card-header">
                                     <h2 className="title">información laboral</h2>
                                 </div>
                                 <div className="card-body">
-                                    <Input text={'Sector laboral'} type={'text'} name={'sector'} valueCustom={'312312'}/>
+                                    
+                                    <SelectFormEditProfile text = {"Sector laboral"} options = {data_categories} status = {status_categories} changes={this.handleCategorieSelect}/>
+
+                                    <SelectFormEditProfile text = {"Professión"} options = {data_professions} status = {status_professions} code={this.state.codeCategorieSelect} />
                                 </div>
 
                                   <div>

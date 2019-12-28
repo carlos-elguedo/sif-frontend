@@ -4,7 +4,7 @@ import { forAllRegisters } from '../../../utils';
 
 export const entities = (state = {}, action) => {
   switch (action.type) {
-    case types.FETCH_CATEGORIES_SUCCESS: {
+    case types.FETCH_SUCCESS: {
       const { categories } = action.payload;
       return {...state, ...categories}
     }

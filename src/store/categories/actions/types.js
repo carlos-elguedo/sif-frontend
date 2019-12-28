@@ -1,5 +1,5 @@
 import { createActionTypes } from '../../../utils';
 
  export default {
-  ...createActionTypes('categories', 'FETCH_CATEGORIES')
+  ...createActionTypes('categories', 'FETCH')
 };
