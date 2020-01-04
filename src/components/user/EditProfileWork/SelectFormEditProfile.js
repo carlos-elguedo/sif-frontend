@@ -16,6 +16,8 @@ const StyleSelect = styled(SearchableSelect)`
 class SelectFormEditProfile extends Component {
     render() {
 
+    let id =  this.props.id;
+    let currentValue =  this.props.value;
     let text =  this.props.text;
     let options =  this.props.options;
     let status =  this.props.status;
@@ -23,9 +25,42 @@ class SelectFormEditProfile extends Component {
     let hasCode = code ? true : false;
     let handleSelect = this.props.changes;
 
-    console.log('Llego a el componente', code)
-    console.log('Tiene code', hasCode)
 
+    let optionsSelect = Object.values(options).map((item, index) => {
+        
+        if(hasCode){
+            const isSameCodeProfession = (currentValue) => currentValue === code;
+            let itemMatch = item.group.every(isSameCodeProfession);
+            if(itemMatch){
+                if(currentValue){
+                    let itemSelected = item.cod === currentValue;
+                    if(itemSelected){
+                        return (
+                            <option value={item.cod} key={index}>{item.name_es}</option>
+                        );
+                    }
+                }else{
+                    return (
+                        <option value={item.cod} key={index}>{item.name_es}</option>
+                    );
+                }
+            } 
+        }else{
+            if(currentValue){
+                let itemMatchCategorie = item.cod === currentValue;
+                if(itemMatchCategorie){
+                    return (
+                        <option value={item.cod} key={index}>{item.name_es}</option>
+                    );
+                }
+            }else{
+                return (
+                    <option value={item.cod} key={index}>{item.name_es}</option>
+                );
+            }            
+        }
+    return [];
+    });
 
     return (
         <div className="form-row">
@@ -34,29 +69,8 @@ class SelectFormEditProfile extends Component {
                 <div>
                     {
                         status ?(
-                            <StyleSelect id="s1" shape = "flat" onSelect = {handleSelect}>
-                                {
-                                    Object.values(options).map((item, index) => {
-                                        //if(hasCode)console.log(item.group)
-                                        
-                                        if(hasCode){
-                                            const isSameCodeProfession = (currentValue) => currentValue === code;
-                                            let itemMatch = item.group.every(isSameCodeProfession);
-                                            //console.log("Entro a la condicion: ", code)
-                                            if(itemMatch){
-                                                return (
-                                                    <option value={item.cod} key={index}>{item.name_es}</option>
-                                                ); 
-                                            } 
-                                        }else{
-                                            console.log("No No Entro a la condicion: ", code)
-                                            return (
-                                                <option value={item.cod} key={index}>{item.name_es}</option>
-                                            ); 
-                                        }
-                                        
-                                    })
-                                }
+                            <StyleSelect id={id} shape = "flat" onSelect = {handleSelect} value={currentValue}>
+                                {optionsSelect}
                             </StyleSelect>
                         ):
                             <div>No ready</div>

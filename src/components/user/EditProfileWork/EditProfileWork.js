@@ -16,9 +16,23 @@ const StyleBottom = styled(Button)`
 
 class EditProfileWork extends Component {
 
-    state = {
-      codeCategorieSelect: ""
-    };
+    constructor(){
+      super();
+
+      this.state={
+        categorie:"",
+        profession:"",
+        codeCategorieSelect: "",
+        codeProfessionSelect: "",
+        nameId1:"",
+        nameId2:""
+      };
+      
+      this.handleCategorieSelect = this.handleCategorieSelect.bind(this);
+      this.handleProfessionsSelect = this.handleProfessionsSelect.bind(this);
+      this.hadleTyping = this.hadleTyping.bind(this);
+      
+    }
 
     componentDidMount() {
         const { fetchUser, fetchProfessions, fetchCategories } = this.props;
@@ -27,32 +41,57 @@ class EditProfileWork extends Component {
         fetchCategories();
       }
 
-      handleCategorieSelect = (action) => {
+      handleCategorieSelect = action => {
         if(typeof(action)==="string"){
           this.setState({
-            codeCategorieSelect: action
+            codeCategorieSelect: action,
+            codeProfessionSelect: ""
           });
-          /* console.log("**************************")
-          //console.log("Value", value);
-          console.log("action", action);
-          console.log("State", typeof(this.state.codeCategorieSelect)) */
+        }else{
+          this.setState({
+            codeCategorieSelect: ""
+          });
         }
-      
     };
 
+    handleProfessionsSelect = (action) => {
+      if(typeof(action)==="string"){
+        this.setState({
+          codeProfessionSelect: action
+        });
+      }else{
+        console.log(action)
+        this.setState({
+          codeProfessionSelect: ""
+        });
+      }
+    };
+
+    saveProfileChanges = () => {
+      console.log("Quiere enviar cambios")
+ 
+ 
+    }
+
+    hadleTyping(eve){
+        console.log(eve.target.name + ": " +eve.target.value + ": " + eve.target.type);
+        const {name, value, type} = eve.target;
+
+        console.log("value",value)
+        console.log("name", name)
+
+     /*      //Other fields of input
+          this.setState({
+            [name]: value
+          });
+          console.log(this.state) */
+    }
 
     render() {
 
     
     const { data_user, data_categories, status_categories, status_professions, data_professions } = this.props;
-    //console.log(data_professions);
-    /* console.log(' - - - -- - -- - - -- - -- -- --   -- - -- -- - -- - -- -')
-    console.log(status_categories);
-    console.log('*********************************')
-    console.log(status_professions); */
-
-    /* console.log('data_user', data_user);
-    console.log('status_user', status_user); */
+    
     let propsName = {
         "text":"Nombres",
         "textDescription1":"Nombre",
@@ -112,7 +151,7 @@ class EditProfileWork extends Component {
                                     </div>
                                 </div>
 
-                                <InputDouble data={propsName}/>
+                                <InputDouble data={propsName} changes={this.hadleTyping}/>
 
                                 <Input text={'Correo'} type={'email'} name = {'email'} valueCustom = {data_user.email}/>
                                 
@@ -128,15 +167,29 @@ class EditProfileWork extends Component {
                                 </div>
                                 <div className="card-body">
                                     
-                                    <SelectFormEditProfile text = {"Sector laboral"} options = {data_categories} status = {status_categories} changes={this.handleCategorieSelect}/>
+                                    <SelectFormEditProfile
+                                      id = {"select-categories"}
+                                      value = {this.state.codeCategorieSelect}
+                                      text = {"Sector laboral"}
+                                      options = {data_categories}
+                                      status = {status_categories}
+                                      changes={this.handleCategorieSelect}
+                                      code={false}/>
 
-                                    <SelectFormEditProfile text = {"Professión"} options = {data_professions} status = {status_professions} code={this.state.codeCategorieSelect} />
+                                    <SelectFormEditProfile
+                                      id = {"select-peofessions"}
+                                      text = {"Professión"}
+                                      value = {this.state.codeProfessionSelect}
+                                      options = {data_professions}
+                                      status = {status_professions}
+                                      changes={this.handleProfessionsSelect}
+                                      code={this.state.codeCategorieSelect} />
                                 </div>
 
                                   <div>
                                     <div className="row">
                                       <div className="col-6">
-                                        <StyleBottom color="primary" size="lg">
+                                        <StyleBottom color="primary" size="lg" onClick={this.saveProfileChanges}>
                                           Guardar cambios
                                         </StyleBottom>
                                       </div>
