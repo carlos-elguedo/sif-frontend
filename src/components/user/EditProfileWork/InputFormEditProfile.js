@@ -10,7 +10,7 @@ class InputFormEditProfile extends Component {
     let DefaultValue =  this.props.valueCustom;
     let changes =  this.props.changes;
 
-    //console.log('Llego a el componente')
+    //console.log('Llego a el componente', this.pro)
 
 
     return (

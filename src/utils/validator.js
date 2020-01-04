@@ -52,6 +52,83 @@ function validate_register(state){
 
 }
 
+function validate_editProfileWorker(state){
+    let ret = {
+        correct:false,
+        message:"Los datos estan vacios",
+        type: "error"
+    };
+
+    const {
+        categorie,
+        profession,
+        codeCategorieSelect,
+        codeProfessionSelect,
+        edit_first_name,
+        edit_last_name,
+        edit_email,
+        edit_phone,
+        edit_area_code,
+        edit_address} = state;
+    
+    //1. Validate empty values
+    if(
+        codeCategorieSelect !== "" ||
+        codeProfessionSelect !== "" ||
+        edit_first_name !== "" ||
+        edit_last_name !== "" ||
+        edit_email !== "" ||
+        edit_phone !== "" ||
+        edit_area_code !== "" ||
+        edit_address !== ""
+    ){
+        //2. Correct Length
+        if(edit_first_name && !correctLength(edit_first_name, 4)){
+            ret.message = "El nombre debe contener al menos 4 caracteres";
+            ret.type = "warning";
+            return ret;
+        }
+
+        if(edit_last_name && !correctLength(edit_last_name, 4)){
+            ret.message = "El apellido debe contener al menos 4 caracteres"
+            ret.type = "warning";
+            return ret;
+        }
+
+        if(edit_email && !correctEmail(edit_email)){
+            ret.message = "El correo electronico no es correcto"
+            ret.type = "warning";
+            return ret;
+        }
+
+        if(edit_phone && !correctNumberPhone(edit_phone)){
+            ret.message = "El numero telefonico no es correcto"
+            ret.type = "warning";
+            return ret;
+        }
+
+        if(edit_area_code && !correctAreaCodePhone(edit_area_code)){
+            ret.message = "El Codigo de area ingresado no es correcto"
+            ret.type = "warning";
+            return ret;
+        }
+
+        if(edit_address && !correctLength(edit_address, 6)){
+            ret.message = "La direccion ingresada es muy corta"
+            ret.type = "warning";
+            return ret;
+        }
+
+
+
+        ret.message = "Correcto";
+        ret.correct = true;
+    }
+
+
+    return ret;
+}
+
 /**
   * 1. Function for check the size of a text
   */
@@ -129,4 +206,16 @@ function correctUserType(userType){
     return ret;
 }
 
-module.exports = {validate_login, validate_register};
+function correctAreaCodePhone(code){
+   
+    //var re = new RegExp("^[+]?\d{1,3}$");
+    //return = re.test(term);
+    return (code.indexOf("+") >= 0 && /^\d{1,3}$/.test(code.substring(1, code.length))) || (/^\d+$/.test(code) && code.length <= 3);
+/* if (re.test(code)) {
+    console.log("Valid:", code);
+} else {
+    console.log("Invalid:", code);
+} */
+}
+
+module.exports = {validate_login, validate_register, validate_editProfileWorker};

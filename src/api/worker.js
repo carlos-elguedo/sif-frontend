@@ -6,4 +6,6 @@ export const userIsLogged = ()=>{
     return sifRequestInstance.get(`/${config.SERVER_API_ACCES_URL}info`);
 }
 
-//, {withCredentials: true}
+export const saveProfileChanges = (data)=>{
+    return sifRequestInstance.put(`/${config.SERVER_API_WORKER_URL}update`, data);
+}

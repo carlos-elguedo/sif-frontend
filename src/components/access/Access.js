@@ -10,6 +10,7 @@ import Alert from '../info/Alert'
 //import NotFound from '../notFound'
 import {validate_login, validate_register} from '../../utils/validator'
 import { access } from '../../api';
+import {ALERT_TYPES} from "../../constants";
 
 /**Global configurations file*/
 // const config = require('../../config.js')
@@ -98,6 +99,7 @@ class Access extends Component {
     }else{
       console.log('Datros malos..........................')
       this.setState({
+        alert_type: ALERT_TYPES.danger,
         text_alert: 'Por favor revisa tus datos',
         show_alert: true
       })
@@ -162,6 +164,7 @@ class Access extends Component {
     }else{
       console.log('Error on register local')
       this.setState({
+        alert_type: ALERT_TYPES.danger,
         text_alert: 'Por favor revisa tus datos',
         show_alert: true
       })
@@ -227,7 +230,8 @@ class Access extends Component {
     eve.preventDefault()
     console.log('close alert')
     this.setState({
-      text_alert: '',
+      alert_type: "",
+      text_alert: "",
       show_alert: false
     })
   }
@@ -238,7 +242,7 @@ class Access extends Component {
     return (
       <div className = 'initial-page'>
         <main className="container p-5">
-            <Alert text_alert = {this.state.text_alert} show = {this.state.show_alert} close = {this.close_alert}/>
+            <Alert type={this.state.alert_type} text_alert = {this.state.text_alert} show = {this.state.show_alert} close = {this.close_alert}/>
             {/* <Alert text_alert = {this.state.text_alert} show = {this.state.show_alert}/> */}
             {<ModalMessage visibility={this.state.sending_request} message={this.state.message_request} cancel = {this.cancelSend} boton_text={this.state.message_request_option}/>}
             <FormLogin login={this.login} typing = {this.changeRegister}/>

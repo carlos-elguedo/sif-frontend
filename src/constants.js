@@ -9,3 +9,10 @@ export const REQUEST_STATUSES = {
   LOADED: 'loaded',
   FAILED: 'failed'
 };
+
+export const ALERT_TYPES = {
+  success:'success',
+  warning:'warning',
+  danger:'danger',
+  info:'info'
+}
