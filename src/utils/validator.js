@@ -60,8 +60,8 @@ function validate_editProfileWorker(state){
     };
 
     const {
-        categorie,
-        profession,
+        //categorie,
+        //profession,
         codeCategorieSelect,
         codeProfessionSelect,
         edit_first_name,
@@ -123,6 +123,8 @@ function validate_editProfileWorker(state){
 
         ret.message = "Correcto";
         ret.correct = true;
+    }else{
+        console.log('Else')
     }
 
 

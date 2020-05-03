@@ -70,6 +70,7 @@ class SelectFormEditProfile extends Component {
                     {
                         status ?(
                             <StyleSelect id={id} shape = "flat" onSelect = {handleSelect} value={currentValue}>
+                                {/* <option value='default' key='000'>Selecciona una opción</option> */}
                                 {optionsSelect}
                             </StyleSelect>
                         ):
