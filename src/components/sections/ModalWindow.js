@@ -22,7 +22,7 @@ class ModalWindow extends Component {
             </Modal.Body>
 
             <Modal.Footer>
-                <Button color="primary">Aceptar</Button>
+                <Button onClick={this.props.close} color="primary">Aceptar</Button>
             </Modal.Footer>
 
         </Modal>

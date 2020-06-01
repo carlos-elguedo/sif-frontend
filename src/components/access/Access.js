@@ -26,6 +26,8 @@ class Access extends Component {
       data_register: '',
       password: '',
       register_name: '',
+      register_firstName: '',
+      register_lastName: '',
       register_data_register: '',
       register_password: '',
       register_age: '',

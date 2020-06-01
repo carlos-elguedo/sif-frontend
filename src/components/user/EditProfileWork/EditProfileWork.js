@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { worker } from '../../../api';
 import { validate_editProfileWorker } from '../../../utils/validator';
 import Alert from '../../info/Alert';
-import { ALERT_TYPES } from '../../../constants';
+import { ALERT_TYPES, WORKER_ROUTES } from '../../../constants';
 
 import { split } from 'lodash';
 
@@ -46,6 +46,7 @@ class EditProfileWork extends Component {
       textHeader: '',
       textBody: '',
       iconUpdate: '',
+      canReload: true
     };
 
     this.handleCategorieSelect = this.handleCategorieSelect.bind(this);
@@ -63,16 +64,16 @@ class EditProfileWork extends Component {
     fetchCategories();
   }
 
-  handleCategorieSelect = (action) => {
+  handleCategorieSelect = action => {
     if (typeof action === 'string') {
       this.setState({
-        codeCategorieSelect: action,
+        codeCategorieSelect: action
       });
       const { data_professions } = this.props;
       let codes = [];
       for (let prof in data_professions) {
         let itemMatch = data_professions[prof].group;
-        itemMatch.forEach((element) => {
+        itemMatch.forEach(element => {
           if (element === action) {
             codes.push(data_professions[prof].cod);
           }
@@ -80,25 +81,25 @@ class EditProfileWork extends Component {
       }
       if (codes) {
         this.setState({
-          codeProfessionSelect: codes[0],
+          codeProfessionSelect: codes[0]
         });
       }
     } else {
       this.setState({
-        codeCategorieSelect: '',
+        codeCategorieSelect: ''
       });
     }
   };
 
-  handleProfessionsSelect = (action) => {
+  handleProfessionsSelect = action => {
     if (typeof action === 'string') {
       this.setState({
-        codeProfessionSelect: action,
+        codeProfessionSelect: action
       });
     } else {
       console.log(action);
       this.setState({
-        codeProfessionSelect: '',
+        codeProfessionSelect: ''
       });
     }
   };
@@ -110,16 +111,15 @@ class EditProfileWork extends Component {
       //Send the data to server
       await worker
         .saveProfileChanges(this.state)
-        .then((res) => {
-            const { data } = res;
-          if (!data.hasError) {
-            this.setState({
-              showModalUpdate: true,
-              textBody: data.message,
-              textHeader: data.option,
-              iconUpdate: 'success',
-            });
-          }
+        .then(res => {
+          const { data } = res;
+          this.setState({
+            showModalUpdate: true,
+            textBody: data.message,
+            textHeader: data.option,
+            iconUpdate: data.hasError ? 'error' : 'success',
+            canReload: data.hasError ? false : true
+          });
         })
         .catch(() => {})
         .finally(() => {});
@@ -130,7 +130,7 @@ class EditProfileWork extends Component {
             ? ALERT_TYPES.danger
             : ALERT_TYPES.warning,
         text_alert_edit: resultVerified.message,
-        show_alert_edit: true,
+        show_alert_edit: true
       });
     }
   }
@@ -140,7 +140,7 @@ class EditProfileWork extends Component {
     const { name, value } = eve.target;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
   }
 
@@ -149,12 +149,15 @@ class EditProfileWork extends Component {
     this.setState({
       alert_type: '',
       text_alert_edit: '',
-      show_alert_edit: false,
+      show_alert_edit: false
     });
   }
 
   closeModal() {
     this.setState({ showModalUpdate: false });
+    if (this.state.canReload) {
+      document.location = WORKER_ROUTES.edit;
+    }
   }
 
   render() {
@@ -163,7 +166,7 @@ class EditProfileWork extends Component {
       data_categories,
       status_categories,
       status_professions,
-      data_professions,
+      data_professions
     } = this.props;
     //console.log("EditProfileWork -> render -> data_professions", data_professions)
 
@@ -183,7 +186,7 @@ class EditProfileWork extends Component {
       defaultValue1: firstName,
       defaultValue2: lastName,
       width1: 'col-sm',
-      width2: 'col-sm',
+      width2: 'col-sm'
     };
 
     let propsPhone = {
@@ -196,7 +199,7 @@ class EditProfileWork extends Component {
       defaultValue1: '+ 57',
       defaultValue2: data_user.phone,
       width1: 'col-3',
-      width2: 'col-9',
+      width2: 'col-9'
     };
 
     return (
@@ -251,7 +254,11 @@ class EditProfileWork extends Component {
                   </div>
                 </div>
 
-                <InputDouble data={propsName} changes={this.hadleTyping} />
+                <InputDouble
+                  data={propsName}
+                  changes={this.hadleTyping}
+                  disabled={false}
+                />
 
                 <Input
                   text={'Correo'}
@@ -259,9 +266,14 @@ class EditProfileWork extends Component {
                   name={'edit_email'}
                   valueCustom={data_user.email}
                   changes={this.hadleTyping}
+                  disabled={data_user.data_register === data_user.email}
                 />
 
-                <InputDouble data={propsPhone} changes={this.hadleTyping} />
+                <InputDouble
+                  data={propsPhone}
+                  changes={this.hadleTyping}
+                  disabled={data_user.data_register === data_user.phone}
+                />
 
                 <Input
                   text={'Dirección (Opcional)'}
@@ -269,6 +281,7 @@ class EditProfileWork extends Component {
                   name={'edit_address'}
                   valueCustom={data_user.address}
                   changes={this.hadleTyping}
+                  disabled={false}
                 />
 
                 {/* <SelectFormEditProfile text = {"Mi trabajo"} options = {data_categories} status = {status_categories} /> */}
