@@ -6,13 +6,18 @@ import SelectFormEditProfile from './SelectFormEditProfile';
 import ModalWindow from '../../sections/ModalWindow';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
+import Spinner from 'emerald-ui/lib/Spinner';
 import styled from 'styled-components';
 import { worker } from '../../../api';
 import { validate_editProfileWorker } from '../../../utils/validator';
 import Alert from '../../info/Alert';
-import { ALERT_TYPES, WORKER_ROUTES } from '../../../constants';
+import {
+  ALERT_TYPES,
+  WORKER_ROUTES,
+  REQUEST_STATUSES
+} from '../../../constants';
 
-import { split } from 'lodash';
+import { split, isEmpty } from 'lodash';
 
 const StyleBottom = styled(Button)`
   border: 2px solid;
@@ -35,6 +40,7 @@ class EditProfileWork extends Component {
       edit_phone: '',
       edit_area_code: '',
       edit_address: '',
+      works: [],
 
       //Alert
       alert_type: '',
@@ -95,11 +101,6 @@ class EditProfileWork extends Component {
     if (typeof action === 'string') {
       this.setState({
         codeProfessionSelect: action
-      });
-    } else {
-      console.log(action);
-      this.setState({
-        codeProfessionSelect: ''
       });
     }
   };
@@ -163,18 +164,31 @@ class EditProfileWork extends Component {
   render() {
     const {
       data_user,
+      status_user,
       data_categories,
       status_categories,
       status_professions,
       data_professions
     } = this.props;
-    //console.log("EditProfileWork -> render -> data_professions", data_professions)
+    const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
+    const showSpinner = status_user === LOADING || status_user === NOT_LOADED;
+
+    console.log('render -> data_user', data_user);
 
     let name = split(data_user.name, ' ');
     let firstName = data_user.firstName ? data_user.firstName : name[0];
     let lastName = data_user.lastName
       ? data_user.lastName
       : `${name[1]} ${name[2] ? name[2] : ''}`;
+
+    let categorie =
+      !isEmpty(data_user.works) && !this.state.profession
+        ? data_user.works[0].group
+        : '';
+    let work =
+      !isEmpty(data_user.works) && !this.state.categorie
+        ? data_user.works[0].code
+        : '';
 
     let propsName = {
       text: 'Nombres',
@@ -220,115 +234,128 @@ class EditProfileWork extends Component {
               close={this.close_alert}
             />
 
-            <div className="card">
+            {showSpinner ? (
               <div className="card-header">
-                <h2 className="title">Información de contacto</h2>
-              </div>
-              <div className="card-body">
-                <div className="form-row">
-                  <div className="name">Imagen de perfil</div>
-                  <div className="value">
-                    <div className="row row-space">
-                      <div className="col-sm">
-                        <div className="input-group-desc">
-                          <ImageUser img_h="150" img_w="150" img_url="" />
-                        </div>
-                      </div>
-                      <div className="col-sm">
-                        <div className="input-group-desc-file">
-                          <input
-                            className="input--style-6"
-                            type="file"
-                            name="profile_pic"
-                            id="profile_pic"
-                          />
-                          <label
-                            className="label--desc-file"
-                            htmlFor="profile_pic"
-                          >
-                            Seleccionar una imagen
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="card-body">
+                  <Spinner animation="grow" variant="warning" />
                 </div>
-
-                <InputDouble
-                  data={propsName}
-                  changes={this.hadleTyping}
-                  disabled={false}
-                />
-
-                <Input
-                  text={'Correo'}
-                  type={'email'}
-                  name={'edit_email'}
-                  valueCustom={data_user.email}
-                  changes={this.hadleTyping}
-                  disabled={data_user.data_register === data_user.email}
-                />
-
-                <InputDouble
-                  data={propsPhone}
-                  changes={this.hadleTyping}
-                  disabled={data_user.data_register === data_user.phone}
-                />
-
-                <Input
-                  text={'Dirección (Opcional)'}
-                  type={'text'}
-                  name={'edit_address'}
-                  valueCustom={data_user.address}
-                  changes={this.hadleTyping}
-                  disabled={false}
-                />
-
-                {/* <SelectFormEditProfile text = {"Mi trabajo"} options = {data_categories} status = {status_categories} /> */}
-
+              </div>
+            ) : (
+              <div className="card">
                 <div className="card-header">
-                  <h2 className="title">información laboral</h2>
+                  <h2 className="title">Información de contacto</h2>
                 </div>
                 <div className="card-body">
-                  <SelectFormEditProfile
-                    id={'select-categories'}
-                    value={this.state.codeCategorieSelect}
-                    text={'Sector laboral'}
-                    options={data_categories}
-                    status={status_categories}
-                    changes={this.handleCategorieSelect}
-                    code={false}
-                  />
-
-                  <SelectFormEditProfile
-                    id={'select-peofessions'}
-                    text={'Professión'}
-                    value={this.state.codeProfessionSelect}
-                    options={data_professions}
-                    status={status_professions}
-                    changes={this.handleProfessionsSelect}
-                    code={this.state.codeCategorieSelect}
-                  />
-                </div>
-
-                <div>
-                  <div className="row">
-                    <div className="col-6">
-                      <StyleBottom
-                        color="primary"
-                        size="lg"
-                        onClick={this.saveProfileChanges}
-                      >
-                        Guardar cambios
-                      </StyleBottom>
+                  <div className="form-row">
+                    <div className="name">Imagen de perfil</div>
+                    <div className="value">
+                      <div className="row row-space">
+                        <div className="col-sm">
+                          <div className="input-group-desc">
+                            <ImageUser img_h="150" img_w="150" img_url="" />
+                          </div>
+                        </div>
+                        <div className="col-sm">
+                          <div className="input-group-desc-file">
+                            <input
+                              className="input--style-6"
+                              type="file"
+                              name="profile_pic"
+                              id="profile_pic"
+                            />
+                            <label
+                              className="label--desc-file"
+                              htmlFor="profile_pic"
+                            >
+                              Seleccionar una imagen
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-6">
-                      <StyleBottom size="lg">Cancelar</StyleBottom>
+                  </div>
+
+                  <InputDouble
+                    data={propsName}
+                    changes={this.hadleTyping}
+                    disabled={false}
+                  />
+
+                  <Input
+                    text={'Correo'}
+                    type={'email'}
+                    name={'edit_email'}
+                    valueCustom={data_user.email}
+                    changes={this.hadleTyping}
+                    disabled={data_user.data_register === data_user.email}
+                  />
+
+                  <InputDouble
+                    data={propsPhone}
+                    changes={this.hadleTyping}
+                    disabled={data_user.data_register === data_user.phone}
+                  />
+
+                  <Input
+                    text={'Dirección (Opcional)'}
+                    type={'text'}
+                    name={'edit_address'}
+                    valueCustom={data_user.address}
+                    changes={this.hadleTyping}
+                    disabled={false}
+                  />
+
+                  {/* <SelectFormEditProfile text = {"Mi trabajo"} options = {data_categories} status = {status_categories} /> */}
+
+                  <div className="card-header">
+                    <h2 className="title">información laboral</h2>
+                  </div>
+                  <div className="card-body">
+                    <SelectFormEditProfile
+                      id={'select-categories'}
+                      currentValue={
+                        this.state.codeCategorieSelect ? this.state.codeCategorieSelect : categorie
+                      }
+                      text={'Sector laboral'}
+                      options={data_categories}
+                      status={status_categories}
+                      handleSelect={this.handleCategorieSelect}
+                    />
+
+                    <SelectFormEditProfile
+                      id={'select-peofessions'}
+                      text={'Professión'}
+                      currentValue={
+                        this.state.codeProfessionSelect ? this.state.codeProfessionSelect : work
+                      }
+                      options={data_professions}
+                      status={status_professions}
+                      handleSelect={this.handleProfessionsSelect}
+                      code={
+                        this.state.codeCategorieSelect ? this.state.codeCategorieSelect : categorie
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <div className="row">
+                      <div className="col-6">
+                        <StyleBottom
+                          color="primary"
+                          size="lg"
+                          onClick={this.saveProfileChanges}
+                        >
+                          Guardar cambios
+                        </StyleBottom>
+                      </div>
+                      <div className="col-6">
+                        <StyleBottom size="lg">Cancelar</StyleBottom>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </Panel.Body>
         </Panel>
       </div>
