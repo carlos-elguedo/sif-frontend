@@ -61,6 +61,7 @@ class EditProfileWork extends Component {
     this.saveProfileChanges = this.saveProfileChanges.bind(this);
     this.close_alert = this.close_alert.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.cancelEdition = this.cancelEdition.bind(this);
   }
 
   componentDidMount() {
@@ -159,6 +160,10 @@ class EditProfileWork extends Component {
     if (this.state.canReload) {
       document.location = WORKER_ROUTES.edit;
     }
+  }
+
+  cancelEdition() {
+      document.location = WORKER_ROUTES.root;
   }
 
   render() {
@@ -349,7 +354,7 @@ class EditProfileWork extends Component {
                         </StyleBottom>
                       </div>
                       <div className="col-6">
-                        <StyleBottom size="lg">Cancelar</StyleBottom>
+                        <StyleBottom size="lg" onClick={this.cancelEdition}>Cancelar</StyleBottom>
                       </div>
                     </div>
                   </div>
