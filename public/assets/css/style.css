@@ -361,12 +361,11 @@ html, body{
 }
 
 .label--desc-file {
-  border: 1px solid #ccc;
   display: inline-block;
   padding: 15px 12px;
   cursor: pointer;
   margin: 10%;
-
+  text-align: left;
 }
 
   /* ==========================================================================

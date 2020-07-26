@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ImageUser from './../ImageUser';
 import Input from './InputFormEditProfile';
 import InputDouble from './InputDoubleFormEditProfile';
 import SelectFormEditProfile from './SelectFormEditProfile';
 import ModalWindow from '../../sections/ModalWindow';
+import DefaultFileUpload from '../../sections/FileUpload';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
 import Spinner from 'emerald-ui/lib/Spinner';
@@ -16,6 +16,7 @@ import {
   WORKER_ROUTES,
   REQUEST_STATUSES
 } from '../../../constants';
+import {SERVER_API_UPLOAD, SERVER_URL} from '../../../config';
 
 import { split, isEmpty } from 'lodash';
 
@@ -163,7 +164,7 @@ class EditProfileWork extends Component {
   }
 
   cancelEdition() {
-      document.location = WORKER_ROUTES.root;
+    document.location = WORKER_ROUTES.root;
   }
 
   render() {
@@ -177,8 +178,6 @@ class EditProfileWork extends Component {
     } = this.props;
     const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
     const showSpinner = status_user === LOADING || status_user === NOT_LOADED;
-
-    console.log('render -> data_user', data_user);
 
     let name = split(data_user.name, ' ');
     let firstName = data_user.firstName ? data_user.firstName : name[0];
@@ -254,29 +253,7 @@ class EditProfileWork extends Component {
                   <div className="form-row">
                     <div className="name">Imagen de perfil</div>
                     <div className="value">
-                      <div className="row row-space">
-                        <div className="col-sm">
-                          <div className="input-group-desc">
-                            <ImageUser img_h="150" img_w="150" img_url="" />
-                          </div>
-                        </div>
-                        <div className="col-sm">
-                          <div className="input-group-desc-file">
-                            <input
-                              className="input--style-6"
-                              type="file"
-                              name="profile_pic"
-                              id="profile_pic"
-                            />
-                            <label
-                              className="label--desc-file"
-                              htmlFor="profile_pic"
-                            >
-                              Seleccionar una imagen
-                            </label>
-                          </div>
-                        </div>
-                      </div>
+                    <DefaultFileUpload url={`${SERVER_URL}${SERVER_API_UPLOAD}profile`}></DefaultFileUpload>
                     </div>
                   </div>
 
@@ -319,7 +296,9 @@ class EditProfileWork extends Component {
                     <SelectFormEditProfile
                       id={'select-categories'}
                       currentValue={
-                        this.state.codeCategorieSelect ? this.state.codeCategorieSelect : categorie
+                        this.state.codeCategorieSelect
+                          ? this.state.codeCategorieSelect
+                          : categorie
                       }
                       text={'Sector laboral'}
                       options={data_categories}
@@ -331,13 +310,17 @@ class EditProfileWork extends Component {
                       id={'select-peofessions'}
                       text={'Professión'}
                       currentValue={
-                        this.state.codeProfessionSelect ? this.state.codeProfessionSelect : work
+                        this.state.codeProfessionSelect
+                          ? this.state.codeProfessionSelect
+                          : work
                       }
                       options={data_professions}
                       status={status_professions}
                       handleSelect={this.handleProfessionsSelect}
                       code={
-                        this.state.codeCategorieSelect ? this.state.codeCategorieSelect : categorie
+                        this.state.codeCategorieSelect
+                          ? this.state.codeCategorieSelect
+                          : categorie
                       }
                     />
                   </div>
@@ -354,7 +337,9 @@ class EditProfileWork extends Component {
                         </StyleBottom>
                       </div>
                       <div className="col-6">
-                        <StyleBottom size="lg" onClick={this.cancelEdition}>Cancelar</StyleBottom>
+                        <StyleBottom size="lg" onClick={this.cancelEdition}>
+                          Cancelar
+                        </StyleBottom>
                       </div>
                     </div>
                   </div>
@@ -369,8 +354,3 @@ class EditProfileWork extends Component {
 }
 
 export default EditProfileWork;
-/* await worker
-  .saveProfileChanges(this.state)
-  .then(()=>{})
-  .catch(()=>{})
-  .finally(()=>{}) */
