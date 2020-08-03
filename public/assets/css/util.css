@@ -2429,8 +2429,9 @@
 }
 
 .wrap-pic-cir-4 {
-	border-radius: 20%;
+	border-radius: 10%;
 	overflow: hidden;
+	border: 2px solid #e5e5e5;
 }
 .wrap-pic-cir-5 img {
 	width: 100%;

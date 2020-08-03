@@ -4,6 +4,7 @@ import InputDouble from './InputDoubleFormEditProfile';
 import SelectFormEditProfile from './SelectFormEditProfile';
 import ModalWindow from '../../sections/ModalWindow';
 import DefaultFileUpload from '../../sections/FileUpload';
+import FileUpload from '../../sections/FileUploader';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
 import Spinner from 'emerald-ui/lib/Spinner';
@@ -16,7 +17,7 @@ import {
   WORKER_ROUTES,
   REQUEST_STATUSES
 } from '../../../constants';
-import {SERVER_API_UPLOAD, SERVER_URL} from '../../../config';
+import { SERVER_API_UPLOAD, SERVER_URL } from '../../../config';
 
 import { split, isEmpty } from 'lodash';
 
@@ -194,6 +195,8 @@ class EditProfileWork extends Component {
         ? data_user.works[0].code
         : '';
 
+    const { profileImage } = data_user;
+
     let propsName = {
       text: 'Nombres',
       textDescription1: 'Nombre',
@@ -250,10 +253,22 @@ class EditProfileWork extends Component {
                   <h2 className="title">Información de contacto</h2>
                 </div>
                 <div className="card-body">
-                  <div className="form-row">
+                  {/* <div className="form-row">
                     <div className="name">Imagen de perfil</div>
                     <div className="value">
                     <DefaultFileUpload url={`${SERVER_URL}${SERVER_API_UPLOAD}profile`}></DefaultFileUpload>
+                    </div>
+                  </div> */}
+
+                  <div className="form-row">
+                    <div className="name">Imagen de perfil</div>
+                    <div className="value">
+                      <FileUpload
+                        url={`${SERVER_API_UPLOAD}profile`}
+                        currentImage={profileImage}
+                        invalidFormatMessage={'Solo imagenes pueden ser cargadas'}
+                        urlReload={WORKER_ROUTES.edit}
+                      ></FileUpload>
                     </div>
                   </div>
 
