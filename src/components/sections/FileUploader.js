@@ -8,6 +8,8 @@ import { utils } from '../../api';
 import PropTypes from 'prop-types';
 import ImageUser from '../user/ImageUser';
 import Spinner from 'emerald-ui/lib/Spinner';
+import Button from 'emerald-ui/lib/Button';
+import ModalWindow from './ModalWindow';
 
 export const UploadTitle = styled.span`
   color: '#8ea7a7';
@@ -35,11 +37,20 @@ export const StyledA = styled.a`
   }
 `;
 
-const FileUpload = ({ invalidFormatMessage, regExp, url, currentImage, urlReload }) => {
+const FileUpload = ({
+  invalidFormatMessage,
+  regExp,
+  url,
+  currentImage,
+  urlReload
+}) => {
+  const [showModalViewImage, setShowModalViewImage] = useState(false);
   const [fileUpload, setFileUpload] = useState([]);
   const [fileOnError, setFileOnError] = useState(false);
   const [isUploading, setUploadingFile] = useState(false);
-  const [textUploadingFile, setTextUploadingFile] = useState('Subiendo archivo...');
+  const [textUploadingFile, setTextUploadingFile] = useState(
+    'Subiendo archivo...'
+  );
 
   const removeFile = () => {
     setFileUpload([]);
@@ -64,22 +75,29 @@ const FileUpload = ({ invalidFormatMessage, regExp, url, currentImage, urlReload
       setFileOnError(true);
     } else {
       setFileOnError(false);
-      setTimeout(async function(){
+      setTimeout(async function () {
         await utils
-        .uploadFile(url, acceptedFiles)
-        .then(res => {
-          const { data } = res;
-          console.log("handleDrop -> data", data)
-          setTextUploadingFile('La imagen a sido subida correctamente');
-          setTimeout(function(){
-            document.location = urlReload
-          }, 1000);
-          
-        })
-        .catch(() => {})
-        .finally(() => {});
+          .uploadFile(url, acceptedFiles)
+          .then(res => {
+            const { data } = res;
+            console.log('handleDrop -> data', data);
+            setTextUploadingFile('La imagen a sido subida correctamente');
+            setTimeout(function () {
+              document.location = urlReload;
+            }, 1000);
+          })
+          .catch(() => {})
+          .finally(() => {});
       }, 1500);
     }
+  };
+
+  const ViewImage = () => {
+    setShowModalViewImage(true)
+  };
+
+  const closeViewImage = () => {
+    setShowModalViewImage(false)
   };
 
   return (
@@ -93,25 +111,34 @@ const FileUpload = ({ invalidFormatMessage, regExp, url, currentImage, urlReload
               ))}
             </FileUploadList>
             <Spinner animation="grow" variant="warning" />
-              <p>{textUploadingFile}</p>
+            <p>{textUploadingFile}</p>
           </div>
         ) : (
-          <FileDropzone
-            style={{ marginBottom: 20 }}
-            multiple={false}
-            onDrop={handleDrop}
-          >
-            <div className="row row-space">
-              <div className="col-sm">
-                <ImageUser img_h="150" img_w="150" img_url={currentImage} />
+          <div>
+            <ModalWindow
+              show={showModalViewImage}
+              textHeader={'Tu imagen de perfil'}
+              close={closeViewImage}
+              children={<ImageUser img_h="450" img_w="450" img_url={currentImage} />}
+            />
+            <FileDropzone
+              style={{ marginBottom: 20 }}
+              multiple={false}
+              onDrop={handleDrop}
+            >
+              <div className="row row-space">
+                <div className="col-sm">
+                  <ImageUser img_h="150" img_w="150" img_url={currentImage} />
+                </div>
+                <div className="col-sm">
+                  <label className="label--desc-file" htmlFor="profile_pic">
+                    Selecciona o arrastra una imagen
+                  </label>
+                </div>
               </div>
-              <div className="col-sm">
-                <label className="label--desc-file" htmlFor="profile_pic">
-                  Selecciona o arrastra una imagen
-                </label>
-              </div>
-            </div>
-          </FileDropzone>
+            </FileDropzone>
+            {currentImage && <Button onClick={ViewImage}>Ver imagen</Button>}
+          </div>
         )}
         <br />
       </div>

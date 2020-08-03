@@ -3,32 +3,32 @@ import Button from 'emerald-ui/lib/Button';
 import IconButton from 'emerald-ui/lib/IconButton';
 import Modal from 'emerald-ui/lib/Modal/';
 
-class ModalWindow extends Component {
+const ModalWindow = ({ show, textHeader, textBody, icon, close, children }) => {
+  return (
+    <div>
+      <Modal onHide={close} show={show}>
+        <Modal.Header closeButton={true}>
+          <Modal.Title>{textHeader}</Modal.Title>
+        </Modal.Header>
 
-  render() {
-    const {show, textBody, textHeader} = this.props;
-    return (
-      <div>
-        <Modal onHide={this.props.close} show={show}>
-            <Modal.Header closeButton={true}>
-                <Modal.Title>{textHeader}</Modal.Title>
-            </Modal.Header>
+        <Modal.Body>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            {icon && (
+              <IconButton ariaLabel="Settings" icon={icon} title="Settings" />
+            )}
+            {textBody && <div className="name">{textBody}</div>}
+            {children ? children : <div></div>}
+          </div>
+        </Modal.Body>
 
-            <Modal.Body>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <IconButton ariaLabel="Settings" icon="settings" title="Settings" />
-                    <div className="name">{textBody}</div>
-                </div>
-            </Modal.Body>
-
-            <Modal.Footer>
-                <Button onClick={this.props.close} color="primary">Aceptar</Button>
-            </Modal.Footer>
-
-        </Modal>
-      </div>
-    );
-  }
-}
+        <Modal.Footer>
+          <Button onClick={close} color="primary">
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 export default ModalWindow;
