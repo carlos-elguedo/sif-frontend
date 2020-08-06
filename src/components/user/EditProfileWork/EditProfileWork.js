@@ -64,6 +64,7 @@ class EditProfileWork extends Component {
     this.close_alert = this.close_alert.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.cancelEdition = this.cancelEdition.bind(this);
+    this.showMessageAlert = this.showMessageAlert.bind(this);
   }
 
   componentDidMount() {
@@ -168,6 +169,18 @@ class EditProfileWork extends Component {
     document.location = WORKER_ROUTES.root;
   }
 
+  showMessageAlert(text, type = ''){
+    console.log('Llego a donde es pro', text);
+    this.setState({
+      alert_type:
+         type === 'error'
+          ? ALERT_TYPES.danger
+          : ALERT_TYPES.warning,
+      text_alert_edit: text,
+      show_alert_edit: true
+    });
+  }
+
   render() {
     const {
       data_user,
@@ -268,6 +281,8 @@ class EditProfileWork extends Component {
                         currentImage={profileImage}
                         invalidFormatMessage={'Solo imagenes pueden ser cargadas'}
                         urlReload={WORKER_ROUTES.edit}
+                        acceptedFiles={['.png', '.jpg', '.jpeg', '.svg']}
+                        alert={this.showMessageAlert}
                       ></FileUpload>
                     </div>
                   </div>

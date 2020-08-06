@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from 'emerald-ui/lib/Button';
 import IconButton from 'emerald-ui/lib/IconButton';
 import Modal from 'emerald-ui/lib/Modal/';

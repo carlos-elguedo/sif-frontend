@@ -39,14 +39,14 @@ export const StyledA = styled.a`
 
 const FileUpload = ({
   invalidFormatMessage,
-  regExp,
   url,
   currentImage,
-  urlReload
+  urlReload,
+  acceptedFiles,
+  alert
 }) => {
   const [showModalViewImage, setShowModalViewImage] = useState(false);
   const [fileUpload, setFileUpload] = useState([]);
-  const [fileOnError, setFileOnError] = useState(false);
   const [isUploading, setUploadingFile] = useState(false);
   const [textUploadingFile, setTextUploadingFile] = useState(
     'Subiendo archivo...'
@@ -54,50 +54,58 @@ const FileUpload = ({
 
   const removeFile = () => {
     setFileUpload([]);
-    setFileOnError(false);
+  };
+
+  const fileEndsWith = name => {
+    let value = false;
+    value = acceptedFiles.some(element => {
+      return name.endsWith(element);
+    });
   };
 
   const handleDrop = async (acceptedFiles = []) => {
-    setUploadingFile(true);
-    const regsExp = new RegExp(regExp, 'g');
+    if (acceptedFiles.length) {
+      setUploadingFile(true);
 
-    const file = acceptedFiles.map(f => ({
-      ...f,
-      name: f.name,
-      cancelable: true,
-      onCancel: removeFile,
-      error: !f.name.match(regsExp),
-      message: !f.name.match(regsExp) ? invalidFormatMessage : 'Correct format'
-    }));
+      const file = acceptedFiles.map(f => ({
+        ...f,
+        name: f.name,
+        cancelable: true,
+        onCancel: removeFile,
+        error: fileEndsWith(f.name),
+        message: fileEndsWith(f.name) ? invalidFormatMessage : 'Correct format'
+      }));
 
-    setFileUpload(file);
-    if (file.some(f => f.error)) {
-      setFileOnError(true);
+      setFileUpload(file);
+      if (!file.some(f => f.error)) {
+        if (file.length) {
+          setTimeout(async function () {
+            await utils
+              .uploadFile(url, acceptedFiles)
+              .then(res => {
+                const { data } = res;
+                console.log('handleDrop -> data', data);
+                setTextUploadingFile('La imagen a sido subida correctamente');
+                setTimeout(function () {
+                  document.location = urlReload;
+                }, 1000);
+              })
+              .catch(() => {})
+              .finally(() => {});
+          }, 1500);
+        }
+      }
     } else {
-      setFileOnError(false);
-      setTimeout(async function () {
-        await utils
-          .uploadFile(url, acceptedFiles)
-          .then(res => {
-            const { data } = res;
-            console.log('handleDrop -> data', data);
-            setTextUploadingFile('La imagen a sido subida correctamente');
-            setTimeout(function () {
-              document.location = urlReload;
-            }, 1000);
-          })
-          .catch(() => {})
-          .finally(() => {});
-      }, 1500);
+      alert && alert(invalidFormatMessage);
     }
   };
 
   const ViewImage = () => {
-    setShowModalViewImage(true)
+    setShowModalViewImage(true);
   };
 
   const closeViewImage = () => {
-    setShowModalViewImage(false)
+    setShowModalViewImage(false);
   };
 
   return (
@@ -119,12 +127,15 @@ const FileUpload = ({
               show={showModalViewImage}
               textHeader={'Tu imagen de perfil'}
               close={closeViewImage}
-              children={<ImageUser img_h="450" img_w="450" img_url={currentImage} />}
+              children={
+                <ImageUser img_h="450" img_w="450" img_url={currentImage} />
+              }
             />
             <FileDropzone
               style={{ marginBottom: 20 }}
               multiple={false}
               onDrop={handleDrop}
+              accept={acceptedFiles}
             >
               <div className="row row-space">
                 <div className="col-sm">
@@ -149,7 +160,10 @@ const FileUpload = ({
 FileUpload.propTypes = {
   invalidFormatMessage: PropTypes.string,
   currentImage: PropTypes.string,
-  url: PropTypes.string
+  acceptedFiles: PropTypes.array,
+  urlReload: PropTypes.string,
+  url: PropTypes.string,
+  alert: PropTypes.func
 };
 
 export default memo(FileUpload);
