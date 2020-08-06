@@ -7,7 +7,7 @@ import DefaultFileUpload from '../../sections/FileUpload';
 import FileUpload from '../../sections/FileUploader';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
-import Spinner from 'emerald-ui/lib/Spinner';
+import Spinner from 'react-bootstrap/Spinner';
 import styled from 'styled-components';
 import { worker } from '../../../api';
 import { validate_editProfileWorker } from '../../../utils/validator';
@@ -169,13 +169,10 @@ class EditProfileWork extends Component {
     document.location = WORKER_ROUTES.root;
   }
 
-  showMessageAlert(text, type = ''){
+  showMessageAlert(text, type = '') {
     console.log('Llego a donde es pro', text);
     this.setState({
-      alert_type:
-         type === 'error'
-          ? ALERT_TYPES.danger
-          : ALERT_TYPES.warning,
+      alert_type: type === 'error' ? ALERT_TYPES.danger : ALERT_TYPES.warning,
       text_alert_edit: text,
       show_alert_edit: true
     });
@@ -255,7 +252,7 @@ class EditProfileWork extends Component {
             />
 
             {showSpinner ? (
-              <div className="card-header">
+              <div className="card-header text-center">
                 <div className="card-body">
                   <Spinner animation="grow" variant="warning" />
                 </div>
@@ -279,7 +276,9 @@ class EditProfileWork extends Component {
                       <FileUpload
                         url={`${SERVER_API_UPLOAD}profile`}
                         currentImage={profileImage}
-                        invalidFormatMessage={'Solo imagenes pueden ser cargadas'}
+                        invalidFormatMessage={
+                          'Solo imagenes pueden ser cargadas'
+                        }
                         urlReload={WORKER_ROUTES.edit}
                         acceptedFiles={['.png', '.jpg', '.jpeg', '.svg']}
                         alert={this.showMessageAlert}
