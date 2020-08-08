@@ -14,7 +14,16 @@ function validate_login(state) {
 }
 
 function validate_register(state) {
-  let ret = false;
+  let ret = false,
+    LIMIT_LENGTH_NAME = 4,
+    LIMIT_LENGTH_PASSWORD = 6;
+
+  let resultValidator = {
+    correct: false,
+    message_es: '',
+    message_en: '',
+    type: 'error'
+  };
   const {
     //register_name,
     register_firstName,
@@ -36,9 +45,9 @@ function validate_register(state) {
   ) {
     //2. Correct Length
     if (
-      correctLength(register_firstName, 4) &&
-      correctLength(register_lastName, 4) &&
-      correctLength(register_password, 6) &&
+      correctLength(register_firstName, LIMIT_LENGTH_NAME) &&
+      correctLength(register_lastName, LIMIT_LENGTH_NAME) &&
+      correctLength(register_password, LIMIT_LENGTH_PASSWORD) &&
       correctDate(register_age) &&
       correctUserType(register_type)
     ) {
@@ -49,24 +58,52 @@ function validate_register(state) {
       ) {
         //3. Finish, accept terms
         if (register_terms === 1) {
-          ret = true;
+          resultValidator.type = '';
+          resultValidator.correct = true;
         } else {
           console.log('TERMINOS');
+          resultValidator.message_es = 'Por favor acepta los terminos y condiciones';
+          resultValidator.message_en = 'Please accept terms and conditions';  
         }
       } //End data of register validation
       else {
-        console.log('Data register');
+        console.log('Data register incorrect');
+        resultValidator.message_es = 'El correo o numero telefonico es incorrecto';
+        resultValidator.message_en = 'The phone number or email is incorrect';
       }
     } //End Correct length validation
     else {
-      console.log('Data correct');
+      console.log('Data do not have correct format');
+      const iconrrectData = `
+      ${
+        correctLength(register_firstName, LIMIT_LENGTH_NAME)
+          ? ''
+          : ' // ' + register_firstName
+      }
+      ${
+        correctLength(register_lastName, LIMIT_LENGTH_NAME)
+          ? ''
+          : ' // ' + register_lastName
+      }
+      ${
+        correctLength(register_password, LIMIT_LENGTH_PASSWORD)
+          ? ''
+          : ' // **password**'
+      }
+      ${correctDate(register_age) ? '' : ' // ' + register_age}
+      ${correctUserType(register_type) ? '' : ' // ' + register_type}
+      `;
+      resultValidator.message_es = `Hay dato(s) incorrectos: (${iconrrectData})`;
+      resultValidator.message_en = `You have incorrect data: (${iconrrectData})`;
     }
   } //End of empty values validation
   else {
     console.log('Data empty values');
+    resultValidator.message_es = 'Hay dato(s) vacio(s) en el formulario';
+    resultValidator.message_en = 'You have some field(s) empty';
   }
 
-  return ret;
+  return resultValidator;
 }
 
 function validate_editProfileWorker(state) {

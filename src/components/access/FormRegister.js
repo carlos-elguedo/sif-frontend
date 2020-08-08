@@ -5,8 +5,8 @@ class FormRegister extends Component {
   render() {
     return (
       <div className="row hide" id="pageRegister">
-        <div className="col-md-6 mx-auto">
-          <div className="card mt-6 text-center">
+        <div className="col-md-8 mx-auto">
+          <div className="card mt-8 text-center">
             <div className="card-header">
               <h1 className="h4">Registro</h1>
             </div>

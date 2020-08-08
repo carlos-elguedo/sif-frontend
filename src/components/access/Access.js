@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 
 import FormLogin from './FormLogin';
@@ -100,8 +99,10 @@ class Access extends Component {
    */
   async register(eve) {
     eve.preventDefault();
+    
+    const resultValidation = validate_register(this.state);
 
-    if (validate_register(this.state)) {
+    if (resultValidation.correct) {
       // Para mostrar el mensaje de enviando datos
       this.setState({
         message_request: 'Enviando...',
@@ -147,10 +148,9 @@ class Access extends Component {
           }
         });
     } else {
-      console.log('Error on register local');
       this.setState({
         alert_type: ALERT_TYPES.danger,
-        text_alert: 'Por favor revisa tus datos',
+        text_alert: resultValidation.message_es,
         show_alert: true
       });
     }
