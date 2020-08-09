@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 
 import Worker from './Worker';
-import {
-  selectors,
-  actions
-} from '../../store/worker';
+import { selectors, actions } from '../../store/worker';
 
-export const mapStateToProps = (state) => {
-
+export const mapStateToProps = state => {
   let workerSelector = selectors(state);
 
   return {
@@ -15,9 +11,6 @@ export const mapStateToProps = (state) => {
     status: workerSelector.getFetchStatus()
   };
 };
-export default connect(
-  mapStateToProps,
-  {
-    fetchWorker: actions.workerFetch
-  }
-)(Worker);
+export default connect(mapStateToProps, {
+  fetchWorker: actions.workerFetch
+})(Worker);

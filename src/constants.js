@@ -3,6 +3,10 @@ export const WORKER_ROUTES = {
   edit: '/workeredit'
 };
 
+export const CLIENT_ROUTES = {
+  root: '/client'
+};
+
 export const REQUEST_STATUSES = {
   NOT_LOADED: 'notLoaded',
   LOADING: 'loading',
@@ -11,8 +15,8 @@ export const REQUEST_STATUSES = {
 };
 
 export const ALERT_TYPES = {
-  success:'success',
-  warning:'warning',
-  danger:'danger',
-  info:'info'
-}
+  success: 'success',
+  warning: 'warning',
+  danger: 'danger',
+  info: 'info'
+};
