@@ -18,7 +18,7 @@ class Client extends Component {
     const { data: current_client } = this.props;
     return (
       <div className="App">
-        <NavBar nav_title={`SIF - ${current_client.firstName || current_client  .name || ''}`} />
+        <NavBar nav_title={`SIF - ${current_client.firstName || current_client.name || ''}`} />
         <SideBar options={userOption} />
         <Switch>
           <Route exact path={CLIENT_ROUTES.root} component={ProfileWork} />

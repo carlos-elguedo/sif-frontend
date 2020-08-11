@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'emerald-ui/lib/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import Search from '../../sections/Search';
 
 const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
 import { CLIENT_ROUTES, REQUEST_STATUSES } from '../../../constants';
@@ -25,15 +26,7 @@ class ProfileClient extends Component {
               <div>
                 <div className="card-header">{data_client.name}</div>
                 <div className="card-body">
-                  <h5 className="card-title">{'SIF - Cartagena'}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    {'Empieza a buscar trabajadores independientes'}
-                  </h6>
-                  {/* <ImageUser
-                img_h="200"
-                img_w="200"
-                img_url={current_worker.profileImage}
-              /> */}
+                  <Search></Search>
                 </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item text-center">
