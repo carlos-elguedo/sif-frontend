@@ -1,67 +1,55 @@
-import React, {Component} from 'react';
-// import { Link } from "react-router-dom";
-const config = require('../../config.js')
-
 /**
- * Class Sidebar
- * LATERAL BAR of the application
- * receives as parameter the text to be displayed in the upper bar
- * It contains a link to the Home page ('/')
+ * Options of search, this is another way to search workers
  * @author Carlos Elguedo
  * @version 0.0.1
  */
 
-class OptionSearch extends Component{
+import React from 'react';
+import styled from 'styled-components';
+import SearchableSelect from 'emerald-ui/lib/SearchableSelect';
 
-
-
-
-  constructor(props){
-    super(props)
-
-    this.state={
-        categories: []
-    };
-
-    this.getCategories = this.getCategories.bind(this)
-
-    this.getCategories()
+const StyleSelect = styled(SearchableSelect)`
+  width: 100%;
+  background-color: white;
+  a {
+    text-align-last: center;
   }
+  div > div.eui-text-field-wrapper {
+    text-align-last: center;
+  }
+`;
 
-
-
-
-  getCategories(){
-
-    fetch(`${config.SERVER_URL}${config.SERVER_API_PROF_URL}allcategory/`)
-      .then(res =>res.json())
-      .then(data =>{
-        // console.log("Se obtuvieron: " + data.length + " categorias");
-        this.setState({categories: data})
-        console.log('tuldlasd ' + this.state.categories.length)
-      })
-      // .catch(error =>{
-      //   console.log('Error request the Categories: ' error);
-      // })
-  }//End get Categories
-
-    render(){
-      const Categories =  this.state.categories.map((category, i) => {
-            return(
-              <option key={i}>{category.name_es}</option>
-            )
-          });
-      // getCategories()
-        return(
-          <div className="form-group">
-            <select className="form-control" id="exampleSelect1">
-              <option> O selecciona una categoria</option>
-              {Categories}
-            </select>
-          </div>
-        );
-    }
-
-}
+const OptionSearch = ({ options, status, onSelect }) => {
+  const mapOptions = () => {
+    return Object.values(options).map((category, i) => {
+      return (
+        <option key={i} value={category.cod}>
+          {category.name_es}
+        </option>
+      );
+    });
+  };
+  return (
+    <div className="form-group">
+      <div className="value selects">
+        <div>
+          {status ? (
+            <StyleSelect
+              id={'Hola'}
+              shape="flat"
+              onSelect={onSelect}
+              /* value={currentValue} */
+            >
+              <option value={''}> O selecciona una categoria</option>
+              {mapOptions()}
+            </StyleSelect>
+          ) : (
+            <div>No ready</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default OptionSearch;

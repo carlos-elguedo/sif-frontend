@@ -8,8 +8,18 @@ const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
 import { CLIENT_ROUTES, REQUEST_STATUSES } from '../../../constants';
 
 class ProfileClient extends Component {
+  componentDidMount() {
+    const { fetchCategories } = this.props;
+    fetchCategories();
+  }
+
   render() {
-    const { status, data: data_client } = this.props;
+    const {
+      status,
+      data: data_client,
+      status_categories,
+      data_categories
+    } = this.props;
     const showSpinner = status === LOADING || status === NOT_LOADED;
 
     return (
@@ -26,7 +36,10 @@ class ProfileClient extends Component {
               <div>
                 <div className="card-header">{data_client.name}</div>
                 <div className="card-body">
-                  <Search></Search>
+                  <Search
+                    options={data_categories}
+                    status={status_categories}
+                  ></Search>
                 </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item text-center">
