@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CarouselSearch from './CarouselSearch';
 import OptionSearchCategorie from './OptionSearch';
 import ResultPanel from './ResultPanel';
+import { worker } from '../../api';
 /**
  *
  * @author Carlos Elguedo
@@ -9,15 +10,25 @@ import ResultPanel from './ResultPanel';
  */
 
 const Search = ({ options, status }) => {
-  const onOptionChanged = selected => {
-    console.log('------------Selected: ', selected);
+  const [workersResult, setWorkersResult] = useState([]);
+
+  const onOptionChanged = async selected => {
+    if (typeof selected === 'string')
+      await makeRequestSearch({ q: selected, searchBy: 'categorie' });
   };
 
-  const onSearch = event => {
-    
-    const { name, value } = event.target;
+  const onSearch = async event => {
+    const { value } = event.target;
+    await makeRequestSearch({ q: value });
+  };
 
-    console.log('Va a buscar: ', value);
+  const makeRequestSearch = async ({ q = '', searchBy = 'profession' }) => {
+    let { data } = await worker.searchWorkers({
+      q,
+      searchBy
+    });
+    setWorkersResult(data.searchWorkers.workers);
+    console.log('Search -> result', workersResult);
   };
 
   return (
