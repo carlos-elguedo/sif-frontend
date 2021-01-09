@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 
 /**
@@ -9,35 +9,37 @@ import React, {Component} from 'react';
  * @author Carlos Elguedo
  * @version 0.0.1
  */
-class SideBar extends Component{
-
-    render(){
-
-        return(
-          <div id="wrapper" className="">
-            <div id="sidebar-wrapper">
-              <ul className="sidebar-nav">
-                  <li className="sidebar-brand">
-                    <a href="lol">SIF Cartagena</a>
-                  </li>
-                  {/* {
-                    Object.keys(this.props.options).map((option) => {
-                      // console.log(this.props.options[option])
-                      <li> <a href="lol"> {this.props.options[option]} </a> </li>  
-                    })
-                  } */}
-                  <li> <a href="lol"> {this.props.options[0]} </a> </li>
-                  <li> <a href="lol"> {this.props.options[1]} </a> </li>
-                  <li> <a href="lol"> {this.props.options[2]} </a> </li>
-                  <li> <a href="lol"> {this.props.options[3]} </a> </li>
-                  {/*<li> <a href="">Contact</a> </li>*/}
-
-              </ul>
-            </div>
-          </div>
-        );
-    }
-
+class SideBar extends Component {
+  render() {
+    return (
+      <div id="wrapper" className="">
+        <div id="sidebar-wrapper">
+          <ul className="sidebar-nav">
+            <li className="sidebar-brand">
+              <a href="lol">SIF Cartagena</a>
+            </li>
+            <li>
+              {' '}
+              <a href="lol"> {this.props.options[0]} </a>{' '}
+            </li>
+            <li>
+              {' '}
+              <a href="lol"> {this.props.options[1]} </a>{' '}
+            </li>
+            <li>
+              {' '}
+              <a href="lol"> {this.props.options[2]} </a>{' '}
+            </li>
+            <li>
+              {' '}
+              <a href="lol"> {this.props.options[3]} </a>{' '}
+            </li>
+            {/*<li> <a href="">Contact</a> </li>*/}
+          </ul>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default SideBar;

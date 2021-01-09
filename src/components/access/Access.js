@@ -173,7 +173,6 @@ class Access extends Component {
         this.setState({
           register_terms: 0
         });
-        // console.log('Cambio a 0---------------:', this.state.register_terms)
       }
     } else {
       //Other fields of input
@@ -187,7 +186,6 @@ class Access extends Component {
    * Funcion para cancelar el envio de un formulario al servidor
    */
   cancelSend() {
-    console.log('Cancelo');
     this.setState({
       sending_request: false,
       message_request: '',

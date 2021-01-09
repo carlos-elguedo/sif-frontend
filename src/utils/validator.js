@@ -14,8 +14,7 @@ function validate_login(state) {
 }
 
 function validate_register(state) {
-  let ret = false,
-    LIMIT_LENGTH_NAME = 4,
+  let LIMIT_LENGTH_NAME = 4,
     LIMIT_LENGTH_PASSWORD = 6;
 
   let resultValidator = {
@@ -61,14 +60,15 @@ function validate_register(state) {
           resultValidator.type = '';
           resultValidator.correct = true;
         } else {
-          console.log('TERMINOS');
-          resultValidator.message_es = 'Por favor acepta los terminos y condiciones';
-          resultValidator.message_en = 'Please accept terms and conditions';  
+          resultValidator.message_es =
+            'Por favor acepta los terminos y condiciones';
+          resultValidator.message_en = 'Please accept terms and conditions';
         }
       } //End data of register validation
       else {
         console.log('Data register incorrect');
-        resultValidator.message_es = 'El correo o numero telefonico es incorrecto';
+        resultValidator.message_es =
+          'El correo o numero telefonico es incorrecto';
         resultValidator.message_en = 'The phone number or email is incorrect';
       }
     } //End Correct length validation
@@ -243,8 +243,6 @@ function correctDate(date) {
   if (year2 < 2000 && year2 > 1900) {
     ret = true;
   }
-
-  // console.log("Fecha: " + ret)
   return ret;
 }
 

@@ -4,8 +4,6 @@ import Card from 'emerald-ui/lib/Card';
 import ImageUser from '../user/ImageUser';
 
 const ResultPanel = ({ title, workers }) => {
-  console.log('ResultPanel -> workers va a pintar', workers);
-
   const renderResults = () => {
     return workers.map((worker, i) => {
       return (
