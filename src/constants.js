@@ -20,3 +20,12 @@ export const ALERT_TYPES = {
   danger: 'danger',
   info: 'info'
 };
+
+export const DEFAULT_QUERY_PARAMS = {
+  offset: 0,
+  limit: 10,
+  order: 'asc',
+  active: true,
+  sort: 'name',
+  searchBy: 'profession'
+};

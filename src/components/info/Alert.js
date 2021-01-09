@@ -29,7 +29,6 @@ class AlertInfo extends Component{
                 icon = "info_outline";
                 color = "info"
         }
-        //console.log('Llego: ', type_Message)
          
         return(
             <Alert style={{ display: show }} color={color}>
@@ -49,21 +48,3 @@ class AlertInfo extends Component{
 }
 
 export default AlertInfo;
-
-
-/* if(this.props.show === true){
-    textVisible = `alert ${}alert-warning alert-dismissible fade show`;
-    
-}else{            
-    textVisible = "alert alert-warning invisible alert-dismissible fade show";
-}
-return(
-        <div className = {textVisible} role='alert'>
-            {this.props.text_alert}
-            <button type='button' className='close' arial-label='Close' onClick={this.props.close}>
-                <span aria-hidden = 'true'>&times;</span>
-            </button>
-        </div>
-
-);
- */

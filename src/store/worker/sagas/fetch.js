@@ -6,11 +6,8 @@ import { getWorker } from '../../../api/worker';
 export function* fetchWorker() {
   yield put(actions.workerRequest());
   try {
-    // yield call(delay, 300);
     const { data } = yield call(getWorker);
-    // console.log('FROM FETCH: ', data)
     yield put(actions.workerSuccess(data));
-    // console.log('FROM succes FETCH: ', data)
   } catch (error) {
     yield put(actions.workerFailure(error));
   }

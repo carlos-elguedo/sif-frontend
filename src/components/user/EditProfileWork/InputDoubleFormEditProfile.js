@@ -15,8 +15,6 @@ class InputFormEditProfile extends Component {
     let changes = this.props.changes;
     let disabled = this.props.disabled;
 
-    //console.log('Llego a el componente', nameId1)
-
     return (
       <div className="form-row">
         <div className="name">{text}</div>

@@ -3,7 +3,6 @@ import Input from './InputFormEditProfile';
 import InputDouble from './InputDoubleFormEditProfile';
 import SelectFormEditProfile from './SelectFormEditProfile';
 import ModalWindow from '../../sections/ModalWindow';
-import DefaultFileUpload from '../../sections/FileUpload';
 import FileUpload from '../../sections/FileUploader';
 import Panel from 'emerald-ui/lib/Panel';
 import Button from 'emerald-ui/lib/Button';
@@ -17,7 +16,7 @@ import {
   WORKER_ROUTES,
   REQUEST_STATUSES
 } from '../../../constants';
-import { SERVER_API_UPLOAD, SERVER_URL } from '../../../config';
+import { SERVER_API_UPLOAD } from '../../../config';
 
 import { split, isEmpty } from 'lodash';
 
@@ -141,7 +140,6 @@ class EditProfileWork extends Component {
   }
 
   hadleTyping(eve) {
-    //console.log(eve.target.name + ": " +eve.target.value + ": " + eve.target.type);
     const { name, value } = eve.target;
 
     this.setState({
@@ -170,7 +168,6 @@ class EditProfileWork extends Component {
   }
 
   showMessageAlert(text, type = '') {
-    console.log('Llego a donde es pro', text);
     this.setState({
       alert_type: type === 'error' ? ALERT_TYPES.danger : ALERT_TYPES.warning,
       text_alert_edit: text,
@@ -263,13 +260,6 @@ class EditProfileWork extends Component {
                   <h2 className="title">Información de contacto</h2>
                 </div>
                 <div className="card-body">
-                  {/* <div className="form-row">
-                    <div className="name">Imagen de perfil</div>
-                    <div className="value">
-                    <DefaultFileUpload url={`${SERVER_URL}${SERVER_API_UPLOAD}profile`}></DefaultFileUpload>
-                    </div>
-                  </div> */}
-
                   <div className="form-row">
                     <div className="name">Imagen de perfil</div>
                     <div className="value">
