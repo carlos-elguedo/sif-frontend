@@ -19,7 +19,7 @@ const StyleSelect = styled(SearchableSelect)`
   }
 `;
 
-const OptionSearch = ({ options, status, onSelect }) => {
+const OptionSearch = ({ options, status, onSearch, currentValue }) => { 
   const mapOptions = () => {
     return Object.values(options).map((category, i) => {
       return (
@@ -35,10 +35,13 @@ const OptionSearch = ({ options, status, onSelect }) => {
         <div>
           {status ? (
             <StyleSelect
-              id={'Hola'}
-              shape="flat"
-              onSelect={onSelect}
-              /* value={currentValue} */
+              id={'searchCategorie'}
+              onSelect={ele => {
+                if (typeof ele === 'string') {
+                  onSearch(ele);
+                }
+              }}
+              value={currentValue}
             >
               <option value={''}> O selecciona una categoria</option>
               {mapOptions()}

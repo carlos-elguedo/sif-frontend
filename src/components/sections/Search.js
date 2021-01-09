@@ -11,10 +11,11 @@ import { worker } from '../../api';
 
 const Search = ({ options, status }) => {
   const [workersResult, setWorkersResult] = useState([]);
+  const [categorieSelected, setCategorieSelected] = useState('');
 
   const onOptionChanged = async selected => {
-    if (typeof selected === 'string')
-      await makeRequestSearch({ q: selected, searchBy: 'categorie' });
+    setCategorieSelected(selected);
+    await makeRequestSearch({ q: selected, searchBy: 'categorie' });
   };
 
   const onSearch = async event => {
@@ -28,7 +29,6 @@ const Search = ({ options, status }) => {
       searchBy
     });
     setWorkersResult(data.searchWorkers.workers);
-    console.log('Search -> result', workersResult);
   };
 
   return (
@@ -55,11 +55,12 @@ const Search = ({ options, status }) => {
       <OptionSearchCategorie
         options={options}
         status={status}
-        onSelect={onOptionChanged}
+        onSearch={onOptionChanged}
+        currentValue={categorieSelected}
       />
       <ResultPanel
-        result_title="Aquí apareceran tus resultados..."
-        workers={{}}
+        title="Aquí apareceran tus resultados..."
+        workers={workersResult}
       />
     </div>
   );
