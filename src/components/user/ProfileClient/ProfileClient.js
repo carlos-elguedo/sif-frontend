@@ -3,9 +3,9 @@ import Button from 'emerald-ui/lib/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import Search from '../../sections/Search';
+import { CLIENT_ROUTES, REQUEST_STATUSES } from '../../../constants';
 
 const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
-import { CLIENT_ROUTES, REQUEST_STATUSES } from '../../../constants';
 
 class ProfileClient extends Component {
   componentDidMount() {
@@ -39,7 +39,7 @@ class ProfileClient extends Component {
                   <Search
                     options={data_categories}
                     status={status_categories}
-                  ></Search>
+                  />
                 </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item text-center">

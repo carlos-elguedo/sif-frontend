@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-// import { Link } from "react-router-dom";
+import React from 'react';
 
 /**
  * Class Sidebar
@@ -9,37 +8,29 @@ import React, { Component } from 'react';
  * @author Carlos Elguedo
  * @version 0.0.1
  */
-class SideBar extends Component {
-  render() {
-    return (
-      <div id="wrapper" className="">
-        <div id="sidebar-wrapper">
-          <ul className="sidebar-nav">
-            <li className="sidebar-brand">
-              <a href="lol">SIF Cartagena</a>
-            </li>
-            <li>
-              {' '}
-              <a href="lol"> {this.props.options[0]} </a>{' '}
-            </li>
-            <li>
-              {' '}
-              <a href="lol"> {this.props.options[1]} </a>{' '}
-            </li>
-            <li>
-              {' '}
-              <a href="lol"> {this.props.options[2]} </a>{' '}
-            </li>
-            <li>
-              {' '}
-              <a href="lol"> {this.props.options[3]} </a>{' '}
-            </li>
-            {/*<li> <a href="">Contact</a> </li>*/}
-          </ul>
-        </div>
+const SideBar = ({ options }) => {
+  const mapOptions = () => {
+    return options.map((option, i) => {
+      return (
+        <li key={i}>
+          <a href={option.url}> {option.label} </a>
+        </li>
+      );
+    });
+  };
+
+  return (
+    <div id="wrapper" className="">
+      <div id="sidebar-wrapper">
+        <ul className="sidebar-nav">
+          <li className="sidebar-brand">
+            <a href="lol">SIF Cartagena</a>
+          </li>
+          {mapOptions()}
+        </ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default SideBar;

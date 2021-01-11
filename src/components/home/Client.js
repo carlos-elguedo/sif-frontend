@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import NavBar from '../sections/NavBar';
 import SideBar from '../sections/SideBar';
-import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
-import ProfileWork from '../user/ProfileClient';
+import { Switch, Route } from 'react-router-dom';
+import ProfileClient from '../user/ProfileClient';
+import ViewProfileWork from '../user/ViewProfileWork';
 
-import { CLIENT_ROUTES } from '../../constants';
-
-var userOption = ['Inicio', 'Mi perfil', 'Buscar un trabajador', 'Mensajes'];
+import {
+  CLIENT_ROUTES,
+  WORKER_ROUTES,
+  userClientOption
+} from '../../constants';
 class Client extends Component {
   componentDidMount() {
     const { fetchClient } = this.props;
@@ -18,10 +20,15 @@ class Client extends Component {
     const { data: current_client } = this.props;
     return (
       <div className="App">
-        <NavBar nav_title={`SIF - ${current_client.firstName || current_client.name || ''}`} />
-        <SideBar options={userOption} />
+        <NavBar
+          nav_title={`SIF - ${
+            current_client.firstName || current_client.name || ''
+          }`}
+        />
+        <SideBar options={userClientOption} />
         <Switch>
-          <Route exact path={CLIENT_ROUTES.root} component={ProfileWork} />
+          <Route exact path={CLIENT_ROUTES.root} component={ProfileClient} />
+          <Route exact path={WORKER_ROUTES.view} component={ViewProfileWork} />
         </Switch>
       </div>
     );

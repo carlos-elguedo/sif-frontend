@@ -4,7 +4,8 @@ export const WORKER_ROUTES = {
 };
 
 export const CLIENT_ROUTES = {
-  root: '/client'
+  root: '/client',
+  view: '/profile'
 };
 
 export const REQUEST_STATUSES = {
@@ -29,3 +30,10 @@ export const DEFAULT_QUERY_PARAMS = {
   sort: 'name',
   searchBy: 'profession'
 };
+
+export const userClientOption = [
+  { label: 'Inicio', url: 'client' },
+  { label: 'Mi perfil', url: 'lol' },
+  { label: 'Buscar un trabajador', url: 'lol' },
+  { label: 'Mensajes', url: 'lol' }
+];

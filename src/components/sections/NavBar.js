@@ -1,11 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { access } from '../../api';
-// import { Link } from "react-router-dom";
-// import DropdownUserMenu from './DropdownUserMenu'
 import Dropdown from 'emerald-ui/lib/Dropdown';
 import Button from 'emerald-ui/lib/Button';
 import styled from 'styled-components';
-
 
 /**
  * Class NavBar
@@ -16,71 +13,71 @@ import styled from 'styled-components';
  * @version 0.0.1
  */
 
-
 const StyleDropdown = styled(Dropdown)`
   background-color: white;
 `;
 
- // <DropdownUserMenu/>
-class NavBar extends Component{
-
-  async closeSession(){
-    //let redirect = '', message_request = '';
-    //if(access.userIsLogged())
-    await access.logout().then(function (response) {
-        //message_request = response.data.message
-        //redirect = response.data.redirect
-        console.log(response.data)
+class NavBar extends Component {
+  async closeSession() {
+    await access
+      .logout()
+      .then(function (response) {
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.log('error in logout: ', error)
+        console.log('error in logout: ', error);
       })
-      .finally(()=>{
+      .finally(() => {
         document.location.href = '/';
-      })
+      });
   }
 
-    render(){
-        return(
-            <nav className="navbar navbar-expand navbar-dark bg-primary">
-              <a href="#menu-toggle" id="menu-toggle" className="navbar-brand">
-                <span className="navbar-toggler-icon"></span>
+  render() {
+    return (
+      <nav className="navbar navbar-expand navbar-dark bg-primary">
+        <a href="#menu-toggle" id="menu-toggle" className="navbar-brand">
+          <span className="navbar-toggler-icon"></span>
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample02"
+          aria-controls="navbarsExample02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarsExample02">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="lol">
+                {this.props.nav_title}
+                <span className="sr-only">(current)</span>
               </a>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
+            </li>
+          </ul>
 
-              <div className="collapse navbar-collapse" id="navbarsExample02">
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="lol">
-                      {this.props.nav_title}
-                      <span className="sr-only">
-                        (current)
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-
-
-                <StyleDropdown fromRight>
-                  <Button>
-                    Actions
-                    <span className="caret" />
-                  </Button>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Action</Dropdown.Item>
-                    <Dropdown.Item>Another action</Dropdown.Item>
-                    <Dropdown.Item separator />
-                    <Dropdown.Item onClick={this.closeSession} >Cerrar sesión</Dropdown.Item>
-                  </Dropdown.Menu>
-                </StyleDropdown>
-              </div>
-
-            </nav>
-        );
-    }
-
+          <StyleDropdown fromRight>
+            <Button>
+              Actions
+              <span className="caret" />
+            </Button>
+            <Dropdown.Menu>
+              <Dropdown.Item>Action</Dropdown.Item>
+              <Dropdown.Item>Another action</Dropdown.Item>
+              <Dropdown.Item separator />
+              <Dropdown.Item onClick={this.closeSession}>
+                Cerrar sesión
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </StyleDropdown>
+        </div>
+      </nav>
+    );
+  }
 }
 
 export default NavBar;

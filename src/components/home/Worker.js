@@ -3,8 +3,7 @@ import NavBar from '../sections/NavBar';
 import SideBar from '../sections/SideBar';
 import ProfileWork from '../user/ProfileWork/';
 import EditProfileWork from '../user/EditProfileWork/';
-import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
+import { Route, Switch } from 'react-router-dom';
 
 import { WORKER_ROUTES } from '../../constants';
 
@@ -21,7 +20,11 @@ class Worker extends Component {
 
     return (
       <div className="App">
-        <NavBar nav_title={`SIF - ${current_worker.firstName || current_worker.name || ''}`} />
+        <NavBar
+          nav_title={`SIF - ${
+            current_worker.firstName || current_worker.name || ''
+          }`}
+        />
         <SideBar options={userOption} />
         <Switch>
           <Route exact path={WORKER_ROUTES.root} component={ProfileWork} />
