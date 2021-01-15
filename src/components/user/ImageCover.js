@@ -8,7 +8,7 @@ const ImageCover = ({ img_url }) => {
 
   return (
     <img
-      src={config.SERVER_URL + `/img/banners/professions/v1/${image}`}
+      src={config.SERVER_URL + `/img/banners/professions/v1/${image}.jpg`}
       alt="Cover"
       width="100%"
       max-width="100%"
