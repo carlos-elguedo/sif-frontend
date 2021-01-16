@@ -6,10 +6,7 @@ import ProfileClient from '../user/ProfileClient';
 import ViewProfileWork from '../user/ViewProfileWork';
 import EditProfileClient from '../user/EditProfileClient';
 
-import {
-  CLIENT_ROUTES,
-  userClientOption
-} from '../../constants';
+import { CLIENT_ROUTES, userClientOption } from '../../constants';
 class Client extends Component {
   componentDidMount() {
     const { fetchClient } = this.props;
@@ -28,9 +25,12 @@ class Client extends Component {
         <SideBar options={userClientOption} />
         <Switch>
           <Route exact path={CLIENT_ROUTES.root} component={ProfileClient} />
-          <Route exact path={`${CLIENT_ROUTES.view}`} component={ViewProfileWork} />
-          <Route exact path={`${CLIENT_ROUTES.edit}`} component={EditProfileClient} />
-          
+          <Route exact path={CLIENT_ROUTES.view} component={ViewProfileWork} />
+          <Route
+            exact
+            path={CLIENT_ROUTES.edit}
+            component={EditProfileClient}
+          />
         </Switch>
       </div>
     );

@@ -10,10 +10,6 @@ import { Information } from './components';
 
 const ViewProfileWork = () => {
   const { id } = useParams();
-  console.log(
-    '🚀 ~ file: ViewProfileWork.js ~ line 14 ~ ViewProfileWork ~ id',
-    id
-  );
   const [workerInfo, setWorkerInfo] = useState({});
   const [state, setState] = useState({
     loadingProfile: true,

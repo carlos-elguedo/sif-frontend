@@ -38,3 +38,8 @@ export const userClientOption = [
   { label: 'Buscar un trabajador', url: 'lol' },
   { label: 'Mensajes', url: 'lol' }
 ];
+
+
+export const messagesApp = {
+  notLoaded: 'Ha ocurrido un error mientras se cargaban los datos!'
+}
