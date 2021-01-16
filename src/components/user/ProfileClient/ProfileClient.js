@@ -44,7 +44,7 @@ class ProfileClient extends Component {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item text-center">
                     <div className="btn-toolbar">
-                      <LinkContainer to={CLIENT_ROUTES.root}>
+                      <LinkContainer to={CLIENT_ROUTES.edit}>
                         <Button shape="flat" color="primary">
                           Editar mi perfil
                         </Button>

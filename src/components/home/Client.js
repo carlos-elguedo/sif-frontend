@@ -4,10 +4,10 @@ import SideBar from '../sections/SideBar';
 import { Switch, Route } from 'react-router-dom';
 import ProfileClient from '../user/ProfileClient';
 import ViewProfileWork from '../user/ViewProfileWork';
+import EditProfileClient from '../user/EditProfileClient';
 
 import {
   CLIENT_ROUTES,
-  WORKER_ROUTES,
   userClientOption
 } from '../../constants';
 class Client extends Component {
@@ -28,7 +28,9 @@ class Client extends Component {
         <SideBar options={userClientOption} />
         <Switch>
           <Route exact path={CLIENT_ROUTES.root} component={ProfileClient} />
-          <Route exact path={WORKER_ROUTES.view} component={ViewProfileWork} />
+          <Route exact path={`${CLIENT_ROUTES.view}`} component={ViewProfileWork} />
+          <Route exact path={`${CLIENT_ROUTES.edit}`} component={EditProfileClient} />
+          
         </Switch>
       </div>
     );
