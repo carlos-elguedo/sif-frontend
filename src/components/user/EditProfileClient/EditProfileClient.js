@@ -35,10 +35,6 @@ const EditProfileClient = () => {
     client
       .getClient()
       .then(({ data }) => {
-        console.log(
-          '🚀 ~ file: EditProfileClient.js ~ line 18 ~ .then ~ data',
-          data
-        );
         setClientInfo(data);
         setState({
           loadingProfile: false,
@@ -71,7 +67,7 @@ const EditProfileClient = () => {
   };
 
   const openAlert = (text, type = '') => {
-    this.setAlert({
+    setAlert({
       alertType: type === 'error' ? ALERT_TYPES.danger : ALERT_TYPES.warning,
       alertText: text,
       alertShow: true
@@ -95,10 +91,10 @@ const EditProfileClient = () => {
       client
         .saveProfileChanges(clientEditData)
         .then(({ data }) => {
-          console.log('🚀 ~ line 18 ~ .then ~ data', data);
+          if (data) goTo(CLIENT_ROUTES.edit);
         })
         .catch(e => {
-          console.log('🚀 ~ line 106 ~ saveChanges ~ e', e);
+          openAlert(e.message, 'warning');
         });
     } else {
       setAlert({
@@ -110,14 +106,10 @@ const EditProfileClient = () => {
         alertShow: true
       });
     }
-    console.log(
-      '🚀 ~ file: EditProfileClient.js ~ line 95 ~ saveChanges ~ statusEdition',
-      statusEdition
-    );
   };
 
-  const cancelEdition = () => {
-    document.location = CLIENT_ROUTES.root;
+  const goTo = url => {
+    document.location = url;
   };
 
   const { loadingProfile, errorGetProfile, messageError } = state;
@@ -209,7 +201,9 @@ const EditProfileClient = () => {
 
                   <ActionButton
                     primaryAction={saveChanges}
-                    secundaryAction={cancelEdition}
+                    secundaryAction={() => {
+                      goTo(CLIENT_ROUTES.root);
+                    }}
                   />
                   {/* end of card body and contaiter */}
                 </div>

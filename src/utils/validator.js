@@ -232,7 +232,7 @@ function validate_editProfileClient(state) {
 
   result.message = 'Correcto';
   result.correct = true;
-
+  result.type = 'OK';
   return result;
 }
 
