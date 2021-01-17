@@ -183,6 +183,59 @@ function validate_editProfileWorker(state) {
   return ret;
 }
 
+function validate_editProfileClient(state) {
+  let allIsEmpty = true;
+  let result = {
+    correct: false,
+    message: 'Los datos estan vacios',
+    type: 'error'
+  };
+
+  //1. Check if the data is empty
+  Object.keys(state).forEach(prop => {
+    if (state[prop] !== '') allIsEmpty = false;
+  });
+  if (allIsEmpty) return result;
+
+  //2. Check if all data has correct format
+  const { firstName, lastName, email, phone, areaCodePhone, address } = state;
+  result.type = 'warning';
+  if (firstName && !correctLength(firstName, 4)) {
+    result.message = 'El nombre debe contener al menos 4 caracteres';
+    return result;
+  }
+
+  if (lastName && !correctLength(lastName, 4)) {
+    result.message = 'El apellido debe contener al menos 4 caracteres';
+    return result;
+  }
+
+  if (email && !correctEmail(email)) {
+    result.message = 'El correo electronico no es correcto';
+    return result;
+  }
+
+  if (phone && !correctNumberPhone(phone)) {
+    result.message = 'El numero telefonico no es correcto';
+    return result;
+  }
+
+  if (areaCodePhone && !correctAreaCodePhone(areaCodePhone)) {
+    result.message = 'El Codigo de area ingresado no es correcto';
+    return result;
+  }
+
+  if (address && !correctLength(address, 10)) {
+    result.message = 'La direccion ingresada es muy corta';
+    return result;
+  }
+
+  result.message = 'Correcto';
+  result.correct = true;
+  result.type = 'OK';
+  return result;
+}
+
 /**
  * 1. Function for check the size of a text
  */
@@ -258,22 +311,16 @@ function correctUserType(userType) {
 }
 
 function correctAreaCodePhone(code) {
-  //var re = new RegExp("^[+]?\d{1,3}$");
-  //return = re.test(term);
   return (
     (code.indexOf('+') >= 0 &&
       /^\d{1,3}$/.test(code.substring(1, code.length))) ||
     (/^\d+$/.test(code) && code.length <= 3)
   );
-  /* if (re.test(code)) {
-    console.log("Valid:", code);
-} else {
-    console.log("Invalid:", code);
-} */
 }
 
 module.exports = {
   validate_login,
   validate_register,
-  validate_editProfileWorker
+  validate_editProfileWorker,
+  validate_editProfileClient
 };

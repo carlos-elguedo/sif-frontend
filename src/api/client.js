@@ -15,3 +15,7 @@ export const getWorkerToView = async idWorker => {
     params: { id: idWorker }
   });
 };
+
+export const saveProfileChanges = data => {
+  return sifRequestInstance.put(`/${config.SERVER_API_CLIENT_URL}update`, data);
+};

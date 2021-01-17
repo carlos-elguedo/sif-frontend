@@ -1,11 +1,12 @@
 export const WORKER_ROUTES = {
   root: '/worker',
-  edit: '/workeredit'
+  edit: '/worker-edit'
 };
 
 export const CLIENT_ROUTES = {
   root: '/client',
-  view: '/profile'
+  view: '/client/profile/:id',
+  edit: '/client/client-edit'
 };
 
 export const REQUEST_STATUSES = {
@@ -32,8 +33,13 @@ export const DEFAULT_QUERY_PARAMS = {
 };
 
 export const userClientOption = [
-  { label: 'Inicio', url: 'client' },
-  { label: 'Mi perfil', url: 'lol' },
+  { label: 'Inicio', url: CLIENT_ROUTES.root },
+  { label: 'Mi perfil', url: CLIENT_ROUTES.edit },
   { label: 'Buscar un trabajador', url: 'lol' },
   { label: 'Mensajes', url: 'lol' }
 ];
+
+
+export const messagesApp = {
+  notLoaded: 'Ha ocurrido un error mientras se cargaban los datos!'
+}

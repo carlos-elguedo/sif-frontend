@@ -18,24 +18,26 @@ const ViewProfileWork = () => {
   });
 
   useEffect(() => {
-    client
-      .getWorkerToView(id)
-      .then(({ data }) => {
-        setWorkerInfo(data);
-        setState({
-          loadingProfile: false,
-          errorGetProfile: false,
-          messageError: ''
+    if (id) {
+      client
+        .getWorkerToView(id)
+        .then(({ data }) => {
+          setWorkerInfo(data);
+          setState({
+            loadingProfile: false,
+            errorGetProfile: false,
+            messageError: ''
+          });
+        })
+        .catch(e => {
+          console.log('error', e.message);
+          setState({
+            loadingProfile: false,
+            errorGetProfile: true,
+            messageError: e.message
+          });
         });
-      })
-      .catch(e => {
-        console.log('error', e.message);
-        setState({
-          loadingProfile: false,
-          errorGetProfile: true,
-          messageError: e.message
-        });
-      });
+    }
   }, [id]);
 
   const clearErrorLoading = () =>

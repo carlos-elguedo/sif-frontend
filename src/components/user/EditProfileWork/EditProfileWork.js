@@ -347,17 +347,17 @@ class EditProfileWork extends Component {
                   <div>
                     <div className="row">
                       <div className="col-6">
+                        <StyleBottom size="lg" onClick={this.cancelEdition}>
+                          Cancelar
+                        </StyleBottom>
+                      </div>
+                      <div className="col-6">
                         <StyleBottom
                           color="primary"
                           size="lg"
                           onClick={this.saveProfileChanges}
                         >
                           Guardar cambios
-                        </StyleBottom>
-                      </div>
-                      <div className="col-6">
-                        <StyleBottom size="lg" onClick={this.cancelEdition}>
-                          Cancelar
                         </StyleBottom>
                       </div>
                     </div>

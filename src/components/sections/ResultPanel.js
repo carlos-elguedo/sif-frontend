@@ -1,18 +1,16 @@
 import React from 'react';
 import CardGrid from 'emerald-ui/lib/CardGrid';
 import Card from 'emerald-ui/lib/Card';
-//import AppCard from 'emerald-ui/lib/AppCard';
 import ImageUser from '../user/ImageUser';
 import { CLIENT_ROUTES } from '../../constants';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
-//const config = require('../../config');
 
 const ResultPanel = ({ title, workers }) => {
   const renderResults = () => {
     return workers.map((worker, i) => {
       return (
         <LinkContainer
-          to={`${CLIENT_ROUTES.view}${worker.id}`}
+          to={`${CLIENT_ROUTES.view.replace(':id', worker.id)}`}
           key={i}
           style={{ cursor: 'pointer' }}
         >
