@@ -6,8 +6,9 @@ import { CLIENT_ROUTES, messagesApp, ALERT_TYPES } from '../../../constants';
 import Alert from '../../info/Alert';
 import { Spinner } from 'react-bootstrap';
 import FileUpload from '../../sections/FileUploader';
-import { Input, InputDouble } from '../common';
+import { Input, InputDouble, ActionButton } from '../common';
 import { SERVER_API_UPLOAD } from '../../../config';
+import { validate_editProfileClient } from '../../../utils/validator';
 
 const EditProfileClient = () => {
   const [clientInfo, setClientInfo] = useState({});
@@ -16,6 +17,7 @@ const EditProfileClient = () => {
     lastName: '',
     email: '',
     phone: '',
+    areaCodePhone: '',
     address: ''
   });
   const [state, setState] = useState({
@@ -79,13 +81,43 @@ const EditProfileClient = () => {
   const hadleTyping = eve => {
     const { name, value } = eve.target;
     let copyInfo = clientEditData;
-    console.log("🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀  ANTES", copyInfo)
 
     Object.keys(clientEditData).forEach(prop => {
       if (prop === name) copyInfo[name] = value;
     });
-    console.log("🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀  DESPUES", copyInfo)
+
     setClientEditData(copyInfo);
+  };
+
+  const saveChanges = () => {
+    const statusEdition = validate_editProfileClient(clientEditData);
+    if (statusEdition.correct) {
+      client
+        .saveProfileChanges(clientEditData)
+        .then(({ data }) => {
+          console.log('🚀 ~ line 18 ~ .then ~ data', data);
+        })
+        .catch(e => {
+          console.log('🚀 ~ line 106 ~ saveChanges ~ e', e);
+        });
+    } else {
+      setAlert({
+        alertType:
+          statusEdition.type === 'error'
+            ? ALERT_TYPES.danger
+            : ALERT_TYPES.warning,
+        alertText: statusEdition.message,
+        alertShow: true
+      });
+    }
+    console.log(
+      '🚀 ~ file: EditProfileClient.js ~ line 95 ~ saveChanges ~ statusEdition',
+      statusEdition
+    );
+  };
+
+  const cancelEdition = () => {
+    document.location = CLIENT_ROUTES.root;
   };
 
   const { loadingProfile, errorGetProfile, messageError } = state;
@@ -144,11 +176,40 @@ const EditProfileClient = () => {
                     textDescriptions={{ one: 'Nombre', two: 'Apellido' }}
                   />
                   <Input
+                    text={'Correo Electrónico'}
+                    DefaultValue={clientInfo.email || ''}
+                    nameId={'email'}
+                    onChange={hadleTyping}
+                    type={'email'}
+                    disabled={clientInfo.email === clientInfo.data_register}
+                  />
+
+                  <InputDouble
+                    text={'Número telefónico'}
+                    defaultValues={{
+                      one: '+57',
+                      two: clientInfo.phone || ''
+                    }}
+                    nameIds={{
+                      one: 'areaCodePhone',
+                      two: 'phone'
+                    }}
+                    onChange={hadleTyping}
+                    type={'text'}
+                    textDescriptions={{ one: 'Indicativo Pais', two: 'Número' }}
+                  />
+
+                  <Input
                     text={'Dirección'}
                     DefaultValue={clientInfo.address || ''}
                     nameId={'address'}
                     onChange={hadleTyping}
                     type={'text'}
+                  />
+
+                  <ActionButton
+                    primaryAction={saveChanges}
+                    secundaryAction={cancelEdition}
                   />
                   {/* end of card body and contaiter */}
                 </div>
