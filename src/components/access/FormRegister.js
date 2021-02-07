@@ -130,6 +130,28 @@ class FormRegister extends Component {
                     Volver atras
                   </a>
                 </div>
+                <hr />
+                <div className="form-group">
+                  <p>O registrate con</p>
+                  <div
+                    style={{ display: 'inline-block' }}
+                    className="g-signin2"
+                    data-onsuccess="onSignIn"
+                    onClick={()=>{
+                      console.log('se quiere logear con google')
+                    }}
+                  ></div>
+                  <br />
+                  <div
+                    className="fb-login-button"
+                    data-width=""
+                    data-size="large"
+                    data-button-type="continue_with"
+                    data-layout="default"
+                    data-auto-logout-link="true"
+                    data-use-continue-as="true"
+                  ></div>
+                </div>
               </form>
             </div>
           </div>

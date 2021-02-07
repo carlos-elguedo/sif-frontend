@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { worker } from '../../../api';
 import { validate_editProfileWorker } from '../../../utils/validator';
 import Alert from '../../info/Alert';
+import Toggle from 'emerald-ui/lib/Toggle';
 import {
   ALERT_TYPES,
   WORKER_ROUTES,
@@ -342,6 +343,8 @@ class EditProfileWork extends Component {
                           : categorie
                       }
                     />
+                    <p>Disponibilidad</p>
+                    <Toggle label="Disponibilidad" />
                   </div>
 
                   <div>

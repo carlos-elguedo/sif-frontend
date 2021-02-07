@@ -53,6 +53,27 @@ class FormLogin extends Component {
                   </button>
                 </div>
               </form>
+              <hr />
+              <div className="form-group">
+                <p>Iniciar sesión con</p>
+                <div
+                  style={{ display: 'inline-block' }}
+                  className="g-signin2"
+                  data-onsuccess="onSignIn"
+                ></div>
+                <br />
+                <div>
+                  <div
+                    className="fb-login-button"
+                    data-width=""
+                    data-size="large"
+                    data-button-type="continue_with"
+                    data-layout="default"
+                    data-auto-logout-link="true"
+                    data-use-continue-as="true"
+                  ></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

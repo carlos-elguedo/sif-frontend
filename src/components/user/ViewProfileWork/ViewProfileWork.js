@@ -2,11 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ImageCover from '../ImageCover';
 import ImageUser from '../ImageUser';
-import { Tab, Col, Row, Nav } from 'react-bootstrap';
+import { Tab, Col, Row, Nav, Button } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'emerald-ui/lib/Toast';
 import { client } from '../../../api';
 import { Information } from './components';
+//import ModalWindow from './ModalWindow';
 
 const ViewProfileWork = () => {
   const { id } = useParams();
@@ -107,6 +108,9 @@ const ViewProfileWork = () => {
               </Row>
             </Tab.Container>
           </div>
+          <Button shape="flat" color="primary">
+            Enviar mensaje
+          </Button>
         </div>
       )}
       <Toast
