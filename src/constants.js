@@ -39,6 +39,13 @@ export const userClientOption = [
   { label: 'Mensajes', url: 'lol' }
 ];
 
+export const disponibilityOptions = [
+  { name_es: 'Disponible', cod: 'disponible' },
+  { name_es: 'No estoy Disponible', cod: 'no_disponible' }
+  /* { name_es: 'Esta semana estoy Disponible', cod: 'week_disponible' },
+  { name_es: 'Esta semana no estoy Disponible', cod: 'week_no_disponible' }, */
+];
+
 
 export const messagesApp = {
   notLoaded: 'Ha ocurrido un error mientras se cargaban los datos!'

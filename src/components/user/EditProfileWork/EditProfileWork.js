@@ -11,11 +11,11 @@ import styled from 'styled-components';
 import { worker } from '../../../api';
 import { validate_editProfileWorker } from '../../../utils/validator';
 import Alert from '../../info/Alert';
-import Toggle from 'emerald-ui/lib/Toggle';
 import {
   ALERT_TYPES,
   WORKER_ROUTES,
-  REQUEST_STATUSES
+  REQUEST_STATUSES,
+  disponibilityOptions
 } from '../../../constants';
 import { SERVER_API_UPLOAD } from '../../../config';
 
@@ -43,6 +43,7 @@ class EditProfileWork extends Component {
       edit_area_code: '',
       edit_address: '',
       works: [],
+      edit_disponibily: '',
 
       //Alert
       alert_type: '',
@@ -65,6 +66,7 @@ class EditProfileWork extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.cancelEdition = this.cancelEdition.bind(this);
     this.showMessageAlert = this.showMessageAlert.bind(this);
+    this.hsndleDisponibility = this.hsndleDisponibility.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +111,14 @@ class EditProfileWork extends Component {
     }
   };
 
+  hsndleDisponibility = action => {
+    if (typeof action === 'string') {
+      this.setState({
+        edit_disponibily: action
+      });
+    }
+  };
+
   async saveProfileChanges() {
     let resultVerified = validate_editProfileWorker(this.state);
 
@@ -121,13 +131,17 @@ class EditProfileWork extends Component {
           this.setState({
             showModalUpdate: true,
             textBody: data.message,
-            textHeader: data.option,
+            textHeader: data.option === 'OK'? 'La información ha sido actualizada': data.option,
             iconUpdate: data.hasError ? 'error' : 'success',
             canReload: data.hasError ? false : true
           });
         })
-        .catch(() => {})
-        .finally(() => {});
+        .catch(error => {
+          console.log(
+            'an error while the data is being update:',
+            error.message
+          );
+        });
     } else {
       this.setState({
         alert_type:
@@ -203,7 +217,13 @@ class EditProfileWork extends Component {
         ? data_user.works[0].code
         : '';
 
-    const { profileImage } = data_user;
+    const { profileImage, disponibily } = data_user;
+
+    let disponibilityServer = !this.state.edit_disponibily
+      ? disponibily
+        ? 'disponible'
+        : 'no_disponible'
+      : this.state.edit_disponibily;
 
     let propsName = {
       text: 'Nombres',
@@ -343,8 +363,15 @@ class EditProfileWork extends Component {
                           : categorie
                       }
                     />
-                    <p>Disponibilidad</p>
-                    <Toggle label="Disponibilidad" />
+
+                    <SelectFormEditProfile
+                      id={'select-disponibility'}
+                      text={'Disponibilidad'}
+                      currentValue={disponibilityServer}
+                      options={disponibilityOptions}
+                      status={status_user}
+                      handleSelect={this.hsndleDisponibility}
+                    />
                   </div>
 
                   <div>

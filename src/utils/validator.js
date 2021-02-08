@@ -123,7 +123,8 @@ function validate_editProfileWorker(state) {
     edit_email,
     edit_phone,
     edit_area_code,
-    edit_address
+    edit_address,
+    edit_disponibily
   } = state;
 
   //1. Validate empty values
@@ -135,7 +136,8 @@ function validate_editProfileWorker(state) {
     edit_email !== '' ||
     edit_phone !== '' ||
     edit_area_code !== '' ||
-    edit_address !== ''
+    edit_address !== '' ||
+    edit_disponibily !== ''
   ) {
     //2. Correct Length
     if (edit_first_name && !correctLength(edit_first_name, 4)) {
