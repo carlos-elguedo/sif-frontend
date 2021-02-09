@@ -6,6 +6,7 @@ module.exports = {
   SERVER_API_WORKER_URL: 'api/rest/worker/',
   SERVER_API_CLIENT_URL: 'api/rest/client/',
   SERVER_API_UPLOAD: 'api/rest/uploads/',
+  SERVER_API_MESSAGE: 'api/rest/message/',
   HANDLE_RELOAD: true,
   COOKIE: {}
 };

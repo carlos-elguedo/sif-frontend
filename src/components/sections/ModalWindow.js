@@ -3,7 +3,15 @@ import Button from 'emerald-ui/lib/Button';
 import IconButton from 'emerald-ui/lib/IconButton';
 import Modal from 'emerald-ui/lib/Modal/';
 
-const ModalWindow = ({ show, textHeader, textBody, icon, close, children }) => {
+const ModalWindow = ({
+  show,
+  textHeader,
+  textBody,
+  icon,
+  close,
+  children,
+  primaryAction
+}) => {
   return (
     <div>
       <Modal onHide={close} show={show}>
@@ -22,9 +30,14 @@ const ModalWindow = ({ show, textHeader, textBody, icon, close, children }) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={close} color="primary">
-            Aceptar
+          <Button onClick={close} color="default">
+            Cerrar
           </Button>
+          {primaryAction && (
+            <Button onClick={primaryAction.action} color="primary">
+              {primaryAction.text || 'Aceptar'}
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </div>

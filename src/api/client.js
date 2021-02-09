@@ -19,3 +19,10 @@ export const getWorkerToView = async idWorker => {
 export const saveProfileChanges = data => {
   return sifRequestInstance.put(`/${config.SERVER_API_CLIENT_URL}update`, data);
 };
+
+export const sendMessage = async (message, idWorker) => {
+  return sifRequestInstance.post(`/${config.SERVER_API_MESSAGE}`, {
+    idWorker,
+    message
+  });
+};

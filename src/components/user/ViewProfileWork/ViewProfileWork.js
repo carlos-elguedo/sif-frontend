@@ -2,12 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ImageCover from '../ImageCover';
 import ImageUser from '../ImageUser';
-import { Tab, Col, Row, Nav, Button } from 'react-bootstrap';
+import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'emerald-ui/lib/Toast';
 import { client } from '../../../api';
 import { Information } from './components';
-//import ModalWindow from './ModalWindow';
+import ModalWindow from '../../sections/ModalWindow';
+import FloatingActionMenu from 'emerald-ui/lib/FloatingActionMenu';
+import FloatingActionMenuItem from 'emerald-ui/lib/FloatingActionMenuItem';
+import Icon from 'emerald-ui/lib/Icon';
+import PanelLoading from '../../sections/PanelLoading';
 
 const ViewProfileWork = () => {
   const { id } = useParams();
@@ -17,6 +21,10 @@ const ViewProfileWork = () => {
     errorGetProfile: false,
     messageError: ''
   });
+  const [modalMessage, setModalMessage] = useState(false);
+  const [newMessage, setNewMessage] = useState('');
+  const [loadingMessage, setLoadingMessage] = useState(false);
+  const [messageToast, setMessageToast] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -41,6 +49,30 @@ const ViewProfileWork = () => {
     }
   }, [id]);
 
+  const sendMessage = () => {
+    setLoadingMessage(true);
+    client
+      .sendMessage(newMessage, info.id)
+      .then(({ data }) => {
+        if (data.status === 'ok') {
+          setModalMessage(false);
+          setMessageToast(
+            'Mensaje Guardado. Puedes verlo en tu bandeja de mensajes'
+          );
+          setNewMessage('');
+        } else {
+          setMessageToast('No se puedo guardar tu mensaje');
+        }
+      })
+      .catch(e => {
+        setMessageToast(`Error: ${e.message}`);
+        console.log('error');
+      })
+      .finally(() => {
+        setLoadingMessage(false);
+      });
+  };
+
   const clearErrorLoading = () =>
     setState({
       loadingProfile: false,
@@ -62,6 +94,27 @@ const ViewProfileWork = () => {
         </div>
       ) : (
         <div style={{ display: 'block', position: 'relative', width: '100%' }}>
+          <ModalWindow
+            show={modalMessage}
+            textHeader={`Escribir un mensaje a ${info.name}`}
+            close={() => {
+              setModalMessage(false);
+            }}
+            children={
+              <div style={{ width: '100%' }}>
+                <PanelLoading loading={loadingMessage} />
+                <textarea
+                  style={{ width: '100%' }}
+                  placeholder="Escribe tu mensaje aqui"
+                  name="mensajeFromView"
+                  onChange={eve => {
+                    setNewMessage(eve.target.value);
+                  }}
+                ></textarea>
+              </div>
+            }
+            primaryAction={{ action: sendMessage, text: 'Enviar mensaje' }}
+          />
           <div
             style={{
               display: 'block',
@@ -108,9 +161,25 @@ const ViewProfileWork = () => {
               </Row>
             </Tab.Container>
           </div>
-          <Button shape="flat" color="primary">
-            Enviar mensaje
-          </Button>
+          <div>
+            <div
+              className="eui-floating-action-dropdown eui-dropdown"
+              style={{ marginRight: '160px', display: 'flex' }}
+            >
+              <FloatingActionMenu show tooltipsAtRight>
+                <FloatingActionMenuItem
+                  title="Enviar un mensaje"
+                  eventKey="1"
+                  onClick={() => {
+                    setModalMessage(true);
+                  }}
+                >
+                  <Icon name="message" />
+                </FloatingActionMenuItem>
+              </FloatingActionMenu>
+            </div>
+            <div style={{ height: '184px' }} />
+          </div>
         </div>
       )}
       <Toast
@@ -120,6 +189,14 @@ const ViewProfileWork = () => {
         visible={errorGetProfile}
         duration={3000}
         onActionClick={clearErrorLoading}
+      />
+      <Toast
+        message={messageToast || 'Success'}
+        actionText="Close"
+        position="left"
+        visible={Boolean(messageToast)}
+        duration={3000}
+        onActionClick={() => setMessageToast('')}
       />
     </Fragment>
   );
