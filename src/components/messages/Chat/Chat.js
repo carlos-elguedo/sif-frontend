@@ -64,19 +64,22 @@ const Chat = () => {
   useEffect(() => {
     if (id) {
       setLoadingChat(true);
-      API.message
-        .getMessages(id)
-        .then(({ data }) => {
-          setNameChat(data.nameChat || 'Trabajador');
-          setIdChat(data.idOtherUser || '');
-          setListMessages(data.messages || []);
-        })
-        .catch(e => {
-          console.log('error chat', e.message);
-        })
-        .finally(() => {
-          setLoadingChat(false);
-        });
+      const interval = setInterval(() => {
+        API.message
+          .getMessages(id)
+          .then(({ data }) => {
+            setNameChat(data.nameChat || 'Trabajador');
+            setIdChat(data.idOtherUser || '');
+            setListMessages(data.messages || []);
+          })
+          .catch(e => {
+            console.log('error chat', e.message);
+          })
+          .finally(() => {
+            setLoadingChat(false);
+          });
+      }, 10000);
+      return () => clearInterval(interval);
     }
   }, [id]);
 
