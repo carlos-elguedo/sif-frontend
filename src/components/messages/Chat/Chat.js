@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Panel from 'emerald-ui/lib/Panel';
 import Spinner from 'react-bootstrap/Spinner';
-import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import * as API from '../../../api';
 import moment from 'moment';
 import styled from 'styled-components';
-import { CLIENT_ROUTES } from '../../../constants';
 
 const StyleTextArea = styled.textarea`
   :hover {
@@ -53,95 +52,93 @@ const StyleDivMessages = styled.div`
 `;
 
 const Chat = () => {
-  useEffect(() => {
-    /* API.message
-      .getInbox()
-      .then(({ data }) => {
-        console.log('messages:', data.inboxes);
-        setInboxes(data.inboxes || []);
-      })
-      .catch(e => {
-        console.log('error bandeja', e.message);
-      })
-      .finally(() => {
-        setLoadingInboxes(false);
-      }); */
-  }, []);
+  const { id } = useParams();
+  const [listMessages, setListMessages] = useState([]);
+  const [nameChat, setNameChat] = useState('');
+  const [loadingChat, setLoadingChat] = useState(false);
 
-  const goTo = url => {
-    document.location = url;
-  };
+  useEffect(() => {
+    if (id) {
+      setLoadingChat(true);
+      API.message
+        .getMessages(id)
+        .then(({ data }) => {
+          setNameChat(data.nameChat || 'Trabajador');
+          setListMessages(data.messages || []);
+        })
+        .catch(e => {
+          console.log('error chat', e.message);
+        })
+        .finally(() => {
+          setLoadingChat(false);
+        });
+    }
+  }, [id]);
+
 
   return (
     <Fragment>
       <div className="container">
         <Panel>
           <Panel.Body>
-            {
-              /* loadingInboxes */ false ? (
-                <div className="card-header text-center">
-                  <div className="card-body">
-                    <Spinner animation="grow" variant="warning" />
-                  </div>
-                </div>
-              ) : (
-                <div className="card" style={{ height: '600px' }}>
-                  <div className="card-header">
-                    <h2 className="title">Chat con Fulano</h2>
-                  </div>
-                  <div className="card-body" style={{ height: '99%' }}>
-                    <StyleDivMessages>
-                      <div className="message message-user">
-                        <div className="text-message">Hola Carlos</div>
-                        <div className="time-message">
-                          <Badge
-                            style={{ fontSize: '12px' }}
-                            pill
-                            variant="light"
-                          >
-                            7 febrero 2020
-                          </Badge>
-                        </div>
-                      </div>
-                      {/* Other message */}
-                      <div className="message message-other">
-                        <div className="text-message">Hola Carlos</div>
-                        <div className="time-message">
-                          <Badge
-                            style={{ fontSize: '12px' }}
-                            pill
-                            variant="light"
-                          >
-                            7 febrero 2020
-                          </Badge>
-                        </div>
-                      </div>
-                    </StyleDivMessages>
-
-                    <div
-                      style={{
-                        width: '100%',
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        display: 'flex'
-                      }}
-                    >
-                      <StyleTextArea
-                        style={{ width: '100%' }}
-                        placeholder="Escribe tu mensaje aqui"
-                        name="mensajeFromChat"
-                        onChange={eve => {
-                          console.log('Escribio', eve.target.value);
-                        }}
-                      ></StyleTextArea>
-                      <Button variant="primary">Enviar</Button>
+            <div className="card" style={{ height: '600px' }}>
+              <div className="card-header">
+                <h2 className="title">Chat con {nameChat}</h2>
+              </div>
+              <div className="card-body" style={{ height: '99%' }}>
+                {loadingChat ? (
+                  <div className="card-header text-center">
+                    <div className="card-body">
+                      <Spinner animation="grow" variant="warning" />
                     </div>
-                    {/* end of card body and contaiter */}
                   </div>
+                ) : (
+                  <StyleDivMessages>
+                    {listMessages.map((message, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={`message message-${
+                            message.sentBy || 'user'
+                          }`}
+                        >
+                          <div className="text-message">{message.message}</div>
+                          <div className="time-message">
+                            <Badge
+                              style={{ fontSize: '12px' }}
+                              pill
+                              variant="light"
+                            >
+                              {moment(message.time).calendar()}
+                            </Badge>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </StyleDivMessages>
+                )}
+                <div
+                  style={{
+                    width: '100%',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    display: 'flex'
+                  }}
+                >
+                  <StyleTextArea
+                    style={{ width: '100%' }}
+                    placeholder="Escribe tu mensaje aqui"
+                    name="mensajeFromChat"
+                    onChange={eve => {
+                      console.log('Escribio', eve.target.value);
+                    }}
+                  ></StyleTextArea>
+                  <Button variant="primary">Enviar</Button>
                 </div>
-              )
-            }
+                {/* end of card body and contaiter */}
+              </div>
+            </div>
           </Panel.Body>
         </Panel>
       </div>
