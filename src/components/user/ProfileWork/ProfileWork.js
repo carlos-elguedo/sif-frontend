@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import Button from 'emerald-ui/lib/Button';
 import ImageUser from './../ImageUser';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
-import Inbox from '../../user/Inbox';
+import Messages from '../../messages/Messages';
 import Spinner from 'react-bootstrap/Spinner';
 
 import { WORKER_ROUTES, REQUEST_STATUSES } from '../../../constants';
 
 class ProfileWork extends Component {
-
   render() {
     const { data: current_worker, status } = this.props;
     const { LOADING, NOT_LOADED } = REQUEST_STATUSES;
@@ -26,44 +25,49 @@ class ProfileWork extends Component {
               </div>
             ) : (
               <div>
-                <div className="card-header">{current_worker.name}</div>
+                <div className="card-header" style={{ fontSize: '20px' }}>
+                  <strong>{current_worker.name}</strong>
+                </div>
                 <div className="card-body">
-                  <h5 className="card-title">
-                    {current_worker.professionName_es || 'Mi profesión'}
+                  <h5 className="card-title" style={{ fontSize: '18px' }}>
+                    Mi profesión:{' '}
+                    <strong>
+                      {current_worker.professionName_es || 'Mi profesión'}
+                    </strong>
                   </h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    {current_worker.categorieName_es || 'Mi area laboral'}
+                  <h6
+                    className="card-subtitle mb-2 text-muted"
+                    style={{ fontSize: '16px' }}
+                  >
+                    Mi sector:{' '}
+                    <strong>
+                      {current_worker.categorieName_es || 'Mi area laboral'}
+                    </strong>
                   </h6>
                   <ImageUser
                     img_h="200"
                     img_w="200"
                     img_url={current_worker.profileImage}
                   />
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item text-center">
+                      <div className="btn-toolbar">
+                        <LinkContainer
+                          to={WORKER_ROUTES.edit}
+                          style={{ width: '100%' }}
+                        >
+                          <Button color="primary">Editar mi perfil</Button>
+                        </LinkContainer>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item text-center">
-                    <div className="btn-toolbar">
-                      <LinkContainer to={WORKER_ROUTES.edit}>
-                        <Button shape="flat" color="primary">
-                          Editar mi perfil
-                        </Button>
-                      </LinkContainer>
-                      <LinkContainer to={WORKER_ROUTES.edit}>
-                        <Button shape="flat" color="primary">
-                          Buscar trabajador
-                        </Button>
-                      </LinkContainer>
-                    </div>
-                  </li>
-                </ul>
               </div>
             )}
           </div>
           {/** End of header */}
         </div>
-        <p>Hola: {current_worker.age}</p>
-        <p>Hola: {status}</p>
-        <Inbox />
+        <Messages user="worker"/>
       </div>
     );
   }

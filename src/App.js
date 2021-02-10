@@ -15,7 +15,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Access} />
           <Route path={[CLIENT_ROUTES.root, `${CLIENT_ROUTES.view}:id`]} component={Client} />
-          <Route path={[WORKER_ROUTES.edit, WORKER_ROUTES.root]} exact component={Worker} />
+          <Route path={[WORKER_ROUTES.edit, WORKER_ROUTES.root, WORKER_ROUTES.messages, WORKER_ROUTES.chat]} exact component={Worker} />
         </Switch>
       </Router>
     );

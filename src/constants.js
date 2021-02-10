@@ -1,6 +1,8 @@
 export const WORKER_ROUTES = {
   root: '/worker',
-  edit: '/worker-edit'
+  edit: '/worker-edit',
+  messages: '/worker/messages',
+  chat: '/worker/messages/chat/:id'
 };
 
 export const CLIENT_ROUTES = {
@@ -39,6 +41,12 @@ export const userClientOption = [
   { label: 'Mi perfil', url: CLIENT_ROUTES.edit },
   { label: 'Buscar un trabajador', url: CLIENT_ROUTES.root },
   { label: 'Mensajes', url: CLIENT_ROUTES.messages }
+];
+
+export const userWorkerOption = [
+  { label: 'Inicio', url: WORKER_ROUTES.root },
+  { label: 'Mi perfil', url: WORKER_ROUTES.edit },
+  { label: 'Mensajes', url: WORKER_ROUTES.messages }
 ];
 
 export const disponibilityOptions = [

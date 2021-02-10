@@ -8,7 +8,7 @@ import React from 'react';
  * @author Carlos Elguedo
  * @version 0.0.1
  */
-const SideBar = ({ options }) => {
+const SideBar = ({ options, route }) => {
   const mapOptions = () => {
     return options.map((option, i) => {
       return (
@@ -24,7 +24,7 @@ const SideBar = ({ options }) => {
       <div id="sidebar-wrapper">
         <ul className="sidebar-nav">
           <li className="sidebar-brand">
-            <a href="lol">SIF Cartagena</a>
+            <a href={route}>SIF Cartagena</a>
           </li>
           {mapOptions()}
         </ul>

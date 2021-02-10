@@ -6,7 +6,7 @@ import Badge from 'react-bootstrap/Badge';
 import * as API from '../../../api';
 import moment from 'moment';
 import styled from 'styled-components';
-import { CLIENT_ROUTES } from '../../../constants';
+import { CLIENT_ROUTES, WORKER_ROUTES } from '../../../constants';
 
 export const StyleMenu = styled.ul`
   li {
@@ -21,12 +21,14 @@ export const StyleMenu = styled.ul`
 const Messages = () => {
   const [inboxes, setInboxes] = useState([]);
   const [loadingInboxes, setLoadingInboxes] = useState(true);
+  const [userType, setUserType] = useState('');
 
   useEffect(() => {
     API.message
       .getInbox()
       .then(({ data }) => {
         setInboxes(data.inboxes || []);
+        setUserType(data.userType || '');
       })
       .catch(e => {
         console.log('error bandeja', e.message);
@@ -77,12 +79,11 @@ const Messages = () => {
                             className="list-group-item d-flex justify-content-between align-items-center alert-success"
                             key={index}
                             onClick={() => {
-                              goTo(
-                                `${CLIENT_ROUTES.chat.replace(
-                                  ':id',
-                                  inbox.id
-                                )}`
-                              );
+                              const newMessageUrl =
+                                userType === '1'
+                                  ? CLIENT_ROUTES.chat
+                                  : WORKER_ROUTES.chat;
+                              goTo(`${newMessageUrl.replace(':id', inbox.id)}`);
                             }}
                           >
                             <div style={{ display: 'flex' }}>

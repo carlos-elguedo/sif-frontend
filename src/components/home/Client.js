@@ -20,11 +20,12 @@ class Client extends Component {
     return (
       <div className="App">
         <NavBar
+          route="client"
           nav_title={`SIF - ${
             current_client.firstName || current_client.name || ''
           }`}
         />
-        <SideBar options={userClientOption} />
+        <SideBar options={userClientOption} route="client" />
         <Switch>
           <Route exact path={CLIENT_ROUTES.root} component={ProfileClient} />
           <Route exact path={CLIENT_ROUTES.view} component={ViewProfileWork} />

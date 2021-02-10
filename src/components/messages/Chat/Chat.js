@@ -168,6 +168,7 @@ const Chat = () => {
                     style={{ width: '100%' }}
                     placeholder="Escribe tu mensaje aqui"
                     name="mensajeFromChat"
+                    value={newMessage}
                     onChange={eve => {
                       setNewMessage(eve.target.value);
                     }}
