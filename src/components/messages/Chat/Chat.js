@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import * as API from '../../../api';
 import moment from 'moment';
 import styled from 'styled-components';
+import Toast from 'emerald-ui/lib/Toast';
 
 const StyleTextArea = styled.textarea`
   :hover {
@@ -55,7 +56,10 @@ const Chat = () => {
   const { id } = useParams();
   const [listMessages, setListMessages] = useState([]);
   const [nameChat, setNameChat] = useState('');
+  const [idChat, setIdChat] = useState('');
   const [loadingChat, setLoadingChat] = useState(false);
+  const [newMessage, setNewMessage] = useState('');
+  const [messageToast, setMessageToast] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -64,6 +68,7 @@ const Chat = () => {
         .getMessages(id)
         .then(({ data }) => {
           setNameChat(data.nameChat || 'Trabajador');
+          setIdChat(data.idOtherUser || '');
           setListMessages(data.messages || []);
         })
         .catch(e => {
@@ -75,6 +80,39 @@ const Chat = () => {
     }
   }, [id]);
 
+  const loadChat = () => {
+    API.message
+      .getMessages(id)
+      .then(({ data }) => {
+        setNameChat(data.nameChat || 'Trabajador');
+        setIdChat(data.idOtherUser || '');
+        setListMessages(data.messages || []);
+      })
+      .catch(e => {
+        console.log('error chat', e.message);
+      })
+      .finally(() => {
+        setLoadingChat(false);
+      });
+  };
+
+  const sentMessage = () => {
+    if (newMessage) {
+      API.client
+        .sendMessage(newMessage, idChat)
+        .then(({ data }) => {
+          if (data.status === 'ok') {
+            setNewMessage('');
+            loadChat();
+          } else {
+            setMessageToast('No se puedo guardar tu mensaje');
+          }
+        })
+        .catch(e => {
+          setMessageToast(`Error: ${e.message}`);
+        });
+    }
+  };
 
   return (
     <Fragment>
@@ -131,10 +169,12 @@ const Chat = () => {
                     placeholder="Escribe tu mensaje aqui"
                     name="mensajeFromChat"
                     onChange={eve => {
-                      console.log('Escribio', eve.target.value);
+                      setNewMessage(eve.target.value);
                     }}
                   ></StyleTextArea>
-                  <Button variant="primary">Enviar</Button>
+                  <Button onClick={sentMessage} variant="primary">
+                    Enviar
+                  </Button>
                 </div>
                 {/* end of card body and contaiter */}
               </div>
@@ -142,6 +182,14 @@ const Chat = () => {
           </Panel.Body>
         </Panel>
       </div>
+      <Toast
+        message={messageToast || 'Success'}
+        actionText="Close"
+        position="left"
+        visible={Boolean(messageToast)}
+        duration={3000}
+        onActionClick={() => setMessageToast('')}
+      />
     </Fragment>
   );
 };
