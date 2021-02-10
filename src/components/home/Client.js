@@ -5,6 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 import ProfileClient from '../user/ProfileClient';
 import ViewProfileWork from '../user/ViewProfileWork';
 import EditProfileClient from '../user/EditProfileClient';
+import Messages from '../messages/Messages';
+import Chat from '../messages/Chat';
 
 import { CLIENT_ROUTES, userClientOption } from '../../constants';
 class Client extends Component {
@@ -31,6 +33,8 @@ class Client extends Component {
             path={CLIENT_ROUTES.edit}
             component={EditProfileClient}
           />
+          <Route exact path={CLIENT_ROUTES.messages} component={Messages} />
+          <Route exact path={CLIENT_ROUTES.chat} component={Chat} />
         </Switch>
       </div>
     );

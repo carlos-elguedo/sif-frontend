@@ -6,7 +6,9 @@ export const WORKER_ROUTES = {
 export const CLIENT_ROUTES = {
   root: '/client',
   view: '/client/profile/:id',
-  edit: '/client/client-edit'
+  edit: '/client/client-edit',
+  messages: '/client/messages',
+  chat: '/client/messages/chat/:id'
 };
 
 export const REQUEST_STATUSES = {
@@ -35,8 +37,8 @@ export const DEFAULT_QUERY_PARAMS = {
 export const userClientOption = [
   { label: 'Inicio', url: CLIENT_ROUTES.root },
   { label: 'Mi perfil', url: CLIENT_ROUTES.edit },
-  { label: 'Buscar un trabajador', url: 'lol' },
-  { label: 'Mensajes', url: 'lol' }
+  { label: 'Buscar un trabajador', url: CLIENT_ROUTES.root },
+  { label: 'Mensajes', url: CLIENT_ROUTES.messages }
 ];
 
 export const disponibilityOptions = [
