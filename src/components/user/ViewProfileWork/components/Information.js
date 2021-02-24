@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Col, Row, FormLabel } from 'react-bootstrap';
+import Label from 'emerald-ui/lib/Label';
 import styled from 'styled-components';
 
 const StyleFormLabel = styled(FormLabel)`
@@ -7,6 +8,7 @@ const StyleFormLabel = styled(FormLabel)`
 `;
 
 const Information = ({ data }) => {
+  console.log('🚀 ~ file: Information.js ~ line 10 ~ Information ~ data', data);
   return (
     <Fragment>
       <Row>
@@ -60,7 +62,20 @@ const Information = ({ data }) => {
           </b>
         </Col>
         <Col sm={9}>
-          <StyleFormLabel>{'Preguntar por direccón'}</StyleFormLabel>
+          <StyleFormLabel>{data.address || ''}</StyleFormLabel>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col sm={3}>
+          <b>
+            <StyleFormLabel>Disponibilidad:</StyleFormLabel>
+          </b>
+        </Col>
+        <Col sm={9}>
+          <Label color={data.disponibily ? 'success' : 'warning'}>
+            {data.disponibily ? 'Disponible' : 'No Disponible'}
+          </Label>
         </Col>
       </Row>
     </Fragment>

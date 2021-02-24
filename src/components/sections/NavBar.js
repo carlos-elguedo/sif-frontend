@@ -62,12 +62,11 @@ class NavBar extends Component {
 
           <StyleDropdown fromRight>
             <Button>
-              Actions
+              Acciones
               <span className="caret" />
             </Button>
             <Dropdown.Menu>
-              <Dropdown.Item>Action</Dropdown.Item>
-              <Dropdown.Item>Another action</Dropdown.Item>
+              <Dropdown.Item>Mi perfil</Dropdown.Item>
               <Dropdown.Item separator />
               <Dropdown.Item onClick={this.closeSession}>
                 Cerrar sesión
